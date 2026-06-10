@@ -1,11 +1,14 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Heart, MapPin, BedDouble, Bath, Maximize2, Eye } from 'lucide-react';
 import { toast } from 'sonner';
-import type { Property } from '../../data/mockData';
-import { useAuthStore } from '../../stores/authStore';
-import { usePropertyStore } from '../../stores/propertyStore';
+import type { Property } from '@/src/data/mockData';
+import { useAuthStore } from '@/src/stores/authStore';
+import { usePropertyStore } from '@/src/stores/propertyStore';
 
 interface PropertyCardProps {
   property: Property;
@@ -19,7 +22,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function PropertyCard({ property, variant = 'default' }: PropertyCardProps) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { isAuthenticated, currentUser } = useAuthStore();
   const { savedPropertyIds, saveProperty, unsaveProperty } = usePropertyStore();
   const isSaved = savedPropertyIds.includes(property.id);
@@ -28,7 +31,7 @@ export default function PropertyCard({ property, variant = 'default' }: Property
     e.stopPropagation();
     if (!isAuthenticated) {
       toast.error('Please sign in to save properties');
-      navigate('/login');
+      router.push('/login');
       return;
     }
     if (isSaved) {
@@ -41,7 +44,7 @@ export default function PropertyCard({ property, variant = 'default' }: Property
   };
 
   const handleClick = () => {
-    navigate(`/properties/${property.id}`);
+    router.push(`/properties/${property.id}`);
   };
 
   if (variant === 'horizontal') {
