@@ -11,9 +11,9 @@ import {
   CheckCircle2, Eye, Building2, Tag, Lock
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import { useAuthStore } from '@/src/stores/authStore';
-import PropertyCard from '@/src/components/property/PropertyCard';
+import { usePropertyStore } from '@/stores/propertyStore';
+import { useAuthStore } from '@/stores/authStore';
+import PropertyCard from '@/components/property/PropertyCard';
 
 export default function PropertyDetailPage() {
   const { id } = useParams<{ id: string }>();

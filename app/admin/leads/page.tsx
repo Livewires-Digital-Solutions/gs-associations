@@ -5,8 +5,8 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Filter, Download } from 'lucide-react';
 import { format } from 'date-fns';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import type { LeadStatus } from '@/src/data/mockData';
+import { usePropertyStore } from '@/stores/propertyStore';
+import type { LeadStatus } from '@/data/mockData';
 import { toast } from 'sonner';
 
 const statusColors: Record<string, string> = {

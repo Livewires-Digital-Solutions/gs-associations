@@ -4,7 +4,7 @@
 import { useState, useMemo } from 'react';
 import { Search } from 'lucide-react';
 import { format } from 'date-fns';
-import { usePropertyStore } from '@/src/stores/propertyStore';
+import { usePropertyStore } from '@/stores/propertyStore';
 
 export default function AdminTracking() {
   const { leads, properties } = usePropertyStore();

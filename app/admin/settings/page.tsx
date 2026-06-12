@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Save, Building2, Bell, Shield, Palette, Globe } from 'lucide-react';
-import { useAuthStore } from '@/src/stores/authStore';
+import { useAuthStore } from '@/stores/authStore';
 
 export default function AdminSettings() {
   const { currentUser } = useAuthStore();

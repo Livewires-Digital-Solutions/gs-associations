@@ -1,46 +1,73 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, Eye, EyeOff, Lock, Mail, ArrowRight } from 'lucide-react';
-import { useAuthStore } from '@/src/stores/authStore';
 import { toast } from 'sonner';
+import { createClient } from '@/lib/supabase/client';
 
-export default function LoginPage() {
+function LoginContent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLoading } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const supabase = createClient();
+  const nextUrl = searchParams.get('next');
+
+  const handleSuccessRedirect = (userMetadata: any) => {
+    if (nextUrl) {
+      router.push(nextUrl);
+    } else if (userMetadata?.role === 'admin') {
+      router.push('/admin');
+    } else {
+      router.push('/');
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await login(email, password);
-    if (result.success) {
-      const user = useAuthStore.getState().currentUser;
-      toast.success(`Welcome back, ${user?.name?.split(' ')[0]}! 👋`);
-      router.push(user?.role === 'admin' ? '/admin' : '/dashboard');
-    } else {
-      toast.error(result.error || 'Login failed');
+    setIsLoading(true);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    setIsLoading(false);
+
+    if (error) {
+      toast.error(error.message || 'Login failed');
+    } else if (data.user) {
+      const name = data.user.user_metadata?.full_name || data.user.email?.split('@')[0];
+      toast.success(`Welcome back, ${name}! 👋`);
+      handleSuccessRedirect(data.user.user_metadata);
     }
   };
 
   const handleDemoLogin = async (type: 'user' | 'admin') => {
     const credentials = {
       user: { email: 'arjun.mehta@gmail.com', password: 'user123' },
-      admin: { email: 'admin@gsassociations.com', password: 'admin123' },
+      admin: { email: 'admin@gsassociations.com', password: 'AdminPassword123!' },
     };
+    
     const { email: e, password: p } = credentials[type];
     setEmail(e);
     setPassword(p);
-    const result = await login(e, p);
-    if (result.success) {
-      const user = useAuthStore.getState().currentUser;
+    
+    setIsLoading(true);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: e,
+      password: p,
+    });
+    setIsLoading(false);
+
+    if (error) {
+      toast.error(error.message || 'Login failed');
+    } else if (data.user) {
       toast.success(`Logged in as ${type === 'admin' ? 'Admin' : 'User'} ✓`);
-      router.push(user?.role === 'admin' ? '/admin' : '/dashboard');
+      handleSuccessRedirect(data.user.user_metadata);
     }
   };
 
@@ -202,10 +229,18 @@ export default function LoginPage() {
           <div className="mt-6 p-4 bg-surface-100 rounded-xl">
             <p className="text-xs text-surface-500 font-medium mb-2">Demo Credentials:</p>
             <p className="text-xs text-surface-600">User: arjun.mehta@gmail.com / user123</p>
-            <p className="text-xs text-surface-600">Admin: admin@gsassociations.com / admin123</p>
+            <p className="text-xs text-surface-600">Admin: admin@gsassociations.com / AdminPassword123!</p>
           </div>
         </motion.div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }

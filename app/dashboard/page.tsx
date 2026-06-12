@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 import { Heart, Clock, Eye, ArrowRight, TrendingUp, Building2, Sparkles } from 'lucide-react';
-import { useAuthStore } from '@/src/stores/authStore';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import PropertyCard from '@/src/components/property/PropertyCard';
+import { useAuthStore } from '@/stores/authStore';
+import { usePropertyStore } from '@/stores/propertyStore';
+import PropertyCard from '@/components/property/PropertyCard';
 
 export default function UserDashboard() {
   const { currentUser } = useAuthStore();

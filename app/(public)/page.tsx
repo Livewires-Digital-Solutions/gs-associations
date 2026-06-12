@@ -9,9 +9,9 @@ import {
   Search, ArrowRight, MapPin, Shield, TrendingUp, Award,
   ChevronRight, Star, Building2, Users, CheckCircle2, Sparkles
 } from 'lucide-react';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import { useContentStore } from '@/src/stores/contentStore';
-import PropertyCard from '@/src/components/property/PropertyCard';
+import { usePropertyStore } from '@/stores/propertyStore';
+import { useContentStore } from '@/stores/contentStore';
+import PropertyCard from '@/components/property/PropertyCard';
 
 const stats = [
   { value: '1,200+', label: 'Properties Sold' },

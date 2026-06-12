@@ -8,7 +8,8 @@ import {
   Menu, X, Building2, ChevronDown, User, Heart, Clock,
   Settings, LogOut, LayoutDashboard
 } from 'lucide-react';
-import { useAuthStore } from '@/src/stores/authStore';
+import { useAuthStore } from '@/stores/authStore';
+import { createClient } from '@/lib/supabase/client';
 
 const navLinks = [
   { label: 'Properties', href: '/properties' },
@@ -29,10 +30,27 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Setup Supabase Auth listener
+    const supabase = createClient();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      useAuthStore.getState().setAuth(session?.user || null);
+    });
+
+    // Initial session check
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      useAuthStore.getState().setAuth(session?.user || null);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
     logout();
     setUserMenuOpen(false);
     router.push('/');

@@ -4,9 +4,9 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Search, SlidersHorizontal, X, ChevronDown } from 'lucide-react';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import PropertyCard from '@/src/components/property/PropertyCard';
-import type { PropertyType, PropertyStatus } from '@/src/data/mockData';
+import { usePropertyStore } from '@/stores/propertyStore';
+import PropertyCard from '@/components/property/PropertyCard';
+import type { PropertyType, PropertyStatus } from '@/data/mockData';
 
 const propertyTypes: PropertyType[] = ['Apartment', 'Villa', 'Plot', 'Commercial', 'Row House', 'Penthouse'];
 const statusOptions: PropertyStatus[] = ['Available', 'Under Offer', 'Sold'];

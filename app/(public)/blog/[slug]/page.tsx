@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Eye, Calendar, Tag, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
-import { useContentStore } from '@/src/stores/contentStore';
+import { useContentStore } from '@/stores/contentStore';
 import { toast } from 'sonner';
 
 export default function BlogDetailPage() {

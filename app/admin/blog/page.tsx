@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, Edit2, Trash2, Star, Eye, Search, X, Check } from 'lucide-react';
 import { format } from 'date-fns';
-import { useContentStore } from '@/src/stores/contentStore';
+import { useContentStore } from '@/stores/contentStore';
 import { toast } from 'sonner';
-import type { BlogPost } from '@/src/data/mockData';
+import type { BlogPost } from '@/data/mockData';
 
 function BlogForm({ blog, onSave, onClose }: { blog?: BlogPost; onSave: (data: Partial<BlogPost>) => void; onClose: () => void }) {
   const [form, setForm] = useState({

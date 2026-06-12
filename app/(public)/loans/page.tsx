@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calculator, CheckCircle2, ArrowRight, Phone, Star } from 'lucide-react';
-import { useContentStore } from '@/src/stores/contentStore';
+import { useContentStore } from '@/stores/contentStore';
+import { usePropertyStore } from '@/stores/propertyStore';
+import { useAuthStore } from '@/stores/authStore';
 import { toast } from 'sonner';
 
 function EMICalculator() {
@@ -102,14 +104,38 @@ function EMICalculator() {
 
 export default function LoansPage() {
   const { loans } = useContentStore();
+  const { addLead } = usePropertyStore();
+  const { currentUser } = useAuthStore();
   const [formSent, setFormSent] = useState(false);
+  const [formData, setFormData] = useState({
+    name: currentUser?.name || '',
+    phone: currentUser?.phone || '',
+    email: currentUser?.email || '',
+    amount: '',
+    loanType: ''
+  });
 
   const handleInquiry = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    addLead({
+      userId: currentUser?.id || '',
+      userName: formData.name,
+      userEmail: formData.email,
+      userPhone: formData.phone,
+      propertyId: formData.loanType,
+      propertyTitle: formData.loanType || 'General Loan Inquiry',
+      propertyLocation: 'GS Loans',
+      timestamp: new Date().toISOString(),
+      status: 'New',
+      notes: `Requested Amount: ₹${formData.amount}`,
+      source: 'Loan Inquiry',
+    });
+
     setTimeout(() => {
       setFormSent(true);
       toast.success('Loan inquiry submitted! Our expert will call you within 2 hours.');
-    }, 1000);
+    }, 500);
   };
 
   return (
@@ -202,15 +228,10 @@ export default function LoansPage() {
                 </div>
 
                 <div className="flex gap-3">
-                  <button
-                    onClick={() => {
-                      toast.success('Our loan expert will call you within 2 hours!');
-                    }}
-                    className="btn-primary text-sm"
-                  >
+                  <Link href={`/loans/${loan.id}`} className="btn-primary text-sm">
                     Apply Now
-                  </button>
-                  <Link href="/contact" className="btn-secondary text-sm">
+                  </Link>
+                  <Link href={`/loans/${loan.id}`} className="btn-secondary text-sm">
                     Learn More
                   </Link>
                 </div>
@@ -238,11 +259,11 @@ export default function LoansPage() {
                 </div>
               ) : (
                 <form onSubmit={handleInquiry} className="space-y-3">
-                  <input type="text" placeholder="Your Full Name" className="input text-sm" required />
-                  <input type="tel" placeholder="Phone Number" className="input text-sm" required />
-                  <input type="email" placeholder="Email Address" className="input text-sm" required />
-                  <input type="number" placeholder="Loan Amount Required (₹)" className="input text-sm" />
-                  <select className="input text-sm">
+                  <input type="text" placeholder="Your Full Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="input text-sm" required />
+                  <input type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="input text-sm" required />
+                  <input type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="input text-sm" required />
+                  <input type="number" placeholder="Loan Amount Required (₹)" value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} className="input text-sm" />
+                  <select className="input text-sm" value={formData.loanType} onChange={e => setFormData({...formData, loanType: e.target.value})}>
                     <option value="">Select Loan Type</option>
                     {loans.map(l => (
                       <option key={l.id} value={l.name}>{l.name}</option>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Clock, Eye, ArrowRight } from 'lucide-react';
-import { useContentStore } from '@/src/stores/contentStore';
+import { useContentStore } from '@/stores/contentStore';
 
 const categories = ['All', 'Market Trends', 'Home Loans', 'Investment Guide', 'Buyer Tips', 'Legal & Compliance', 'Interior Design'];
 

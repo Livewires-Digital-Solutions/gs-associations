@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { usePropertyStore } from '@/src/stores/propertyStore';
+import { usePropertyStore } from '@/stores/propertyStore';
 
 const contactInfo = [
   { icon: <MapPin className="w-5 h-5" />, label: 'Office Address', value: 'Plot 42, Gachibowli Main Road,\nFinancial District, Hyderabad — 500032' },

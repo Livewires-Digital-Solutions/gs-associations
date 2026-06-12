@@ -12,8 +12,8 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell
 } from 'recharts';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import { users } from '@/src/data/mockData';
+import { usePropertyStore } from '@/stores/propertyStore';
+import { users } from '@/data/mockData';
 import { format, subDays } from 'date-fns';
 
 const COLORS = ['#1e2889', '#f59e0b', '#10b981', '#ef4444', '#6366f1'];

@@ -4,9 +4,9 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, Edit2, Trash2, Star, X, Check } from 'lucide-react';
-import { useContentStore } from '@/src/stores/contentStore';
+import { useContentStore } from '@/stores/contentStore';
 import { toast } from 'sonner';
-import type { LoanProgram } from '@/src/data/mockData';
+import type { LoanProgram } from '@/data/mockData';
 
 function LoanForm({ loan, onSave, onClose }: { loan?: LoanProgram; onSave: (data: Partial<LoanProgram>) => void; onClose: () => void }) {
   const [form, setForm] = useState({
@@ -19,6 +19,9 @@ function LoanForm({ loan, onSave, onClose }: { loan?: LoanProgram; onSave: (data
     processingFee: loan?.processingFee || '',
     eligibility: loan?.eligibility || '',
     features: loan?.features?.join('\n') || '',
+    overview: loan?.overview || '',
+    benefits: loan?.benefits?.join('\n') || '',
+    documents: loan?.documents?.join('\n') || '',
     popular: loan?.popular || false,
   });
 
@@ -27,6 +30,8 @@ function LoanForm({ loan, onSave, onClose }: { loan?: LoanProgram; onSave: (data
     onSave({
       ...form,
       features: form.features.split('\n').filter(Boolean),
+      benefits: form.benefits ? form.benefits.split('\n').filter(Boolean) : undefined,
+      documents: form.documents ? form.documents.split('\n').filter(Boolean) : undefined,
       logo: loan?.logo || '',
     });
   };
@@ -87,6 +92,20 @@ function LoanForm({ loan, onSave, onClose }: { loan?: LoanProgram; onSave: (data
           <div>
             <label className="label mb-1.5 block">Features (one per line)</label>
             <textarea value={form.features} onChange={e => setForm(p => ({ ...p, features: e.target.value }))} className="input h-24 resize-none" placeholder="No prepayment penalty&#10;Balance transfer facility" />
+          </div>
+          <div>
+            <label className="label mb-1.5 block">Overview</label>
+            <textarea value={form.overview} onChange={e => setForm(p => ({ ...p, overview: e.target.value }))} className="input h-20 resize-none" />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="label mb-1.5 block">Benefits (one per line)</label>
+              <textarea value={form.benefits} onChange={e => setForm(p => ({ ...p, benefits: e.target.value }))} className="input h-24 resize-none" />
+            </div>
+            <div>
+              <label className="label mb-1.5 block">Documents (one per line)</label>
+              <textarea value={form.documents} onChange={e => setForm(p => ({ ...p, documents: e.target.value }))} className="input h-24 resize-none" />
+            </div>
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.popular} onChange={e => setForm(p => ({ ...p, popular: e.target.checked }))} className="rounded" />

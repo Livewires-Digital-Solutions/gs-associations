@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, Eye, EyeOff, User, Phone, Mail, Lock, ArrowRight } from 'lucide-react';
-import { useAuthStore } from '@/src/stores/authStore';
+import { useAuthStore } from '@/stores/authStore';
 import { toast } from 'sonner';
 
 const lookingForOptions = ['Apartment', 'Villa', 'Plot', 'Commercial', 'Row House', 'Not sure yet'];

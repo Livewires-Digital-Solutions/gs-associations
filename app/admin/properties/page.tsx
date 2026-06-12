@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, Edit2, Trash2, Star, Eye, Heart, X, Check } from 'lucide-react';
 import { toast } from 'sonner';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import type { Property } from '@/src/data/mockData';
+import { usePropertyStore } from '@/stores/propertyStore';
+import type { Property } from '@/data/mockData';
 
 type FormMode = 'add' | 'edit' | null;
 

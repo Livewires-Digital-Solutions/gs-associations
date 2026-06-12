@@ -3,8 +3,8 @@
 import Link from 'next/link';
 
 import { Heart, ArrowRight } from 'lucide-react';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import PropertyCard from '@/src/components/property/PropertyCard';
+import { usePropertyStore } from '@/stores/propertyStore';
+import PropertyCard from '@/components/property/PropertyCard';
 
 export default function SavedProperties() {
   const { properties, savedPropertyIds } = usePropertyStore();

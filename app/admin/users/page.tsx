@@ -4,8 +4,8 @@
 import { useState } from 'react';
 import { Search, Shield, CheckCircle2, XCircle } from 'lucide-react';
 import { format } from 'date-fns';
-import { users } from '@/src/data/mockData';
-import { usePropertyStore } from '@/src/stores/propertyStore';
+import { users } from '@/data/mockData';
+import { usePropertyStore } from '@/stores/propertyStore';
 
 export default function AdminUsers() {
   const [search, setSearch] = useState('');

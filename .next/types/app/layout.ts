@@ -1,4 +1,4 @@
-// File: /Users/macos/GS Associations/app/layout.tsx
+// File: C:\Users\vasee\Desktop\GS Association Stuffs\gs-associations\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

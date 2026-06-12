@@ -8,8 +8,8 @@ import {
 } from 'recharts';
 import { subDays, format } from 'date-fns';
 import { TrendingUp, Download } from 'lucide-react';
-import { usePropertyStore } from '@/src/stores/propertyStore';
-import { users } from '@/src/data/mockData';
+import { usePropertyStore } from '@/stores/propertyStore';
+import { users } from '@/data/mockData';
 import { toast } from 'sonner';
 
 const COLORS = ['#1e2889', '#f59e0b', '#10b981', '#ef4444', '#6366f1', '#ec4899'];

@@ -8,7 +8,7 @@ import {
   FileText, CreditCard, BarChart3, Settings, LogOut,
   TrendingUp
 } from 'lucide-react';
-import { useAuthStore } from '@/src/stores/authStore';
+import { useAuthStore } from '@/stores/authStore';
 
 const navItems = [
   { icon: <LayoutDashboard className="w-4 h-4" />, label: 'Dashboard', href: '/admin' },
