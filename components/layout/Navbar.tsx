@@ -76,7 +76,7 @@ export default function Navbar() {
                 GS Associations
               </span>
               <span className={`text-xs font-medium transition-colors ${scrolled ? 'text-gold-600' : 'text-gold-400'}`}>
-                Premium Real Estate
+                Premium Real Estate & Loans
               </span>
             </div>
           </Link>

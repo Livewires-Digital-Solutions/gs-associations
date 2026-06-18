@@ -146,12 +146,12 @@ export default function LoansPage() {
           backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(245,158,11,0.5), transparent 60%)',
         }} />
         <div className="container-app relative z-10 text-center">
-          <p className="section-label text-gold-400 mb-4">Home Loan Advisory</p>
+          <p className="section-label text-gold-400 mb-4">Loan & Financial Services</p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-            Find the Perfect Home Loan
+            Comprehensive Loan Solutions
           </h1>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            We partner with 15+ leading banks to offer you the best rates, PMAY subsidies, and personalized loan guidance at no extra cost.
+            From home loans and business loans to loan against property, secured overdraft, and working capital — we partner with 15+ leading banks to get you the best rates.
           </p>
         </div>
       </div>
@@ -162,10 +162,10 @@ export default function LoansPage() {
           <div className="lg:col-span-2 space-y-6">
             <div>
               <h2 className="font-display text-2xl font-bold text-surface-900 mb-2">
-                Our Loan Programs
+                Our Loan Products
               </h2>
               <p className="text-surface-500 text-sm">
-                {loans.length} loan programs from trusted banking partners
+                {loans.length} loan products across home, business, and financial services
               </p>
             </div>
 

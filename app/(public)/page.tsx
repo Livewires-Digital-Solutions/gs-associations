@@ -7,7 +7,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Search, ArrowRight, MapPin, Shield, TrendingUp, Award,
-  ChevronRight, Star, Building2, Users, CheckCircle2, Sparkles
+  ChevronRight, Star, Building2, Users, CheckCircle2, Sparkles,
+  Wallet, Landmark, Home, Briefcase
 } from 'lucide-react';
 import { usePropertyStore } from '@/stores/propertyStore';
 import { useContentStore } from '@/stores/contentStore';
@@ -112,7 +113,7 @@ export default function HomePage() {
             <motion.div variants={itemVariants} className="flex items-center gap-2 mb-6">
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold-500/20 border border-gold-500/30 text-gold-400 text-xs font-semibold">
                 <Sparkles className="w-3 h-3" />
-                Hyderabad's #1 Premium Real Estate Platform
+                Hyderabad's Trusted Property & Financial Services Partner
               </span>
             </motion.div>
 
@@ -120,17 +121,17 @@ export default function HomePage() {
               variants={itemVariants}
               className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6"
             >
-              Find Your
-              <span className="block gradient-gold-text">Dream Property</span>
-              in Hyderabad
+              Properties &
+              <span className="block gradient-gold-text">Financial Solutions</span>
+              Under One Roof
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="text-lg md:text-xl text-white/70 leading-relaxed mb-10 max-w-2xl"
             >
-              From cozy apartments in Kondapur to luxury villas in Jubilee Hills —
-              discover 500+ verified properties with real-time market insights and expert guidance.
+              Browse 500+ verified properties and explore tailored loan solutions — home loans, business loans, and more.
+              Expert guidance for every step of your property and financial journey.
             </motion.p>
 
             {/* Search bar */}
@@ -191,6 +192,88 @@ export default function HomePage() {
           <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 80L1440 80L1440 40C1440 40 1200 80 720 40C240 0 0 40 0 40L0 80Z" fill="white" />
           </svg>
+        </div>
+      </section>
+
+      {/* ─── OUR SERVICES ──────────────────────────────────────────────────── */}
+      <section className="section bg-white">
+        <div className="container-app">
+          <div className="text-center mb-12">
+            <p className="section-label">What We Offer</p>
+            <h2 className="section-heading">Two Powerful Services,<br />One Trusted Partner</h2>
+            <p className="section-subheading max-w-2xl mx-auto">
+              GS Associations brings together premium property services and comprehensive financial solutions to help you achieve your goals.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Property Services Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="card p-8 group hover:border-navy-200 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-6 opacity-5">
+                <Home className="w-40 h-40" />
+              </div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 rounded-2xl bg-navy-50 group-hover:bg-navy-800 flex items-center justify-center mb-6 transition-all duration-300 text-navy-700 group-hover:text-white">
+                  <Building2 className="w-7 h-7" />
+                </div>
+                <h3 className="font-display font-bold text-2xl text-surface-900 mb-3">Property Services</h3>
+                <p className="text-surface-500 leading-relaxed text-sm mb-6">
+                  Browse and explore verified property listings across Hyderabad — apartments, villas, plots, commercial spaces, and more. Get expert advisory and make informed decisions.
+                </p>
+                <div className="space-y-2.5 mb-8">
+                  {['500+ Verified Properties', 'RERA Compliant Listings', 'Expert Property Advisory', 'End-to-End Buying Support'].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2.5 text-sm text-surface-700">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <Link href="/properties" className="btn-primary">
+                  Explore Properties
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Loan Services Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="card p-8 group hover:border-gold-200 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-6 opacity-5">
+                <Wallet className="w-40 h-40" />
+              </div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 rounded-2xl bg-gold-50 group-hover:bg-gold-600 flex items-center justify-center mb-6 transition-all duration-300 text-gold-700 group-hover:text-white">
+                  <Landmark className="w-7 h-7" />
+                </div>
+                <h3 className="font-display font-bold text-2xl text-surface-900 mb-3">Loan & Financial Services</h3>
+                <p className="text-surface-500 leading-relaxed text-sm mb-6">
+                  Access a wide range of loan products — home loans, business loans, loan against property, working capital, and more. Compare rates from 15+ banking partners.
+                </p>
+                <div className="space-y-2.5 mb-8">
+                  {['Home, Business & LAP Loans', '15+ Banking Partners', 'Best Rate Guarantee', 'Free Expert Consultation'].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2.5 text-sm text-surface-700">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <Link href="/loans" className="btn-gold">
+                  Explore Loan Options
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -293,16 +376,16 @@ export default function HomePage() {
             }} />
             <div className="relative z-10 p-10 md:p-16 flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1">
-                <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-4">Home Loan Advisory</p>
+                <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-4">Loan & Financial Services</p>
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                  Get Home Loans at the<br />Best Available Rates
+                  Loans for Every Need —<br />Best Rates Guaranteed
                 </h2>
                 <p className="text-white/60 text-sm leading-relaxed mb-8 max-w-lg">
-                  We partner with 15+ leading banks and HFCs to get you pre-approved at the lowest interest rates. PMAY subsidies, balance transfers, and NRI loans — all under one roof.
+                  Home loans, business loans, loan against property, secured overdraft, and working capital. We partner with 15+ leading banks to get you pre-approved at the lowest rates.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/loans" className="btn-gold">
-                    Explore Loan Programs
+                    Explore All Loan Products
                   </Link>
                   <Link href="/contact" className="btn-ghost text-white hover:bg-white/10">
                     Talk to an Expert →
@@ -312,8 +395,8 @@ export default function HomePage() {
               <div className="flex-shrink-0 grid grid-cols-2 gap-4 min-w-64">
                 {[
                   { label: 'Interest Rate From', value: '8.35%' },
-                  { label: 'Max Loan Amount', value: '₹10 Cr' },
-                  { label: 'Processing Time', value: '24 Hrs' },
+                  { label: 'Max Loan Amount', value: '₹25 Cr' },
+                  { label: 'Loan Products', value: '14+' },
                   { label: 'Bank Partners', value: '15+' },
                 ].map(item => (
                   <div key={item.label} className="bg-white/10 rounded-2xl p-4 text-center border border-white/10">
@@ -425,10 +508,10 @@ export default function HomePage() {
           >
             <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-4">Get Started Today</p>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-5">
-              Your Dream Property<br />Is One Click Away
+              Your Property & Loan<br />Journey Starts Here
             </h2>
             <p className="text-white/60 text-lg mb-10 max-w-lg mx-auto">
-              Register for free and get access to complete property details, save favorites, and connect with our expert advisors.
+              Register for free to access complete property details, explore loan options, save favorites, and connect with our expert advisors.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/register" className="btn-gold text-base px-8 py-4">

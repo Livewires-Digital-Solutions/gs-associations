@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-surface-950 text-surface-400">
       <div className="container-app py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
@@ -15,11 +15,11 @@ export default function Footer() {
               </div>
               <div className="flex flex-col leading-none">
                 <span className="font-display font-bold text-lg text-white leading-none">GS Associations</span>
-                <span className="text-xs font-medium text-gold-500">Premium Real Estate</span>
+                <span className="text-xs font-medium text-gold-500">Premium Real Estate & Loans</span>
               </div>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Hyderabad's trusted real estate partner since 2012. We help families find their dream homes and investors build wealth through property.
+              Hyderabad's trusted real estate and financial services partner since 2012. We help families find their dream homes, explore loan options, and investors build wealth through property.
             </p>
             <div className="flex gap-3">
               {['facebook', 'twitter', 'instagram', 'linkedin'].map(s => (
@@ -40,6 +40,23 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Loan Services */}
+          <div>
+            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-5">Loan Services</h4>
+            <ul className="space-y-3 text-sm">
+              {[
+                { label: 'Home Loans', href: '/loans' },
+                { label: 'Business Loans', href: '/loans' },
+                { label: 'Loan Against Property', href: '/loans' },
+                { label: 'Secured Overdraft', href: '/loans' },
+                { label: 'Working Capital', href: '/loans' },
+                { label: 'All Loan Products', href: '/loans' },
+              ].map(item => (
+                <li key={item.label}><Link href={item.href} className="hover:text-white transition-colors">{item.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+
           {/* Company */}
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-5">Company</h4>
@@ -47,7 +64,6 @@ export default function Footer() {
               {[
                 { label: 'About Us', href: '/about' },
                 { label: 'Blog', href: '/blog' },
-                { label: 'Loan Programs', href: '/loans' },
                 { label: 'Contact Us', href: '/contact' },
                 { label: 'Privacy Policy', href: '#' },
                 { label: 'Terms of Service', href: '#' },
