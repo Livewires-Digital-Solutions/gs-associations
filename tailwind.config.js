@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// Force tailwind rebuild
 export default {
   darkMode: ["class"],
   content: [
@@ -9,11 +10,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["'Inter'", "system-ui", "sans-serif"],
-        display: ["'Syne'", "system-ui", "sans-serif"],
+        sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        display: ["var(--font-manrope)", "system-ui", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },
       colors: {
+        "theme-primary": "hsl(var(--theme-primary))",
+        "theme-secondary": "hsl(var(--theme-secondary))",
+        "theme-tertiary": "hsl(var(--theme-tertiary))",
         navy: {
           50: "#f0f4ff",
           100: "#dde8ff",

@@ -26,6 +26,9 @@ export default function Navbar() {
   const { isAuthenticated, currentUser, logout } = useAuthStore();
   const router = useRouter();
   const pathname = usePathname();
+  
+  const isLightTop = ['/login', '/register'].some(path => pathname === path || pathname?.startsWith(path + '/'));
+  const useDarkText = scrolled || isLightTop;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -58,13 +61,15 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-surface-200 shadow-sm'
-          : 'bg-transparent'
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 flex justify-center ${
+        scrolled ? 'pt-4 px-4' : 'pt-0 px-0'
       }`}
     >
-      <div className="container-app">
+      <div className={`w-full max-w-7xl transition-all duration-500 ${
+        scrolled
+          ? 'bg-white/60 backdrop-blur-xl shadow-2xl rounded-full px-6 sm:px-8'
+          : 'bg-transparent px-4 sm:px-6 lg:px-8'
+      }`}>
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
@@ -72,10 +77,10 @@ export default function Navbar() {
               <Building2 className="w-5 h-5 text-white" />
             </div>
             <div className="flex flex-col leading-none">
-              <span className={`font-display font-bold text-lg leading-none transition-colors ${scrolled ? 'text-navy-900' : 'text-white'}`}>
+              <span className={`font-display font-bold text-lg leading-none transition-colors ${useDarkText ? 'text-navy-900' : 'text-white'}`}>
                 GS Associations
               </span>
-              <span className={`text-xs font-medium transition-colors ${scrolled ? 'text-gold-600' : 'text-gold-400'}`}>
+              <span className={`text-xs font-medium transition-colors ${useDarkText ? 'text-gold-600' : 'text-gold-400'}`}>
                 Premium Real Estate & Loans
               </span>
             </div>
@@ -91,8 +96,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? scrolled ? 'text-navy-800 bg-navy-50' : 'text-white bg-white/15'
-                      : scrolled ? 'text-surface-600 hover:text-navy-800 hover:bg-surface-100' : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? useDarkText ? 'text-navy-800 bg-navy-50' : 'text-white bg-white/15'
+                      : useDarkText ? 'text-surface-600 hover:text-navy-800 hover:bg-surface-100' : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {link.label}
@@ -108,7 +113,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
                   className={`flex items-center gap-2.5 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                    scrolled
+                    useDarkText
                       ? 'text-surface-700 hover:bg-surface-100 border border-surface-200'
                       : 'text-white hover:bg-white/10 border border-white/20'
                   }`}
@@ -164,7 +169,7 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                    scrolled ? 'text-surface-700 hover:bg-surface-100' : 'text-white/90 hover:text-white hover:bg-white/10'
+                    useDarkText ? 'text-surface-700 hover:bg-surface-100' : 'text-white/90 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   Sign In
@@ -182,7 +187,7 @@ export default function Navbar() {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-surface-700 hover:bg-surface-100' : 'text-white hover:bg-white/10'}`}
+            className={`md:hidden p-2 rounded-lg transition-colors ${useDarkText ? 'text-surface-700 hover:bg-surface-100' : 'text-white hover:bg-white/10'}`}
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -197,7 +202,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-white border-t border-surface-200 overflow-hidden"
+            className="md:hidden absolute top-full left-0 w-full bg-white border-t border-surface-200 overflow-hidden shadow-2xl"
           >
             <div className="container-app py-4 flex flex-col gap-1">
               {navLinks.map(link => {

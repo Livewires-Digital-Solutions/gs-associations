@@ -24,31 +24,61 @@ export default function BlogListPage() {
     });
 
   return (
-    <div className="pt-24 pb-20 bg-surface-50 min-h-screen">
-      {/* Header */}
-      <div className="gradient-hero py-16 mb-12 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(245,158,11,0.5), transparent 60%)',
-        }} />
-        <div className="container-app relative z-10 text-center">
-          <p className="section-label text-gold-400 mb-4">Knowledge Hub</p>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-            Real Estate Insights
-          </h1>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto mb-8">
-            Market trends, investment guides, legal tips, and expert advice for Hyderabad's property market.
-          </p>
-          <div className="max-w-md mx-auto relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-400" />
+    <div className="bg-surface-50 min-h-screen pb-20">
+      {/* 75vh Hero Section */}
+      <section className="relative min-h-[75vh] flex items-center justify-center pt-24 overflow-hidden">
+        {/* Background Image & Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+            alt="Real Estate Insights and News" 
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-navy-950/70 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-50 via-surface-50/10 to-transparent" />
+        </div>
+        
+        {/* Hero Content */}
+        <div className="container-app relative z-10 text-center -mt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto"
+          >
+            <span className="text-gold-400 font-bold tracking-widest uppercase text-sm mb-4 block">
+              Knowledge Hub
+            </span>
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-md">
+              Real Estate Insights
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto drop-shadow-sm">
+              Market trends, investment guides, legal tips, and expert advice for Hyderabad's property market.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="container-app -mt-10 md:-mt-12 relative z-20 mb-12">
+        <form onSubmit={e => e.preventDefault()} className="relative max-w-3xl mx-auto">
+          <div className="flex items-center w-full h-14 md:h-16 bg-white rounded-full border border-surface-200 shadow-xl overflow-hidden pr-2 pl-6 transition-all hover:shadow-2xl focus-within:border-navy-300 focus-within:ring-4 focus-within:ring-navy-900/5">
+            <Search className="w-5 h-5 text-surface-400 mr-3 flex-shrink-0" />
             <input
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Search articles..."
-              className="w-full h-12 pl-11 pr-4 rounded-xl bg-white text-surface-900 placeholder:text-surface-400 focus:outline-none focus:ring-2 focus:ring-gold-400 text-sm"
+              placeholder="Search articles, guides, and news..."
+              className="flex-1 h-full bg-transparent text-surface-900 placeholder:text-surface-400 focus:outline-none text-base font-medium"
             />
+            <button 
+              type="button" 
+              className="h-10 md:h-12 px-6 bg-navy-900 hover:bg-navy-800 text-white text-sm font-semibold rounded-full transition-all flex items-center gap-2 flex-shrink-0"
+            >
+              <span className="hidden sm:inline">Search</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
-        </div>
+        </form>
       </div>
 
       <div className="container-app">

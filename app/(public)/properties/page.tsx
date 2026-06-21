@@ -101,49 +101,80 @@ function PropertiesContent() {
   const hasFilters = searchQuery || selectedTypes.length > 0 || selectedStatus.length > 0 || priceRange > 0 || bedrooms !== null;
 
   return (
-    <div className="pt-24 pb-20 bg-surface-50 min-h-screen">
-      <div className="container-app">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="font-display text-3xl font-bold text-surface-900 mb-2">Property Listings</h1>
-          <p className="text-surface-500">Discover {properties.length} verified properties across Hyderabad</p>
+    <div className="bg-surface-50 min-h-screen pb-20">
+      {/* 75vh Hero Section */}
+      <section className="relative min-h-[75vh] flex items-center justify-center pt-24 overflow-hidden">
+        {/* Background Image & Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/assets/hyderabad_luxury_hero.png?v=2" 
+            alt="Luxury Property in Hyderabad" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-navy-950/40 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-50 via-surface-50/10 to-transparent" />
         </div>
+        
+        {/* Hero Content */}
+        <div className="container-app relative z-10 text-center -mt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto"
+          >
+            <span className="text-gold-400 font-bold tracking-widest uppercase text-sm mb-4 block">
+              Premium Collection
+            </span>
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
+              Discover Your Perfect Home
+            </h1>
+            <p className="text-lg md:text-xl text-white/90">
+              Explore our exclusive portfolio of {properties.length} verified properties across Hyderabad's most premium neighborhoods.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
+      <div className="container-app -mt-12 relative z-20">
         {/* Search + Filters Bar */}
-        <div className="bg-white rounded-2xl border border-surface-200 shadow-card-base p-4 mb-8 flex flex-col md:flex-row gap-3">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-400" />
+        <div className="bg-white md:rounded-full rounded-2xl border border-surface-200 shadow-xl overflow-hidden p-2 md:p-3 mb-8 flex flex-col md:flex-row gap-3 transition-all hover:shadow-2xl focus-within:border-navy-300 focus-within:ring-4 focus-within:ring-navy-900/5">
+          <div className="flex-1 relative flex items-center bg-transparent pl-4 md:pl-6">
+            <Search className="w-5 h-5 text-surface-400 mr-3 flex-shrink-0" />
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Search location, property name..."
-              className="input pl-10"
+              className="flex-1 h-12 bg-transparent text-surface-900 placeholder:text-surface-400 focus:outline-none text-base font-medium"
             />
           </div>
-          <button
-            onClick={() => setFiltersOpen(!filtersOpen)}
-            className={`btn-secondary gap-2 ${filtersOpen ? 'bg-navy-50 border-navy-300 text-navy-700' : ''}`}
-          >
-            <SlidersHorizontal className="w-4 h-4" />
-            Filters
-            {hasFilters && (
-              <span className="w-5 h-5 rounded-full bg-navy-700 text-white text-[10px] flex items-center justify-center font-bold">
-                {[searchQuery, ...selectedTypes, ...selectedStatus, priceRange > 0 ? 1 : 0, bedrooms !== null ? 1 : 0].filter(Boolean).length}
-              </span>
-            )}
-          </button>
-          <div className="relative">
-            <select
-              value={sortBy}
-              onChange={e => setSortBy(e.target.value)}
-              className="input pr-8 appearance-none cursor-pointer bg-surface-50 min-w-[180px]"
+          
+          <div className="flex items-center gap-2 px-2 md:px-0">
+            <button
+              onClick={() => setFiltersOpen(!filtersOpen)}
+              className={`h-12 px-6 rounded-full font-semibold transition-all flex items-center gap-2 ${filtersOpen ? 'bg-navy-900 text-white' : 'bg-surface-100 hover:bg-surface-200 text-surface-700'}`}
             >
-              {sortOptions.map(o => (
-                <option key={o.value} value={o.value}>{o.label}</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-400 pointer-events-none" />
+              <SlidersHorizontal className="w-4 h-4" />
+              Filters
+              {hasFilters && (
+                <span className="w-5 h-5 rounded-full bg-gold-400 text-navy-900 text-[10px] flex items-center justify-center font-bold">
+                  {[searchQuery, ...selectedTypes, ...selectedStatus, priceRange > 0 ? 1 : 0, bedrooms !== null ? 1 : 0].filter(Boolean).length}
+                </span>
+              )}
+            </button>
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={e => setSortBy(e.target.value)}
+                className="h-12 pl-5 pr-10 rounded-full font-semibold appearance-none cursor-pointer bg-surface-100 hover:bg-surface-200 text-surface-700 min-w-[160px] focus:outline-none transition-colors"
+              >
+                {sortOptions.map(o => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-500 pointer-events-none" />
+            </div>
           </div>
         </div>
 

@@ -1,9 +1,56 @@
 'use client';
 
 import Link from 'next/link';
-
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, Award, Users, Building2, TrendingUp, CheckCircle2 } from 'lucide-react';
+
+function JackpotDigit({ value, delay, start }: { value: string, delay: number, start: boolean }) {
+  if (isNaN(Number(value))) return <span className="px-[1px]">{value}</span>;
+  const num = parseInt(value, 10);
+  const spins = 2;
+  const spinArray = Array.from({ length: spins * 10 + num + 1 }, (_, i) => i % 10);
+  const totalItems = spinArray.length;
+  return (
+    <div className="relative inline-flex flex-col overflow-hidden h-[1em] leading-none align-baseline tabular-nums w-[0.6em] justify-start">
+      <motion.div
+        initial={{ y: "0%" }}
+        animate={start ? { y: `-${((totalItems - 1) / totalItems) * 100}%` } : { y: "0%" }}
+        transition={{ duration: 2 + delay, ease: [0.22, 1, 0.36, 1] }}
+        className="flex flex-col"
+      >
+        {spinArray.map((n, i) => (
+          <span key={i} className="h-[1em] leading-none flex justify-center items-center">{n}</span>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+function AnimatedCounter({ value, prefix = '', suffix = '', delay = 0 }: { value: number, prefix?: string, suffix?: string, delay?: number }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const [start, setStart] = useState(false);
+  useEffect(() => {
+    if (inView) {
+      const timeout = setTimeout(() => setStart(true), delay * 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [inView, delay]);
+  const valueStr = value.toLocaleString('en-IN');
+  const digits = valueStr.split('');
+  return (
+    <span ref={ref} className="inline-flex items-center tabular-nums leading-none">
+      {prefix && <span className="mr-[2px]">{prefix}</span>}
+      <span className="inline-flex">
+        {digits.map((d, i) => (
+          <JackpotDigit key={i} value={d} delay={i * 0.15} start={start} />
+        ))}
+      </span>
+      {suffix && <span className="ml-[2px]">{suffix}</span>}
+    </span>
+  );
+}
 
 const team = [
   {
@@ -43,31 +90,49 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-24 pb-20">
-      {/* Hero */}
-      <div className="gradient-hero py-20 mb-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(245,158,11,0.5), transparent 60%)',
-        }} />
-        <div className="container-app relative z-10 text-center">
-          <p className="section-label text-gold-400 mb-4">Our Story</p>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-5">
-            Hyderabad's Most Trusted<br />Real Estate Partner
-          </h1>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Since 2012, GS Associations has helped over 15,000 families and investors navigate Hyderabad's dynamic property market with honesty, data, and expertise.
-          </p>
+    <div className="bg-surface-50 min-h-screen pb-20">
+      {/* 75vh Hero Section */}
+      <section className="relative min-h-[75vh] flex items-center justify-center pt-24 overflow-hidden">
+        {/* Background Image & Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+            alt="GS Associations Team Collaborating" 
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-navy-950/70 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-50 via-surface-50/10 to-transparent" />
         </div>
-      </div>
+        
+        {/* Hero Content */}
+        <div className="container-app relative z-10 text-center -mt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto"
+          >
+            <span className="text-gold-400 font-bold tracking-widest uppercase text-sm mb-4 block">
+              Our Story
+            </span>
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-md">
+              Hyderabad's Most Trusted<br />Real Estate Partner
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto drop-shadow-sm">
+              Since 2012, GS Associations has helped over 15,000 families and investors navigate Hyderabad's dynamic property market with honesty, data, and expertise.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-      <div className="container-app">
+      <div className="container-app -mt-12 md:-mt-16 relative z-20">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-6 md:py-8 mb-20">
           {[
-            { icon: <Building2 className="w-6 h-6" />, value: '1,200+', label: 'Properties Sold' },
-            { icon: <Users className="w-6 h-6" />, value: '15,000+', label: 'Happy Families' },
-            { icon: <TrendingUp className="w-6 h-6" />, value: '₹2,400 Cr', label: 'Worth Transacted' },
-            { icon: <Award className="w-6 h-6" />, value: '12+ Years', label: 'of Excellence' },
+            { value: 1200, suffix: '+', label: 'Properties Sold' },
+            { value: 15000, suffix: '+', label: 'Happy Families' },
+            { value: 2400, prefix: '₹', suffix: ' Cr', label: 'Worth Transacted' },
+            { value: 12, suffix: '+', label: 'Years of Excellence' },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -75,13 +140,12 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="card p-6 text-center"
+              className="text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-navy-100 flex items-center justify-center mx-auto mb-4 text-navy-700">
-                {stat.icon}
+              <div className="text-4xl md:text-5xl font-display font-bold text-navy-800 mb-2 tabular-nums">
+                <AnimatedCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} delay={i * 0.1} />
               </div>
-              <div className="text-2xl font-display font-bold text-navy-800 mb-1">{stat.value}</div>
-              <div className="text-sm text-surface-500">{stat.label}</div>
+              <div className="text-sm md:text-base text-surface-500 font-medium uppercase tracking-wider">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -106,15 +170,74 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-          <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
-              alt="GS Associations Office"
-              className="rounded-2xl w-full h-80 object-cover shadow-card-hover"
-            />
-            <div className="absolute -bottom-6 -left-6 card p-4 shadow-card-hover">
-              <p className="text-2xl font-display font-bold text-navy-800">98%</p>
-              <p className="text-xs text-surface-500">Client Satisfaction Rate</p>
+          <div className="relative mt-8 md:mt-0 flex justify-center md:justify-end">
+            <div className="relative w-full max-w-md h-[400px] md:h-[450px]">
+              {/* Soft background pedestal - Light blue uneven rectangle with subtle blobs */}
+              <div 
+                className="absolute bottom-0 inset-x-4 md:inset-x-0 h-[75%] bg-navy-900 overflow-hidden -z-10 border border-navy-800 shadow-2xl"
+                style={{ borderRadius: '40px 80px 30px 60px' }}
+              >
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/50 rounded-full blur-3xl mix-blend-screen"></div>
+                <div className="absolute bottom-0 left-0 w-72 h-72 bg-indigo-600/40 rounded-full blur-3xl mix-blend-screen"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-teal-500/20 rounded-full blur-3xl mix-blend-screen"></div>
+              </div>
+              
+              <img
+                src="/assets/ceo.png"
+                alt="Rajesh Gupta - Founder & CEO"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[105%] w-auto object-contain object-bottom drop-shadow-2xl z-10"
+              />
+
+              {/* Sleek Minimalist Nameplate */}
+              <div className="absolute -bottom-4 right-8 md:-right-4 bg-white/95 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl border border-surface-200 z-20 text-center">
+                <p className="font-display font-bold text-navy-900 text-lg mb-0.5">Rajesh Gupta</p>
+                <p className="text-gold-600 text-[10px] font-bold uppercase tracking-widest">Founder & CEO</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            <p className="section-label">Our Journey</p>
+            <h2 className="section-heading">12 Years of Building Trust</h2>
+          </div>
+          <div className="max-w-4xl mx-auto relative px-4 sm:px-6">
+            {/* Main vertical line */}
+            <div className="absolute left-8 md:left-1/2 top-2 bottom-2 w-px bg-surface-200 transform md:-translate-x-1/2" />
+            
+            <div className="space-y-12">
+              {milestones.map((m, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className={`relative flex flex-col md:flex-row items-start md:items-center justify-between w-full group ${
+                    i % 2 === 0 ? 'md:flex-row-reverse' : ''
+                  }`}
+                >
+                  {/* Empty space for alternating layout on desktop */}
+                  <div className="hidden md:block w-5/12" />
+                  
+                  {/* Timeline Dot */}
+                  <div className="absolute left-8 md:left-1/2 top-2 md:top-1/2 transform -translate-x-1/2 md:-translate-y-1/2 flex items-center justify-center z-10">
+                    <div className="w-3 h-3 rounded-full bg-surface-300 group-hover:bg-gold-500 transition-colors duration-300 ring-4 ring-surface-50" />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className={`w-full pl-16 md:pl-0 md:w-5/12 ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-navy-900 mb-2">
+                      {m.year}
+                    </h3>
+                    <p className="text-surface-600 leading-relaxed text-base md:text-lg">
+                      {m.event}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
@@ -143,37 +266,6 @@ export default function AboutPage() {
                 <h3 className="font-display font-semibold text-surface-900 mb-0.5">{member.name}</h3>
                 <p className="text-xs text-gold-600 font-medium mb-3">{member.role}</p>
                 <p className="text-sm text-surface-500 leading-relaxed">{member.bio}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Timeline */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <p className="section-label">Our Journey</p>
-            <h2 className="section-heading">12 Years of Building Trust</h2>
-          </div>
-          <div className="max-w-3xl mx-auto">
-            {milestones.map((m, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex gap-6 mb-8"
-              >
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-navy-800 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
-                    {m.year.slice(2)}
-                  </div>
-                  {i < milestones.length - 1 && <div className="w-0.5 flex-1 bg-surface-200 mt-2" />}
-                </div>
-                <div className="pb-8">
-                  <p className="text-sm font-bold text-navy-700 mb-1">{m.year}</p>
-                  <p className="text-sm text-surface-600 leading-relaxed">{m.event}</p>
-                </div>
               </motion.div>
             ))}
           </div>
