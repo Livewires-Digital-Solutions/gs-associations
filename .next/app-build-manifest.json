@@ -16,25 +16,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(public)/page.js"
     ],
-    "/(public)/loans/page": [
+    "/(public)/properties/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(public)/loans/page.js"
+      "static/chunks/app/(public)/properties/[id]/page.js"
     ],
-    "/(public)/blog/page": [
+    "/(public)/properties/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(public)/blog/page.js"
-    ],
-    "/(public)/about/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/about/page.js"
-    ],
-    "/(public)/contact/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/contact/page.js"
+      "static/chunks/app/(public)/properties/page.js"
     ]
   }
 }

@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Building2, Users, TrendingUp, Eye, ArrowRight,
@@ -12,14 +11,24 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell
 } from 'recharts';
-import { usePropertyStore } from '@/stores/propertyStore';
-import { users } from '@/data/mockData';
+import { getProperties } from '@/lib/db/properties';
+import { getLeads } from '@/lib/db/leads';
+import { getProfiles } from '@/lib/db/profiles';
 import { format, subDays } from 'date-fns';
+import type { Property, Lead } from '@/data/mockData';
 
 const COLORS = ['#1e2889', '#f59e0b', '#10b981', '#ef4444', '#6366f1'];
 
 export default function AdminDashboard() {
-  const { properties, leads } = usePropertyStore();
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [userCount, setUserCount] = useState(0);
+
+  useEffect(() => {
+    getProperties().then(setProperties).catch(() => {});
+    getLeads().then(setLeads).catch(() => {});
+    getProfiles().then(p => setUserCount(p.filter(u => u.role === 'user').length)).catch(() => {});
+  }, []);
 
   // KPIs
   const totalLeads = leads.length;
@@ -56,9 +65,9 @@ export default function AdminDashboard() {
   ];
 
   const kpiCards = [
-    { icon: <TrendingUp className="w-5 h-5" />, label: 'Total Leads', value: totalLeads, sub: `${newLeads} new today`, color: 'bg-navy-100 text-navy-700', trend: '+12%' },
+    { icon: <TrendingUp className="w-5 h-5" />, label: 'Total Leads', value: totalLeads, sub: `${newLeads} new`, color: 'bg-navy-100 text-navy-700', trend: '+12%' },
     { icon: <Building2 className="w-5 h-5" />, label: 'Properties', value: properties.length, sub: `${properties.filter(p => p.status === 'Available').length} available`, color: 'bg-gold-100 text-gold-700', trend: '+3' },
-    { icon: <Users className="w-5 h-5" />, label: 'Registered Users', value: users.filter(u => u.role === 'user').length, sub: '5 joined this week', color: 'bg-emerald-100 text-emerald-700', trend: '+8%' },
+    { icon: <Users className="w-5 h-5" />, label: 'Registered Users', value: userCount, sub: 'total users', color: 'bg-emerald-100 text-emerald-700', trend: '+8%' },
     { icon: <Eye className="w-5 h-5" />, label: 'Total Views', value: properties.reduce((a, b) => a + b.views, 0).toLocaleString(), sub: 'across all properties', color: 'bg-purple-100 text-purple-700', trend: '+24%' },
   ];
 

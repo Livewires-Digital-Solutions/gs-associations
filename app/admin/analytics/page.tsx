@@ -1,21 +1,30 @@
 'use client';
 
-
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, Legend
 } from 'recharts';
 import { subDays, format } from 'date-fns';
 import { TrendingUp, Download } from 'lucide-react';
-import { usePropertyStore } from '@/stores/propertyStore';
-import { users } from '@/data/mockData';
+import { getProperties } from '@/lib/db/properties';
+import { getLeads } from '@/lib/db/leads';
+import { getProfiles } from '@/lib/db/profiles';
 import { toast } from 'sonner';
+import type { Property, Lead } from '@/data/mockData';
 
 const COLORS = ['#1e2889', '#f59e0b', '#10b981', '#ef4444', '#6366f1', '#ec4899'];
 
 export default function AdminAnalytics() {
-  const { properties, leads } = usePropertyStore();
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [userCount, setUserCount] = useState(0);
+
+  useEffect(() => {
+    getProperties().then(setProperties).catch(() => {});
+    getLeads().then(setLeads).catch(() => {});
+    getProfiles().then(p => setUserCount(p.filter(u => u.role === 'user').length)).catch(() => {});
+  }, []);
 
   // Lead trend — 30 days
   const leadTrend = useMemo(() => {
@@ -51,7 +60,7 @@ export default function AdminAnalytics() {
     { label: 'Total Lead Value (est.)', value: `₹${closedValue} Cr`, icon: '💰', sub: 'From closed leads' },
     { label: 'Conversion Rate', value: `${((leads.filter(l => l.status === 'Closed').length / leads.length) * 100).toFixed(1)}%`, icon: '📊', sub: 'Lead to close' },
     { label: 'Avg Views per Property', value: Math.round(properties.reduce((s, p) => s + p.views, 0) / properties.length).toLocaleString(), icon: '👁️', sub: 'Across all listings' },
-    { label: 'Registered Users', value: users.filter(u => u.role === 'user').length, icon: '👥', sub: 'Total platform users' },
+    { label: 'Registered Users', value: userCount, icon: '👥', sub: 'Total platform users' },
   ];
 
   return (

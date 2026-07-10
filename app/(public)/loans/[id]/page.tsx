@@ -2,22 +2,27 @@
 
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   CheckCircle2, ChevronRight, FileText, ArrowRight, Phone,
   Percent, Clock, ShieldCheck, FileSignature, Wallet
 } from 'lucide-react';
-import { useContentStore } from '@/stores/contentStore';
-import { usePropertyStore } from '@/stores/propertyStore';
+import { getLoanProgram } from '@/lib/db/loans';
+import { createLead } from '@/lib/db/leads';
 import { useAuthStore } from '@/stores/authStore';
 import { toast } from 'sonner';
+import type { LoanProgram } from '@/data/mockData';
 
 export default function LoanDetailPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
-  const { loans } = useContentStore();
-  const { addLead } = usePropertyStore();
   const { currentUser } = useAuthStore();
+  const [loan, setLoan] = useState<LoanProgram | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getLoanProgram(id).then(l => { setLoan(l); setLoading(false); }).catch(() => setLoading(false));
+  }, [id]);
   
   const [formSent, setFormSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -27,7 +32,7 @@ export default function LoanDetailPage() {
     amount: '',
   });
 
-  const loan = loans.find(l => l.id === id);
+  if (loading) return <div className="pt-32 text-center"><div className="w-12 h-12 border-4 border-navy-200 border-t-navy-600 rounded-full animate-spin mx-auto" /></div>;
 
   if (!loan) {
     return (
@@ -65,27 +70,26 @@ export default function LoanDetailPage() {
     { title: 'Disbursal', desc: 'Once you accept the offer and complete any final formalities, the loan amount will be disbursed.' }
   ];
 
-  const handleInquiry = (e: React.FormEvent) => {
+  const handleInquiry = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    addLead({
-      userId: currentUser?.id || '',
-      userName: formData.name,
-      userEmail: formData.email,
-      userPhone: formData.phone,
-      propertyId: loan.name,
-      propertyTitle: loan.name,
-      propertyLocation: loan.bankName,
-      timestamp: new Date().toISOString(),
-      status: 'New',
-      notes: `Requested Amount: ₹${formData.amount}`,
-      source: 'Loan Inquiry',
-    });
-
-    setTimeout(() => {
+    try {
+      await createLead({
+        userId: currentUser?.id || '',
+        userName: formData.name,
+        userEmail: formData.email,
+        userPhone: formData.phone,
+        propertyId: '',
+        propertyTitle: loan.name,
+        propertyLocation: loan.bankName,
+        status: 'New',
+        notes: `Requested Amount: ₹${formData.amount}`,
+        source: 'Loan Inquiry',
+      });
       setFormSent(true);
       toast.success('Loan inquiry submitted! Our expert will call you within 2 hours.');
-    }, 500);
+    } catch {
+      toast.error('Failed to submit inquiry. Please try again.');
+    }
   };
 
   return (

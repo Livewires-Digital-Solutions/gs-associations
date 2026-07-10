@@ -1,17 +1,26 @@
 'use client';
 
-
-import { useState } from 'react';
-import { Search, Shield, CheckCircle2, XCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, CheckCircle2, XCircle } from 'lucide-react';
 import { format } from 'date-fns';
-import { users } from '@/data/mockData';
-import { usePropertyStore } from '@/stores/propertyStore';
+import { getProfiles } from '@/lib/db/profiles';
+import type { Profile } from '@/lib/db/profiles';
+import { getLeads } from '@/lib/db/leads';
+import type { Lead } from '@/data/mockData';
 
 export default function AdminUsers() {
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const { leads } = usePropertyStore();
 
-  const regularUsers = users.filter(u => u.role === 'user');
+  useEffect(() => {
+    Promise.all([getProfiles(), getLeads()])
+      .then(([p, l]) => { setProfiles(p); setLeads(l); })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const regularUsers = profiles.filter(u => u.role === 'user');
   const filtered = regularUsers.filter(u =>
     !search ||
     u.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -26,7 +35,7 @@ export default function AdminUsers() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-display text-2xl font-bold text-surface-900">Users Management</h1>
-          <p className="text-surface-500 text-sm">{regularUsers.length} registered users</p>
+          <p className="text-surface-500 text-sm">{loading ? 'Loading...' : `${regularUsers.length} registered users`}</p>
         </div>
         <div className="flex items-center gap-3 text-sm">
           <div className="px-3 py-1.5 bg-navy-50 rounded-lg text-navy-700 font-medium">
@@ -53,12 +62,13 @@ export default function AdminUsers() {
               <th className="table-header-cell">Budget</th>
               <th className="table-header-cell">Joined</th>
               <th className="table-header-cell">Leads</th>
-              <th className="table-header-cell">Saved</th>
               <th className="table-header-cell">Verified</th>
             </tr>
           </thead>
           <tbody>
-            {filtered.map(user => (
+            {loading ? (
+              <tr><td colSpan={7} className="text-center py-10 text-surface-400">Loading users...</td></tr>
+            ) : filtered.map(user => (
               <tr key={user.id} className="table-row">
                 <td className="table-cell">
                   <div className="flex items-center gap-3">
@@ -69,7 +79,7 @@ export default function AdminUsers() {
                     </div>
                   </div>
                 </td>
-                <td className="table-cell text-sm text-surface-600">{user.phone}</td>
+                <td className="table-cell text-sm text-surface-600">{user.phone || '—'}</td>
                 <td className="table-cell">
                   {user.lookingFor ? (
                     <span className="badge badge-navy text-[10px]">{user.lookingFor}</span>
@@ -79,12 +89,11 @@ export default function AdminUsers() {
                 </td>
                 <td className="table-cell text-xs text-surface-600">{user.budget || '—'}</td>
                 <td className="table-cell text-xs text-surface-500">
-                  {format(new Date(user.joinedDate), 'MMM d, yyyy')}
+                  {format(new Date(user.createdAt), 'MMM d, yyyy')}
                 </td>
                 <td className="table-cell">
                   <span className="font-semibold text-navy-700">{getUserLeadCount(user.id)}</span>
                 </td>
-                <td className="table-cell text-surface-600">{user.savedProperties.length}</td>
                 <td className="table-cell">
                   {user.isVerified ? (
                     <CheckCircle2 className="w-4 h-4 text-emerald-500" />

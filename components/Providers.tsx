@@ -21,13 +21,17 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       {children}
       <Toaster
-        position="top-right"
+        position="bottom-center"
         richColors
         closeButton
         toastOptions={{
           style: {
             fontFamily: 'var(--font-manrope), sans-serif',
-            borderRadius: '12px',
+            borderRadius: '16px',
+            boxShadow: '0 10px 40px -10px rgba(0,0,0,0.15)',
+            border: '1px solid rgba(226,232,240,0.8)',
+            padding: '16px 20px',
+            fontSize: '14px',
           },
         }}
       />

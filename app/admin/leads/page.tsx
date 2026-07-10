@@ -1,12 +1,11 @@
 'use client';
 
-
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Filter, Download } from 'lucide-react';
 import { format } from 'date-fns';
-import { usePropertyStore } from '@/stores/propertyStore';
-import type { LeadStatus } from '@/data/mockData';
+import { getLeads, updateLeadStatus as dbUpdateLeadStatus, updateLeadNotes as dbUpdateLeadNotes } from '@/lib/db/leads';
+import type { Lead, LeadStatus } from '@/data/mockData';
 import { toast } from 'sonner';
 
 const statusColors: Record<string, string> = {
@@ -19,11 +18,18 @@ const statusColors: Record<string, string> = {
 const statusOptions: LeadStatus[] = ['New', 'Contacted', 'Qualified', 'Closed'];
 
 export default function AdminLeads() {
-  const { leads, updateLeadStatus, updateLeadNotes } = usePropertyStore();
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<LeadStatus | 'All'>('All');
-  const [selectedLead, setSelectedLead] = useState<typeof leads[0] | null>(null);
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [noteText, setNoteText] = useState('');
+
+  const load = async () => {
+    setLoading(true);
+    try { setLeads(await getLeads()); } finally { setLoading(false); }
+  };
+  useEffect(() => { load(); }, []);
 
   const filtered = useMemo(() => {
     return leads.filter(l => {
@@ -36,18 +42,26 @@ export default function AdminLeads() {
     });
   }, [leads, search, statusFilter]);
 
-  const handleStatusChange = (leadId: string, status: LeadStatus) => {
-    updateLeadStatus(leadId, status);
-    if (selectedLead?.id === leadId) {
-      setSelectedLead(prev => prev ? { ...prev, status } : null);
+  const handleStatusChange = async (leadId: string, status: LeadStatus) => {
+    try {
+      await dbUpdateLeadStatus(leadId, status);
+      setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status } : l));
+      if (selectedLead?.id === leadId) setSelectedLead(prev => prev ? { ...prev, status } : null);
+      toast.success(`Lead status updated to ${status}`);
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to update status');
     }
-    toast.success(`Lead status updated to ${status}`);
   };
 
-  const handleNoteSave = () => {
+  const handleNoteSave = async () => {
     if (selectedLead) {
-      updateLeadNotes(selectedLead.id, noteText);
-      toast.success('Note saved');
+      try {
+        await dbUpdateLeadNotes(selectedLead.id, noteText);
+        setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, notes: noteText } : l));
+        toast.success('Note saved');
+      } catch (e: any) {
+        toast.error(e.message || 'Failed to save note');
+      }
     }
   };
 

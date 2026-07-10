@@ -37,6 +37,7 @@ export interface Property {
   saves: number;
   agentName: string;
   agentPhone: string;
+  agentEmail: string;
   rera?: string;
 }
 
@@ -186,6 +187,7 @@ export const properties: Property[] = [
     saves: 124,
     agentName: 'Ravi Shankar',
     agentPhone: '+91 98765 43210',
+    agentEmail: 'ravi.shankar@gsassociations.com',
     rera: 'P02400001234',
   },
   {
@@ -216,6 +218,7 @@ export const properties: Property[] = [
     saves: 289,
     agentName: 'Priya Nair',
     agentPhone: '+91 98765 43211',
+    agentEmail: 'priya.nair@gsassociations.com',
     rera: 'P02400001235',
   },
   {
@@ -246,6 +249,7 @@ export const properties: Property[] = [
     saves: 87,
     agentName: 'Ravi Shankar',
     agentPhone: '+91 98765 43210',
+    agentEmail: 'ravi.shankar@gsassociations.com',
     rera: 'P02400001236',
   },
   {
@@ -276,6 +280,7 @@ export const properties: Property[] = [
     saves: 45,
     agentName: 'Suresh Reddy',
     agentPhone: '+91 98765 43212',
+    agentEmail: 'suresh.reddy@gsassociations.com',
     rera: 'P02400001237',
   },
   {
@@ -306,6 +311,7 @@ export const properties: Property[] = [
     saves: 445,
     agentName: 'Priya Nair',
     agentPhone: '+91 98765 43211',
+    agentEmail: 'priya.nair@gsassociations.com',
     rera: 'P02400001238',
   },
   {
@@ -336,6 +342,7 @@ export const properties: Property[] = [
     saves: 78,
     agentName: 'Suresh Reddy',
     agentPhone: '+91 98765 43212',
+    agentEmail: 'suresh.reddy@gsassociations.com',
     rera: 'P02400001239',
   },
   {
@@ -366,6 +373,7 @@ export const properties: Property[] = [
     saves: 62,
     agentName: 'Ravi Shankar',
     agentPhone: '+91 98765 43210',
+    agentEmail: 'ravi.shankar@gsassociations.com',
     rera: 'P02400001240',
   },
   {
@@ -396,6 +404,7 @@ export const properties: Property[] = [
     saves: 103,
     agentName: 'Suresh Reddy',
     agentPhone: '+91 98765 43212',
+    agentEmail: 'suresh.reddy@gsassociations.com',
     rera: 'P02400001241',
   },
   {
@@ -426,6 +435,7 @@ export const properties: Property[] = [
     saves: 671,
     agentName: 'Priya Nair',
     agentPhone: '+91 98765 43211',
+    agentEmail: 'priya.nair@gsassociations.com',
     rera: 'P02400001242',
   },
   {
@@ -456,6 +466,7 @@ export const properties: Property[] = [
     saves: 58,
     agentName: 'Ravi Shankar',
     agentPhone: '+91 98765 43210',
+    agentEmail: 'ravi.shankar@gsassociations.com',
     rera: 'P02400001243',
   },
   {
@@ -486,6 +497,7 @@ export const properties: Property[] = [
     saves: 98,
     agentName: 'Suresh Reddy',
     agentPhone: '+91 98765 43212',
+    agentEmail: 'suresh.reddy@gsassociations.com',
     rera: 'P02400001244',
   },
   {
@@ -516,6 +528,7 @@ export const properties: Property[] = [
     saves: 34,
     agentName: 'Priya Nair',
     agentPhone: '+91 98765 43211',
+    agentEmail: 'priya.nair@gsassociations.com',
     rera: 'P02400001245',
   },
   {
@@ -546,6 +559,7 @@ export const properties: Property[] = [
     saves: 71,
     agentName: 'Ravi Shankar',
     agentPhone: '+91 98765 43210',
+    agentEmail: 'ravi.shankar@gsassociations.com',
     rera: 'P02400001246',
   },
   {
@@ -576,6 +590,7 @@ export const properties: Property[] = [
     saves: 29,
     agentName: 'Suresh Reddy',
     agentPhone: '+91 98765 43212',
+    agentEmail: 'suresh.reddy@gsassociations.com',
     rera: 'P02400001247',
   },
   {
@@ -606,6 +621,7 @@ export const properties: Property[] = [
     saves: 198,
     agentName: 'Priya Nair',
     agentPhone: '+91 98765 43211',
+    agentEmail: 'priya.nair@gsassociations.com',
     rera: 'P02400001248',
   },
   {
@@ -636,6 +652,7 @@ export const properties: Property[] = [
     saves: 12,
     agentName: 'Ravi Shankar',
     agentPhone: '+91 98765 43210',
+    agentEmail: 'ravi.shankar@gsassociations.com',
     rera: 'P02400001249',
   },
   {
@@ -666,6 +683,7 @@ export const properties: Property[] = [
     saves: 312,
     agentName: 'Priya Nair',
     agentPhone: '+91 98765 43211',
+    agentEmail: 'priya.nair@gsassociations.com',
     rera: 'P02400001250',
   },
   {
@@ -696,6 +714,7 @@ export const properties: Property[] = [
     saves: 48,
     agentName: 'Suresh Reddy',
     agentPhone: '+91 98765 43212',
+    agentEmail: 'suresh.reddy@gsassociations.com',
     rera: 'P02400001251',
   },
   {
@@ -726,6 +745,7 @@ export const properties: Property[] = [
     saves: 84,
     agentName: 'Ravi Shankar',
     agentPhone: '+91 98765 43210',
+    agentEmail: 'ravi.shankar@gsassociations.com',
     rera: 'P02400001252',
   },
   {
@@ -756,6 +776,7 @@ export const properties: Property[] = [
     saves: 534,
     agentName: 'Priya Nair',
     agentPhone: '+91 98765 43211',
+    agentEmail: 'priya.nair@gsassociations.com',
     rera: 'P02400001253',
   },
 ];
@@ -1636,3 +1657,4 @@ export const DEMO_CREDENTIALS = {
   admin: { email: 'admin@gsassociations.com', password: 'admin123' },
   user: { email: 'arjun.mehta@gmail.com', password: 'user123' },
 };
+

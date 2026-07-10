@@ -1,11 +1,10 @@
 'use client';
 
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, Edit2, Trash2, Star, Eye, Search, X, Check } from 'lucide-react';
 import { format } from 'date-fns';
-import { useContentStore } from '@/stores/contentStore';
+import { getBlogPosts, createBlogPost, updateBlogPost, deleteBlogPost } from '@/lib/db/blogs';
 import { toast } from 'sonner';
 import type { BlogPost } from '@/data/mockData';
 
@@ -99,29 +98,46 @@ function BlogForm({ blog, onSave, onClose }: { blog?: BlogPost; onSave: (data: P
 }
 
 export default function AdminBlog() {
-  const { blogs, addBlog, updateBlog, deleteBlog, toggleBlogFeatured } = useContentStore();
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingBlog, setEditingBlog] = useState<BlogPost | undefined>();
 
+  const load = async () => {
+    setLoading(true);
+    try { setBlogs(await getBlogPosts()); } finally { setLoading(false); }
+  };
+  useEffect(() => { load(); }, []);
+
   const filtered = blogs.filter(b => !search || b.title.toLowerCase().includes(search.toLowerCase()));
 
-  const handleSave = (data: Partial<BlogPost>) => {
-    if (editingBlog) {
-      updateBlog(editingBlog.id, data);
-      toast.success('Article updated');
-    } else {
-      addBlog(data as Omit<BlogPost, 'id' | 'publishedDate' | 'views'>);
-      toast.success('Article published');
+  const handleSave = async (data: Partial<BlogPost>) => {
+    try {
+      if (editingBlog) {
+        await updateBlogPost(editingBlog.id, data);
+        toast.success('Article updated');
+      } else {
+        await createBlogPost(data as Omit<BlogPost, 'id' | 'publishedDate' | 'views'>);
+        toast.success('Article published');
+      }
+      setShowForm(false);
+      setEditingBlog(undefined);
+      await load();
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to save article');
     }
-    setShowForm(false);
-    setEditingBlog(undefined);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Delete this article?')) {
-      deleteBlog(id);
-      toast.success('Article deleted');
+      try {
+        await deleteBlogPost(id);
+        toast.success('Article deleted');
+        await load();
+      } catch (e: any) {
+        toast.error(e.message || 'Failed to delete article');
+      }
     }
   };
 
@@ -130,7 +146,7 @@ export default function AdminBlog() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-display text-2xl font-bold text-surface-900">Blog Management</h1>
-          <p className="text-surface-500 text-sm">{blogs.length} articles published</p>
+          <p className="text-surface-500 text-sm">{loading ? 'Loading...' : `${blogs.length} articles published`}</p>
         </div>
         <button onClick={() => { setShowForm(true); setEditingBlog(undefined); }} className="btn-primary text-sm">
           <Plus className="w-4 h-4" /> New Article

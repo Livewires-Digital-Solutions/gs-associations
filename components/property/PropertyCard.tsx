@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import type { Property } from '@/data/mockData';
 import { useAuthStore } from '@/stores/authStore';
 import { usePropertyStore } from '@/stores/propertyStore';
+import { generatePropertySlug } from '@/lib/utils';
 
 interface PropertyCardProps {
   property: Property;
@@ -44,7 +45,7 @@ export default function PropertyCard({ property, variant = 'default' }: Property
   };
 
   const handleClick = () => {
-    router.push(`/properties/${property.id}`);
+    router.push(`/properties/${generatePropertySlug(property.title, property.id)}`);
   };
 
   if (variant === 'horizontal') {

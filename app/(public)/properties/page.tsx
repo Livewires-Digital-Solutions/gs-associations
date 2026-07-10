@@ -1,12 +1,13 @@
 'use client';
 
-
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, SlidersHorizontal, X, ChevronDown } from 'lucide-react';
-import { usePropertyStore } from '@/stores/propertyStore';
 import PropertyCard from '@/components/property/PropertyCard';
-import type { PropertyType, PropertyStatus } from '@/data/mockData';
+import type { PropertyType, PropertyStatus, Property } from '@/data/mockData';
+import { getProperties } from '@/lib/db/properties';
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const propertyTypes: PropertyType[] = ['Apartment', 'Villa', 'Plot', 'Commercial', 'Row House', 'Penthouse'];
 const statusOptions: PropertyStatus[] = ['Available', 'Under Offer', 'Sold'];
@@ -27,12 +28,14 @@ const sortOptions = [
   { label: 'Most Saved', value: 'saves' },
 ];
 
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-
 function PropertiesContent() {
   const searchParams = useSearchParams();
-  const { properties } = usePropertyStore();
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProperties().then(data => { setProperties(data); setLoading(false); }).catch(() => setLoading(false));
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '');
   const [selectedTypes, setSelectedTypes] = useState<PropertyType[]>(
@@ -130,7 +133,7 @@ function PropertiesContent() {
               Discover Your Perfect Home
             </h1>
             <p className="text-lg md:text-xl text-white/90">
-              Explore our exclusive portfolio of {properties.length} verified properties across Hyderabad's most premium neighborhoods.
+              Explore our exclusive portfolio of {loading ? '...' : properties.length} verified properties across Hyderabad's most premium neighborhoods.
             </p>
           </motion.div>
         </div>
@@ -284,7 +287,13 @@ function PropertiesContent() {
           </p>
         </div>
 
-        {filtered.length === 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl h-80 animate-pulse" />
+            ))}
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="text-center py-20">
             <div className="text-6xl mb-4">🏘️</div>
             <h3 className="font-display text-xl font-semibold text-surface-700 mb-2">No properties found</h3>
@@ -320,3 +329,4 @@ export default function PropertiesPage() {
     </Suspense>
   );
 }
+

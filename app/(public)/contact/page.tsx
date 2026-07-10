@@ -1,11 +1,10 @@
 'use client';
 
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { usePropertyStore } from '@/stores/propertyStore';
+import { createLead } from '@/lib/db/leads';
 
 const contactInfo = [
   { icon: <MapPin className="w-5 h-5" />, label: 'Office Address', value: 'Plot 42, Gachibowli Main Road,\nFinancial District, Hyderabad — 500032' },
@@ -28,30 +27,30 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', type: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { addLead } = usePropertyStore();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      // Add as contact form lead
-      addLead({
-        userId: `visitor-${Date.now()}`,
+    try {
+      await createLead({
+        userId: '',
         userName: formData.name,
         userEmail: formData.email,
         userPhone: formData.phone,
         propertyId: '',
         propertyTitle: formData.type || 'General Inquiry',
         propertyLocation: 'Contact Form',
-        timestamp: new Date().toISOString(),
         status: 'New',
         notes: formData.message,
         source: 'Contact Form',
       });
       setSubmitted(true);
-      setLoading(false);
       toast.success('Message sent! Our team will get back to you within 24 hours.');
-    }, 1500);
+    } catch (e) {
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

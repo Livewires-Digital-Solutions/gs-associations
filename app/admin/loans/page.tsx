@@ -1,10 +1,9 @@
 'use client';
 
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, Edit2, Trash2, Star, X, Check } from 'lucide-react';
-import { useContentStore } from '@/stores/contentStore';
+import { getLoanPrograms, createLoanProgram, updateLoanProgram, deleteLoanProgram } from '@/lib/db/loans';
 import { toast } from 'sonner';
 import type { LoanProgram } from '@/data/mockData';
 
@@ -122,26 +121,52 @@ function LoanForm({ loan, onSave, onClose }: { loan?: LoanProgram; onSave: (data
 }
 
 export default function AdminLoans() {
-  const { loans, addLoan, updateLoan, deleteLoan, toggleLoanPopular } = useContentStore();
+  const [loans, setLoans] = useState<LoanProgram[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingLoan, setEditingLoan] = useState<LoanProgram | undefined>();
 
-  const handleSave = (data: Partial<LoanProgram>) => {
-    if (editingLoan) {
-      updateLoan(editingLoan.id, data);
-      toast.success('Loan program updated');
-    } else {
-      addLoan(data as Omit<LoanProgram, 'id'>);
-      toast.success('Loan program added');
+  const load = async () => {
+    setLoading(true);
+    try { setLoans(await getLoanPrograms()); } finally { setLoading(false); }
+  };
+  useEffect(() => { load(); }, []);
+
+  const handleSave = async (data: Partial<LoanProgram>) => {
+    try {
+      if (editingLoan) {
+        await updateLoanProgram(editingLoan.id, data);
+        toast.success('Loan program updated');
+      } else {
+        await createLoanProgram(data as Omit<LoanProgram, 'id'>);
+        toast.success('Loan program added');
+      }
+      setShowForm(false);
+      setEditingLoan(undefined);
+      await load();
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to save loan program');
     }
-    setShowForm(false);
-    setEditingLoan(undefined);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Delete this loan program?')) {
-      deleteLoan(id);
-      toast.success('Loan program deleted');
+      try {
+        await deleteLoanProgram(id);
+        toast.success('Loan program deleted');
+        await load();
+      } catch (e: any) {
+        toast.error(e.message || 'Failed to delete loan program');
+      }
+    }
+  };
+
+  const handleTogglePopular = async (loan: LoanProgram) => {
+    try {
+      await updateLoanProgram(loan.id, { popular: !loan.popular });
+      await load();
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to update loan');
     }
   };
 
@@ -150,7 +175,7 @@ export default function AdminLoans() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-display text-2xl font-bold text-surface-900">Loan Management</h1>
-          <p className="text-surface-500 text-sm">{loans.length} loan programs available</p>
+          <p className="text-surface-500 text-sm">{loading ? 'Loading...' : `${loans.length} loan programs available`}</p>
         </div>
         <button onClick={() => { setShowForm(true); setEditingLoan(undefined); }} className="btn-primary text-sm">
           <Plus className="w-4 h-4" /> Add Program

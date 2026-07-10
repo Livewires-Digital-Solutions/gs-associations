@@ -1,15 +1,24 @@
 'use client';
 
-
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { format } from 'date-fns';
-import { usePropertyStore } from '@/stores/propertyStore';
+import { getLeads } from '@/lib/db/leads';
+import { getProperties } from '@/lib/db/properties';
+import type { Lead, Property } from '@/data/mockData';
 
 export default function AdminTracking() {
-  const { leads, properties } = usePropertyStore();
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [propertyFilter, setPropertyFilter] = useState('All');
+
+  useEffect(() => {
+    Promise.all([getLeads(), getProperties()])
+      .then(([l, p]) => { setLeads(l); setProperties(p); })
+      .finally(() => setLoading(false));
+  }, []);
 
   const viewLeads = leads.filter(l => l.source === 'Property View');
 

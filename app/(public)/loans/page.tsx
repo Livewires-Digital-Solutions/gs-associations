@@ -51,15 +51,19 @@ function AnimatedCounter({ value, prefix = '', suffix = '', delay = 0 }: { value
     </span>
   );
 }
-import { useContentStore } from '@/stores/contentStore';
-import { usePropertyStore } from '@/stores/propertyStore';
+import { getLoanPrograms } from '@/lib/db/loans';
+import { createLead } from '@/lib/db/leads';
 import { useAuthStore } from '@/stores/authStore';
 import { toast } from 'sonner';
+import type { LoanProgram } from '@/data/mockData';
 
 export default function LoansPage() {
-  const { loans } = useContentStore();
-  const { addLead } = usePropertyStore();
+  const [loans, setLoans] = useState<LoanProgram[]>([]);
   const { currentUser } = useAuthStore();
+
+  useEffect(() => {
+    getLoanPrograms().then(setLoans).catch(() => {});
+  }, []);
   
   const [isEmiModalOpen, setIsEmiModalOpen] = useState(false);
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);

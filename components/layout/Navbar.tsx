@@ -2,16 +2,20 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Menu, X, Building2, ChevronDown, User, Heart, Clock,
+  Menu, X, ChevronDown, User, Heart, Clock,
   Settings, LogOut, LayoutDashboard
 } from 'lucide-react';
+import logo from '@/assets/logo.png';
+import logoWhite from '@/assets/logowhite.png';
 import { useAuthStore } from '@/stores/authStore';
 import { createClient } from '@/lib/supabase/client';
 
 const navLinks = [
+  { label: 'Home', href: '/' },
   { label: 'Properties', href: '/properties' },
   { label: 'Loans', href: '/loans' },
   { label: 'Blog', href: '/blog' },
@@ -23,7 +27,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { isAuthenticated, currentUser, logout } = useAuthStore();
+  const { isAuthenticated, currentUser, logout, openLoginModal, openRegisterModal } = useAuthStore();
   const router = useRouter();
   const pathname = usePathname();
   
@@ -62,7 +66,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 flex justify-center ${
-        scrolled ? 'pt-4 px-4' : 'pt-0 px-0'
+        scrolled ? 'pt-4 px-4' : 'pt-6 px-0'
       }`}
     >
       <div className={`w-full max-w-7xl transition-all duration-500 ${
@@ -70,37 +74,39 @@ export default function Navbar() {
           ? 'bg-white/60 backdrop-blur-xl shadow-2xl rounded-full px-6 sm:px-8'
           : 'bg-transparent px-4 sm:px-6 lg:px-8'
       }`}>
-        <div className="flex items-center justify-between h-18 py-4">
+        <div className="flex items-center justify-between h-16 py-2">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-navy-800 flex items-center justify-center shadow-sm group-hover:bg-navy-700 transition-colors">
-              <Building2 className="w-5 h-5 text-white" />
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className={`font-display font-bold text-lg leading-none transition-colors ${useDarkText ? 'text-navy-900' : 'text-white'}`}>
-                GS Associations
-              </span>
-              <span className={`text-xs font-medium transition-colors ${useDarkText ? 'text-gold-600' : 'text-gold-400'}`}>
-                Premium Real Estate & Loans
-              </span>
-            </div>
+          <Link href="/" className="flex items-center gap-2 group">
+            <Image
+              src={useDarkText ? logo : logoWhite}
+              alt="GS Associations Logo"
+              height={48}
+              className={`h-12 w-auto object-contain transition-all duration-300 origin-left ${scrolled ? 'scale-100' : 'scale-125'}`}
+            />
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map(link => {
-              const isActive = pathname === link.href || pathname?.startsWith(link.href + '/');
+              const isActive = link.href === '/' ? pathname === '/' : pathname === link.href || pathname?.startsWith(link.href + '/');
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? useDarkText ? 'text-navy-800 bg-navy-50' : 'text-white bg-white/15'
-                      : useDarkText ? 'text-surface-600 hover:text-navy-800 hover:bg-surface-100' : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? useDarkText ? 'text-navy-800' : 'text-white'
+                      : useDarkText ? 'text-surface-600 hover:text-navy-800' : 'text-white hover:text-blue-400'
                   }`}
                 >
                   {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-indicator"
+                      className={`absolute bottom-0 left-3 right-3 h-[2px] rounded-full ${useDarkText ? 'bg-navy-800' : 'bg-white'}`}
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -166,20 +172,20 @@ export default function Navbar() {
               </div>
             ) : (
               <>
-                <Link
-                  href="/login"
+                <button
+                  onClick={() => openLoginModal()}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                     useDarkText ? 'text-surface-700 hover:bg-surface-100' : 'text-white/90 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   Sign In
-                </Link>
-                <Link
-                  href="/register"
-                  className="btn-gold text-sm px-5 py-2.5"
+                </button>
+                <button
+                  onClick={() => openRegisterModal()}
+                  className="btn-gold text-sm px-6 py-2.5 !rounded-full"
                 >
                   Register Free
-                </Link>
+                </button>
               </>
             )}
           </div>
@@ -206,7 +212,7 @@ export default function Navbar() {
           >
             <div className="container-app py-4 flex flex-col gap-1">
               {navLinks.map(link => {
-                const isActive = pathname === link.href || pathname?.startsWith(link.href + '/');
+                const isActive = link.href === '/' ? pathname === '/' : pathname === link.href || pathname?.startsWith(link.href + '/');
                 return (
                   <Link
                     key={link.href}
@@ -232,8 +238,8 @@ export default function Navbar() {
                   </>
                 ) : (
                   <>
-                    <Link href="/login" onClick={() => setMobileOpen(false)} className="btn-secondary w-full justify-center">Sign In</Link>
-                    <Link href="/register" onClick={() => setMobileOpen(false)} className="btn-gold w-full justify-center">Register Free</Link>
+                    <button onClick={() => { setMobileOpen(false); openLoginModal(); }} className="btn-secondary w-full justify-center">Sign In</button>
+                    <button onClick={() => { setMobileOpen(false); openRegisterModal(); }} className="btn-gold w-full justify-center !rounded-full">Register Free</button>
                   </>
                 )}
               </div>

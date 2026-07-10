@@ -1,21 +1,42 @@
 'use client';
 
 import Link from 'next/link';
-
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Clock, Eye, ArrowRight, TrendingUp, Building2, Sparkles } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
-import { usePropertyStore } from '@/stores/propertyStore';
+import { getSavedPropertyIds, getViewedPropertyIds } from '@/lib/db/saved';
+import { getProperties, getFeaturedProperties } from '@/lib/db/properties';
+import { getLeads } from '@/lib/db/leads';
 import PropertyCard from '@/components/property/PropertyCard';
+import type { Property, Lead } from '@/data/mockData';
 
 export default function UserDashboard() {
   const { currentUser } = useAuthStore();
-  const { properties, savedPropertyIds, viewedPropertyIds, leads } = usePropertyStore();
+  const [savedPropertyIds, setSavedPropertyIds] = useState<string[]>([]);
+  const [viewedPropertyIds, setViewedPropertyIds] = useState<string[]>([]);
+  const [savedProperties, setSavedProperties] = useState<Property[]>([]);
+  const [recentlyViewed, setRecentlyViewed] = useState<Property[]>([]);
+  const [userLeads, setUserLeads] = useState<Lead[]>([]);
+  const [recommended, setRecommended] = useState<Property[]>([]);
 
-  const savedProperties = properties.filter(p => savedPropertyIds.includes(p.id));
-  const recentlyViewed = viewedPropertyIds.slice(0, 4).map(id => properties.find(p => p.id === id)).filter(Boolean) as typeof properties;
-  const userLeads = leads.filter(l => l.userId === currentUser?.id);
-  const recommended = properties.filter(p => !savedPropertyIds.includes(p.id) && p.featured).slice(0, 3);
+  useEffect(() => {
+    if (!currentUser) return;
+    getSavedPropertyIds(currentUser.id).then(ids => {
+      setSavedPropertyIds(ids);
+      getProperties().then(all => {
+        setSavedProperties(all.filter(p => ids.includes(p.id)));
+        setRecommended(all.filter(p => !ids.includes(p.id) && p.featured).slice(0, 3));
+      });
+    });
+    getViewedPropertyIds(currentUser.id).then(ids => {
+      setViewedPropertyIds(ids);
+      getProperties().then(all => {
+        setRecentlyViewed(ids.slice(0, 4).map(id => all.find(p => p.id === id)).filter(Boolean) as Property[]);
+      });
+    });
+    getLeads().then(all => setUserLeads(all.filter(l => l.userId === currentUser.id)));
+  }, [currentUser?.id]);
 
   const statCards = [
     { icon: <Heart className="w-5 h-5" />, label: 'Saved Properties', value: savedPropertyIds.length, color: 'bg-red-100 text-red-600', link: '/dashboard/saved' },

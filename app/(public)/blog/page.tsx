@@ -1,18 +1,23 @@
 'use client';
 
 import Link from 'next/link';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Clock, Eye, ArrowRight } from 'lucide-react';
-import { useContentStore } from '@/stores/contentStore';
+import { getBlogPosts } from '@/lib/db/blogs';
+import type { BlogPost } from '@/data/mockData';
 
 const categories = ['All', 'Market Trends', 'Home Loans', 'Investment Guide', 'Buyer Tips', 'Legal & Compliance', 'Interior Design'];
 
 export default function BlogListPage() {
-  const { blogs } = useContentStore();
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
+
+  useEffect(() => {
+    getBlogPosts().then(data => { setBlogs(data); setLoading(false); }).catch(() => setLoading(false));
+  }, []);
 
   const featured = blogs.filter(b => b.featured)[0];
   const filtered = blogs

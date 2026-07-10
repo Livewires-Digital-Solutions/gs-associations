@@ -10,9 +10,10 @@ import {
   ChevronRight, Star, Building2, Users, CheckCircle2, Sparkles,
   Wallet, Landmark, Home, Briefcase
 } from 'lucide-react';
-import { usePropertyStore } from '@/stores/propertyStore';
-import { useContentStore } from '@/stores/contentStore';
+import { getFeaturedProperties } from '@/lib/db/properties';
+import { getFeaturedBlogPosts } from '@/lib/db/blogs';
 import PropertyCard from '@/components/property/PropertyCard';
+import type { Property, BlogPost } from '@/data/mockData';
 
 // Theme Config Variables
 const blogSectionBg = "bg-blue-50";
@@ -211,12 +212,14 @@ const itemVariants = {
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const { properties } = usePropertyStore();
-  const { blogs } = useContentStore();
+  const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
+  const [latestBlogs, setLatestBlogs] = useState<BlogPost[]>([]);
   const router = useRouter();
 
-  const featuredProperties = properties.filter(p => p.featured).slice(0, 6);
-  const latestBlogs = blogs.slice(0, 3);
+  useEffect(() => {
+    getFeaturedProperties(6).then(setFeaturedProperties).catch(() => {});
+    getFeaturedBlogPosts(3).then(setLatestBlogs).catch(() => {});
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

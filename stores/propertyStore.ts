@@ -1,151 +1,100 @@
+// propertyStore is now a thin signal layer.
+// Actual data lives in Supabase and is fetched by pages via lib/db/properties & lib/db/leads.
+// The store only holds the current user's savedPropertyIds and viewedPropertyIds (client-side cache),
+// and exposes mutation functions that call the DB layer.
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Property, Lead, LeadStatus } from '../data/mockData';
-import { properties as initialProperties, leads as initialLeads } from '../data/mockData';
+import {
+  saveProperty as dbSave,
+  unsaveProperty as dbUnsave,
+  getSavedPropertyIds,
+  recordPropertyView,
+  getViewedPropertyIds,
+} from '@/lib/db/saved';
+import { createLead } from '@/lib/db/leads';
+import type { Lead } from '@/data/mockData';
 
 interface PropertyState {
-  properties: Property[];
-  leads: Lead[];
   savedPropertyIds: string[];
   viewedPropertyIds: string[];
 
-  // Property actions
-  addProperty: (property: Omit<Property, 'id' | 'postedDate' | 'views' | 'saves'>) => void;
-  updateProperty: (id: string, data: Partial<Property>) => void;
-  deleteProperty: (id: string) => void;
-  toggleFeatured: (id: string) => void;
+  // Load from DB for logged-in user
+  loadUserData: (userId: string) => Promise<void>;
 
-  // User interactions
-  saveProperty: (propertyId: string) => void;
-  unsaveProperty: (propertyId: string) => void;
-  recordView: (propertyId: string, userId: string, userName: string, userEmail: string, userPhone: string) => void;
+  // Save/unsave
+  saveProperty: (propertyId: string, userId: string) => Promise<void>;
+  unsaveProperty: (propertyId: string, userId: string) => Promise<void>;
 
-  // Lead actions
-  updateLeadStatus: (leadId: string, status: LeadStatus) => void;
-  updateLeadNotes: (leadId: string, notes: string) => void;
-  addLead: (lead: Omit<Lead, 'id'>) => void;
+  // View tracking
+  recordView: (propertyId: string, userId: string, userName: string, userEmail: string, userPhone: string) => Promise<void>;
+
+  // Lead creation (contact form / schedule visit)
+  addLead: (lead: Omit<Lead, 'id' | 'timestamp'>) => Promise<void>;
+
+  // Refresh signal (bump to trigger page re-fetch)
+  refreshSignal: number;
+  triggerRefresh: () => void;
 }
 
 export const usePropertyStore = create<PropertyState>()(
   persist(
     (set, get) => ({
-      properties: initialProperties,
-      leads: initialLeads,
       savedPropertyIds: [],
       viewedPropertyIds: [],
+      refreshSignal: 0,
 
-      addProperty: (propertyData) => {
-        const newProperty: Property = {
-          ...propertyData,
-          id: `prop-${Date.now()}`,
-          postedDate: new Date().toISOString().split('T')[0],
-          views: 0,
-          saves: 0,
-        } as Property;
-        set(state => ({ properties: [newProperty, ...state.properties] }));
+      loadUserData: async (userId) => {
+        const [saved, viewed] = await Promise.all([
+          getSavedPropertyIds(userId),
+          getViewedPropertyIds(userId),
+        ]);
+        set({ savedPropertyIds: saved, viewedPropertyIds: viewed });
       },
 
-      updateProperty: (id, data) => {
-        set(state => ({
-          properties: state.properties.map(p => p.id === id ? { ...p, ...data } : p),
+      saveProperty: async (propertyId, userId) => {
+        if (!userId) return;
+        await dbSave(userId, propertyId);
+        set(s => ({ savedPropertyIds: [...new Set([...s.savedPropertyIds, propertyId])] }));
+      },
+
+      unsaveProperty: async (propertyId, userId) => {
+        if (!userId) return;
+        await dbUnsave(userId, propertyId);
+        set(s => ({ savedPropertyIds: s.savedPropertyIds.filter(id => id !== propertyId) }));
+      },
+
+      recordView: async (propertyId, userId, userName, userEmail, userPhone) => {
+        if (!userId) return;
+        await recordPropertyView(userId, propertyId);
+        set(s => ({
+          viewedPropertyIds: [propertyId, ...s.viewedPropertyIds.filter(id => id !== propertyId)].slice(0, 20),
         }));
-      },
-
-      deleteProperty: (id) => {
-        set(state => ({
-          properties: state.properties.filter(p => p.id !== id),
-        }));
-      },
-
-      toggleFeatured: (id) => {
-        set(state => ({
-          properties: state.properties.map(p =>
-            p.id === id ? { ...p, featured: !p.featured } : p
-          ),
-        }));
-      },
-
-      saveProperty: (propertyId) => {
-        set(state => {
-          if (state.savedPropertyIds.includes(propertyId)) return state;
-          return {
-            savedPropertyIds: [...state.savedPropertyIds, propertyId],
-            properties: state.properties.map(p =>
-              p.id === propertyId ? { ...p, saves: p.saves + 1 } : p
-            ),
-          };
-        });
-      },
-
-      unsaveProperty: (propertyId) => {
-        set(state => ({
-          savedPropertyIds: state.savedPropertyIds.filter(id => id !== propertyId),
-          properties: state.properties.map(p =>
-            p.id === propertyId ? { ...p, saves: Math.max(0, p.saves - 1) } : p
-          ),
-        }));
-      },
-
-      recordView: (propertyId, userId, userName, userEmail, userPhone) => {
-        const state = get();
-        const property = state.properties.find(p => p.id === propertyId);
-        if (!property) return;
-
-        // Add to viewed list
-        if (!state.viewedPropertyIds.includes(propertyId)) {
-          set(state => ({
-            viewedPropertyIds: [propertyId, ...state.viewedPropertyIds.slice(0, 19)],
-          }));
-        }
-
-        // Increment view count
-        set(state => ({
-          properties: state.properties.map(p =>
-            p.id === propertyId ? { ...p, views: p.views + 1 } : p
-          ),
-        }));
-
-        // Create lead entry
-        const newLead: Lead = {
-          id: `lead-${Date.now()}`,
+        // Also create a lead entry
+        await createLead({
           userId,
           userName,
           userEmail,
           userPhone,
           propertyId,
-          propertyTitle: property.title,
-          propertyLocation: property.location,
-          timestamp: new Date().toISOString(),
+          propertyTitle: '',   // caller should pass this; kept minimal here
+          propertyLocation: '',
           status: 'New',
           notes: '',
           source: 'Property View',
-        };
-
-        set(state => ({ leads: [newLead, ...state.leads] }));
+        });
+        get().triggerRefresh();
       },
 
-      updateLeadStatus: (leadId, status) => {
-        set(state => ({
-          leads: state.leads.map(l => l.id === leadId ? { ...l, status } : l),
-        }));
+      addLead: async (lead) => {
+        await createLead(lead);
+        get().triggerRefresh();
       },
 
-      updateLeadNotes: (leadId, notes) => {
-        set(state => ({
-          leads: state.leads.map(l => l.id === leadId ? { ...l, notes } : l),
-        }));
-      },
-
-      addLead: (leadData) => {
-        const newLead: Lead = { ...leadData, id: `lead-${Date.now()}` };
-        set(state => ({ leads: [newLead, ...state.leads] }));
-      },
+      triggerRefresh: () => set(s => ({ refreshSignal: s.refreshSignal + 1 })),
     }),
     {
       name: 'gs-properties',
       partialize: (state) => ({
-        properties: state.properties,
-        leads: state.leads,
         savedPropertyIds: state.savedPropertyIds,
         viewedPropertyIds: state.viewedPropertyIds,
       }),

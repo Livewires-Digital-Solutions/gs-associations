@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Building2 } from 'lucide-react';
+import Image from 'next/image';
+import logoWhite from '@/assets/logowhite.png';
 
 export default function Footer() {
   return (
@@ -10,13 +11,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-navy-700 flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-white" />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="font-display font-bold text-lg text-white leading-none">GS Associations</span>
-                <span className="text-xs font-medium text-gold-500">Premium Real Estate & Loans</span>
-              </div>
+              <Image
+                src={logoWhite}
+                alt="GS Associations Logo"
+                height={56}
+                className="h-14 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm leading-relaxed mb-6">
               Hyderabad's trusted real estate and financial services partner since 2012. We help families find their dream homes, explore loan options, and investors build wealth through property.

@@ -1,12 +1,17 @@
 'use client';
 
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, Edit2, Trash2, Star, Eye, Heart, X, Check } from 'lucide-react';
 import { toast } from 'sonner';
-import { usePropertyStore } from '@/stores/propertyStore';
 import type { Property } from '@/data/mockData';
+import {
+  getProperties,
+  createProperty,
+  updateProperty,
+  deleteProperty,
+  updateProperty as dbUpdateProperty,
+} from '@/lib/db/properties';
 
 type FormMode = 'add' | 'edit' | null;
 
@@ -166,31 +171,58 @@ function PropertyForm({
 }
 
 export default function AdminProperties() {
-  const { properties, addProperty, updateProperty, deleteProperty, toggleFeatured } = usePropertyStore();
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [formMode, setFormMode] = useState<FormMode>(null);
   const [editingProperty, setEditingProperty] = useState<Property | undefined>();
+
+  const load = async () => {
+    setLoading(true);
+    try { setProperties(await getProperties()); } finally { setLoading(false); }
+  };
+
+  useEffect(() => { load(); }, []);
 
   const filtered = properties.filter(p =>
     !search || p.title.toLowerCase().includes(search.toLowerCase()) || p.location.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleSave = (data: Partial<Property>) => {
-    if (editingProperty) {
-      updateProperty(editingProperty.id, data);
-      toast.success('Property updated successfully');
-    } else {
-      addProperty(data as Omit<Property, 'id' | 'postedDate' | 'views' | 'saves'>);
-      toast.success('Property added successfully');
+  const handleSave = async (data: Partial<Property>) => {
+    try {
+      if (editingProperty) {
+        await updateProperty(editingProperty.id, data);
+        toast.success('Property updated successfully');
+      } else {
+        await createProperty(data as Omit<Property, 'id' | 'postedDate' | 'views' | 'saves'>);
+        toast.success('Property added successfully');
+      }
+      setFormMode(null);
+      setEditingProperty(undefined);
+      await load();
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to save property');
     }
-    setFormMode(null);
-    setEditingProperty(undefined);
   };
 
-  const handleDelete = (id: string, title: string) => {
+  const handleDelete = async (id: string, title: string) => {
     if (confirm(`Delete "${title}"? This action cannot be undone.`)) {
-      deleteProperty(id);
-      toast.success('Property deleted');
+      try {
+        await deleteProperty(id);
+        toast.success('Property deleted');
+        await load();
+      } catch (e: any) {
+        toast.error(e.message || 'Failed to delete property');
+      }
+    }
+  };
+
+  const handleToggleFeatured = async (property: Property) => {
+    try {
+      await dbUpdateProperty(property.id, { featured: !property.featured });
+      await load();
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to update property');
     }
   };
 
@@ -201,11 +233,11 @@ export default function AdminProperties() {
   };
 
   return (
-    <div>
+      <div>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-display text-2xl font-bold text-surface-900">Properties Management</h1>
-          <p className="text-surface-500 text-sm">{properties.length} total properties</p>
+          <p className="text-surface-500 text-sm">{loading ? 'Loading...' : `${properties.length} total properties`}</p>
         </div>
         <button onClick={() => { setFormMode('add'); setEditingProperty(undefined); }} className="btn-primary text-sm">
           <Plus className="w-4 h-4" />
@@ -256,7 +288,7 @@ export default function AdminProperties() {
                   <div className="flex items-center gap-1 text-surface-600"><Heart className="w-3 h-3" />{property.saves}</div>
                 </td>
                 <td className="table-cell">
-                  <button onClick={() => toggleFeatured(property.id)} className={`w-8 h-4 rounded-full transition-colors ${property.featured ? 'bg-gold-500' : 'bg-surface-300'}`}>
+                  <button onClick={() => handleToggleFeatured(property)} className={`w-8 h-4 rounded-full transition-colors ${property.featured ? 'bg-gold-500' : 'bg-surface-300'}`}>
                     <div className={`w-3 h-3 bg-white rounded-full mx-auto transition-none`} />
                   </button>
                 </td>
@@ -295,3 +327,4 @@ export default function AdminProperties() {
     </div>
   );
 }
+

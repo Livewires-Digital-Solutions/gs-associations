@@ -2,23 +2,31 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Eye, Calendar, Tag, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
-import { useContentStore } from '@/stores/contentStore';
+import { getBlogPost, getBlogPosts, incrementBlogView } from '@/lib/db/blogs';
 import { toast } from 'sonner';
+import type { BlogPost } from '@/data/mockData';
 
 export default function BlogDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { blogs, incrementBlogView } = useContentStore();
-
-  const blog = blogs.find(b => b.slug === slug);
-  const related = blogs.filter(b => b.slug !== slug && b.category === blog?.category).slice(0, 3);
+  const [blog, setBlog] = useState<BlogPost | null>(null);
+  const [related, setRelated] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (blog) incrementBlogView(blog.id);
     window.scrollTo(0, 0);
+    setLoading(true);
+    getBlogPost(slug).then(async (b) => {
+      setBlog(b);
+      if (b) {
+        await incrementBlogView(b.id);
+        const all = await getBlogPosts();
+        setRelated(all.filter(x => x.slug !== slug && x.category === b.category).slice(0, 3));
+      }
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, [slug]);
 
   if (!blog) {
