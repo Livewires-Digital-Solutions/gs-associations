@@ -115,7 +115,7 @@ export default function PropertyDetailPage() {
         propertyLocation: property.location,
         status: 'New',
         notes: formMessage,
-        source: 'Property Detail',
+        source: 'Property View',
       });
 
       const res = await fetch('/api/enquiry', {

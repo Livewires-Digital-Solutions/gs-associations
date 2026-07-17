@@ -141,6 +141,18 @@ export default function AdminBlog() {
     }
   };
 
+  const toggleBlogFeatured = async (id: string) => {
+    const blog = blogs.find(b => b.id === id);
+    if (!blog) return;
+    try {
+      await updateBlogPost(id, { featured: !blog.featured });
+      toast.success(blog.featured ? 'Removed from featured' : 'Marked as featured');
+      await load();
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to update article');
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">

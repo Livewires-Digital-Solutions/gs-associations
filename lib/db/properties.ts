@@ -31,6 +31,7 @@ function rowToProperty(row: any): Property {
     saves: row.saves,
     agentName: row.agent_name,
     agentPhone: row.agent_phone,
+    agentEmail: row.agent_email ?? '',
     rera: row.rera ?? undefined,
   };
 }
@@ -61,6 +62,7 @@ function propertyToRow(p: Partial<Property>) {
   if (p.featured !== undefined)    row.featured      = p.featured;
   if (p.agentName !== undefined)   row.agent_name    = p.agentName;
   if (p.agentPhone !== undefined)  row.agent_phone   = p.agentPhone;
+  if (p.agentEmail !== undefined)  row.agent_email   = p.agentEmail;
   if (p.rera !== undefined)        row.rera          = p.rera;
   return row;
 }

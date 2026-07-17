@@ -207,7 +207,7 @@ export default function AdminLoans() {
                 <td className="table-cell text-sm font-semibold text-navy-800">{loan.maxAmount}</td>
                 <td className="table-cell text-sm text-surface-600">{loan.tenure}</td>
                 <td className="table-cell">
-                  <button onClick={() => toggleLoanPopular(loan.id)} className={`w-8 h-4 rounded-full transition-colors ${loan.popular ? 'bg-gold-500' : 'bg-surface-300'}`}>
+                  <button onClick={() => handleTogglePopular(loan)} className={`w-8 h-4 rounded-full transition-colors ${loan.popular ? 'bg-gold-500' : 'bg-surface-300'}`}>
                     <div className="w-3 h-3 bg-white rounded-full mx-auto" />
                   </button>
                 </td>

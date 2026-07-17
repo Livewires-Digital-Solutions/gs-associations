@@ -97,7 +97,7 @@ export default function LoansPage() {
   const handleInquiry = (e: React.FormEvent) => {
     e.preventDefault();
     
-    addLead({
+    createLead({
       userId: currentUser?.id || '',
       userName: formData.name,
       userEmail: formData.email,
@@ -105,7 +105,6 @@ export default function LoansPage() {
       propertyId: formData.loanType,
       propertyTitle: formData.loanType || 'General Loan Inquiry',
       propertyLocation: 'GS Loans',
-      timestamp: new Date().toISOString(),
       status: 'New',
       notes: `Requested Amount: ₹${formData.amount}`,
       source: 'Loan Inquiry',

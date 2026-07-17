@@ -1,5 +1,26 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/enquiry/route": "app/api/enquiry/route.js",
+  "/(public)/about/page": "app/(public)/about/page.js",
+  "/admin/analytics/page": "app/admin/analytics/page.js",
+  "/(public)/blog/[slug]/page": "app/(public)/blog/[slug]/page.js",
+  "/(public)/contact/page": "app/(public)/contact/page.js",
+  "/(public)/properties/page": "app/(public)/properties/page.js",
+  "/(public)/loans/[id]/page": "app/(public)/loans/[id]/page.js",
+  "/(public)/blog/page": "app/(public)/blog/page.js",
+  "/admin/leads/page": "app/admin/leads/page.js",
+  "/(public)/loans/page": "app/(public)/loans/page.js",
+  "/admin/loans/page": "app/admin/loans/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/blog/page": "app/admin/blog/page.js",
+  "/admin/properties/page": "app/admin/properties/page.js",
+  "/admin/settings/page": "app/admin/settings/page.js",
+  "/admin/users/page": "app/admin/users/page.js",
   "/(public)/properties/[id]/page": "app/(public)/properties/[id]/page.js",
+  "/dashboard/history/page": "app/dashboard/history/page.js",
+  "/admin/tracking/page": "app/admin/tracking/page.js",
   "/(public)/page": "app/(public)/page.js",
-  "/(public)/properties/page": "app/(public)/properties/page.js"
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/saved/page": "app/dashboard/saved/page.js",
+  "/dashboard/profile/page": "app/dashboard/profile/page.js"
 }

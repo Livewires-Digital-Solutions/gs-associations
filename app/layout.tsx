@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Manrope } from 'next/font/google';
 import Providers from '../components/Providers';
 import LoginModal from '@/components/auth/LoginModal';
@@ -25,8 +26,12 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${manrope.variable}`} suppressHydrationWarning>
       <body className={`antialiased font-sans ${manrope.className}`} suppressHydrationWarning>
         <Providers>{children}</Providers>
-        <LoginModal />
-        <RegisterModal />
+        <Suspense fallback={null}>
+          <LoginModal />
+        </Suspense>
+        <Suspense fallback={null}>
+          <RegisterModal />
+        </Suspense>
       </body>
     </html>
   );

@@ -36,10 +36,10 @@ export default function PropertyCard({ property, variant = 'default' }: Property
       return;
     }
     if (isSaved) {
-      unsaveProperty(property.id);
+      unsaveProperty(property.id, currentUser?.id ?? '');
       toast.success('Removed from saved properties');
     } else {
-      saveProperty(property.id);
+      saveProperty(property.id, currentUser?.id ?? '');
       toast.success('Added to saved properties ✓');
     }
   };
