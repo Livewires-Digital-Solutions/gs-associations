@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import logoWhite from '@/assets/logowhite.png';
 
 export default function Footer() {
@@ -22,9 +23,14 @@ export default function Footer() {
               Hyderabad's trusted real estate and financial services partner since 2012. We help families find their dream homes, explore loan options, and investors build wealth through property.
             </p>
             <div className="flex gap-3">
-              {['facebook', 'twitter', 'instagram', 'linkedin'].map(s => (
-                <a key={s} href="#" className="w-9 h-9 rounded-lg bg-surface-800 hover:bg-navy-700 flex items-center justify-center transition-colors">
-                  <span className="text-xs capitalize text-white">{s[0].toUpperCase()}</span>
+              {[
+                { name: 'facebook', icon: Facebook },
+                { name: 'twitter', icon: Twitter },
+                { name: 'instagram', icon: Instagram },
+                { name: 'linkedin', icon: Linkedin }
+              ].map(s => (
+                <a key={s.name} href="#" className="w-9 h-9 rounded-lg bg-surface-800 hover:bg-navy-700 flex items-center justify-center transition-colors">
+                  <s.icon className="w-4 h-4 text-white" />
                 </a>
               ))}
             </div>
@@ -98,8 +104,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-surface-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-          <p>© 2024 GS Associations. All rights reserved. RERA Registration: P024000RERA</p>
-          <p className="text-surface-600">Designed and built with ❤️ for Hyderabad</p>
+          <p>© 2026 GS Associations. All rights reserved. RERA Registration: P024000RERA</p>
+          <p className="text-surface-600">
+            Built with 💚 by <a href="https://livewiresdigitalsolutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Livewires Digital Solutions</a>
+          </p>
         </div>
       </div>
     </footer>
