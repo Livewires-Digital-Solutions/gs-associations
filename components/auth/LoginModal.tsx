@@ -63,7 +63,7 @@ export default function LoginModal() {
       toast.error(error.message || 'Login failed');
     } else if (data.user) {
       const name = data.user.user_metadata?.full_name || data.user.email?.split('@')[0];
-      toast.success(`Welcome back, ${name}! 👋`);
+      toast.success(`Welcome back, ${name}!`);
       handleSuccessRedirect(data.user.user_metadata);
     }
   };

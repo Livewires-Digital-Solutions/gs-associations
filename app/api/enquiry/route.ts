@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
             <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; margin: 20px 0;">
               <p style="margin: 0 0 4px; font-weight: 600; font-size: 16px; color: #0f2551;">${propertyTitle}</p>
-              <p style="margin: 0; font-size: 13px; color: #6b7280;">📍 ${propertyLocation}</p>
+              <p style="margin: 0; font-size: 13px; color: #6b7280;">Location: ${propertyLocation}</p>
             </div>
 
             <h2 style="font-size: 15px; font-weight: 600; color: #374151; margin: 24px 0 12px;">Prospect Details</h2>
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
             </table>
 
             <div style="margin-top: 28px; padding: 16px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;">
-              <p style="margin: 0; font-size: 13px; color: #92400e;">⚡ Please follow up within 2 hours for the best conversion rate.</p>
+              <p style="margin: 0; font-size: 13px; color: #92400e;"><strong>Action Required:</strong> Please follow up within 2 hours for the best conversion rate.</p>
             </div>
 
             <p style="font-size: 12px; color: #9ca3af; margin-top: 24px;">
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
         html: `
           <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
             <div style="background: #0f2551; padding: 24px 32px; border-radius: 12px 12px 0 0;">
-              <h1 style="color: white; margin: 0; font-size: 22px;">Enquiry Confirmed ✓</h1>
+              <h1 style="color: white; margin: 0; font-size: 22px;">Enquiry Confirmed</h1>
               <p style="color: rgba(255,255,255,0.7); margin: 4px 0 0; font-size: 14px;">GS Associations — Premium Real Estate</p>
             </div>
             <div style="background: #fff; border: 1px solid #e5e7eb; border-top: none; padding: 32px; border-radius: 0 0 12px 12px;">
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
 
               <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; margin: 20px 0;">
                 <p style="margin: 0 0 4px; font-weight: 600; font-size: 15px; color: #0f2551;">${propertyTitle}</p>
-                <p style="margin: 0; font-size: 13px; color: #6b7280;">📍 ${propertyLocation}</p>
+                <p style="margin: 0; font-size: 13px; color: #6b7280;">Location: ${propertyLocation}</p>
               </div>
 
               <p style="font-size: 13px; color: #6b7280;">If you have any urgent questions, you can also call us directly.</p>

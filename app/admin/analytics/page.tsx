@@ -6,7 +6,7 @@ import {
   BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, Legend
 } from 'recharts';
 import { subDays, format } from 'date-fns';
-import { TrendingUp, Download } from 'lucide-react';
+import { TrendingUp, Download, IndianRupee, BarChart3, Eye, Users } from 'lucide-react';
 import { getProperties } from '@/lib/db/properties';
 import { getLeads } from '@/lib/db/leads';
 import { getProfiles } from '@/lib/db/profiles';
@@ -57,10 +57,10 @@ export default function AdminAnalytics() {
   const closedValue = (leads.filter(l => l.status === 'Closed').length * avgPrice / 10000000).toFixed(1);
 
   const summaryCards = [
-    { label: 'Total Lead Value (est.)', value: `₹${closedValue} Cr`, icon: '💰', sub: 'From closed leads' },
-    { label: 'Conversion Rate', value: `${((leads.filter(l => l.status === 'Closed').length / leads.length) * 100).toFixed(1)}%`, icon: '📊', sub: 'Lead to close' },
-    { label: 'Avg Views per Property', value: Math.round(properties.reduce((s, p) => s + p.views, 0) / properties.length).toLocaleString(), icon: '👁️', sub: 'Across all listings' },
-    { label: 'Registered Users', value: userCount, icon: '👥', sub: 'Total platform users' },
+    { label: 'Total Lead Value (est.)', value: `₹${closedValue} Cr`, icon: <IndianRupee className="w-6 h-6 text-emerald-600" />, sub: 'From closed leads' },
+    { label: 'Conversion Rate', value: `${((leads.filter(l => l.status === 'Closed').length / leads.length) * 100).toFixed(1)}%`, icon: <BarChart3 className="w-6 h-6 text-blue-600" />, sub: 'Lead to close' },
+    { label: 'Avg Views per Property', value: Math.round(properties.reduce((s, p) => s + p.views, 0) / properties.length).toLocaleString(), icon: <Eye className="w-6 h-6 text-amber-600" />, sub: 'Across all listings' },
+    { label: 'Registered Users', value: userCount, icon: <Users className="w-6 h-6 text-purple-600" />, sub: 'Total platform users' },
   ];
 
   return (
@@ -83,7 +83,7 @@ export default function AdminAnalytics() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
         {summaryCards.map((card, i) => (
           <div key={i} className="stat-card">
-            <div className="text-2xl">{card.icon}</div>
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-surface-50 border border-surface-100 mb-3">{card.icon}</div>
             <div>
               <p className="text-xl font-display font-bold text-surface-900">{card.value}</p>
               <p className="text-xs text-surface-500">{card.label}</p>

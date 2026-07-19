@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, SlidersHorizontal, X, ChevronDown } from 'lucide-react';
+import { Search, SlidersHorizontal, X, ChevronDown, Building2 } from 'lucide-react';
 import PropertyCard from '@/components/property/PropertyCard';
 import type { PropertyType, PropertyStatus, Property } from '@/data/mockData';
 import { getProperties } from '@/lib/db/properties';
@@ -295,7 +295,7 @@ function PropertiesContent() {
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
-            <div className="text-6xl mb-4">🏘️</div>
+            <Building2 className="w-16 h-16 text-surface-300 mx-auto mb-4" />
             <h3 className="font-display text-xl font-semibold text-surface-700 mb-2">No properties found</h3>
             <p className="text-surface-500 text-sm mb-6">Try adjusting your filters or search terms</p>
             <button onClick={clearFilters} className="btn-primary">Clear Filters</button>

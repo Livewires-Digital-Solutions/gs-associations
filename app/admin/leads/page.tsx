@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, Filter, Download } from 'lucide-react';
+import { Search, X, Filter, Download, Phone } from 'lucide-react';
 import { format } from 'date-fns';
 import { getLeads, updateLeadStatus as dbUpdateLeadStatus, updateLeadNotes as dbUpdateLeadNotes } from '@/lib/db/leads';
 import type { Lead, LeadStatus } from '@/data/mockData';
@@ -196,7 +196,7 @@ export default function AdminLeads() {
                     </div>
                   </div>
                   <a href={`tel:${selectedLead.userPhone}`} className="flex items-center gap-2 p-2.5 rounded-xl text-sm text-navy-700 hover:bg-navy-50 transition-colors font-medium">
-                    📞 {selectedLead.userPhone}
+                    <Phone className="w-4 h-4" /> {selectedLead.userPhone}
                   </a>
                 </div>
               </div>

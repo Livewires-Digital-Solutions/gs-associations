@@ -53,7 +53,7 @@ export default function RegisterModal() {
 
     const result = await register(form.name.trim(), form.email.trim(), form.phone.trim(), form.password);
     if (result.success) {
-      toast.success(`Welcome to GS Associations, ${form.name.split(' ')[0]}! 🎉`);
+      toast.success(`Welcome to GS Associations, ${form.name.split(' ')[0]}!`);
       closeRegisterModal();
       router.push('/dashboard');
     } else {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Heart } from 'lucide-react';
 import logoWhite from '@/assets/logowhite.png';
 
 export default function Footer() {
@@ -105,8 +105,8 @@ export default function Footer() {
 
         <div className="border-t border-surface-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
           <p>© 2026 GS Associations. All rights reserved. RERA Registration: P024000RERA</p>
-          <p className="text-surface-600">
-            Built with 💚 by <a href="https://livewiresdigitalsolutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Livewires Digital Solutions</a>
+          <p className="text-surface-600 flex items-center gap-1 flex-wrap justify-center md:justify-end">
+            Built with <Heart className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 inline-block" /> by <a href="https://livewiresdigitalsolutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Livewires Digital Solutions</a>
           </p>
         </div>
       </div>

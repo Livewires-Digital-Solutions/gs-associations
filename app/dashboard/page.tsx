@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Clock, Eye, ArrowRight, TrendingUp, Building2, Sparkles } from 'lucide-react';
+import { Heart, Clock, Eye, ArrowRight, TrendingUp, Building2, Sparkles, Hand } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { getSavedPropertyIds, getViewedPropertyIds } from '@/lib/db/saved';
 import { getProperties, getFeaturedProperties } from '@/lib/db/properties';
@@ -54,7 +54,7 @@ export default function UserDashboard() {
         }} />
         <div className="relative z-10 flex items-center justify-between">
           <div>
-            <p className="text-gold-400 text-sm font-medium mb-1">Welcome back 👋</p>
+            <p className="text-gold-400 text-sm font-medium mb-1 flex items-center gap-1.5">Welcome back <Hand className="w-4 h-4" /></p>
             <h1 className="font-display text-2xl font-bold text-white mb-2">
               {currentUser?.name || 'User'}
             </h1>

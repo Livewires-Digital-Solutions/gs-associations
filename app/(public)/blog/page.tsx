@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Clock, Eye, ArrowRight } from 'lucide-react';
+import { Search, Clock, Eye, ArrowRight, FileText } from 'lucide-react';
 import { getBlogPosts } from '@/lib/db/blogs';
 import type { BlogPost } from '@/data/mockData';
 
@@ -152,7 +152,7 @@ export default function BlogListPage() {
         {/* Blog Grid */}
         {filtered.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-4xl mb-4">📰</p>
+            <FileText className="w-12 h-12 text-surface-300 mx-auto mb-4" />
             <h3 className="font-semibold text-surface-700 mb-2">No articles found</h3>
             <button onClick={() => { setSearch(''); setCategory('All'); }} className="btn-primary mt-4">Clear Search</button>
           </div>
