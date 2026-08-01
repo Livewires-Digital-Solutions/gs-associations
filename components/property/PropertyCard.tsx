@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, MapPin, BedDouble, Bath, Maximize2, Eye } from 'lucide-react';
+import { Heart, MapPin, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 import type { Property } from '@/data/mockData';
 import { useAuthStore } from '@/stores/authStore';
@@ -53,7 +53,7 @@ export default function PropertyCard({ property, variant = 'default' }: Property
       <motion.div
         whileHover={{ y: -2 }}
         onClick={handleClick}
-        className="property-card flex overflow-hidden"
+        className="property-card flex overflow-hidden cursor-pointer group"
       >
         <div className="relative w-48 flex-shrink-0 overflow-hidden">
           <img
@@ -67,20 +67,23 @@ export default function PropertyCard({ property, variant = 'default' }: Property
         </div>
         <div className="flex-1 p-5 flex flex-col justify-between">
           <div>
-            <span className="badge badge-navy text-[10px] mb-2">{property.type}</span>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="badge badge-navy text-[10px]">{property.type}</span>
+              {property.bedrooms > 0 && (
+                <span className="badge bg-surface-100 text-surface-700 text-[10px]">{property.bedrooms} BHK</span>
+              )}
+            </div>
             <h3 className="font-display font-semibold text-surface-900 text-sm leading-snug mb-1 line-clamp-2">{property.title}</h3>
             <div className="flex items-center gap-1 text-xs text-surface-500 mb-3">
-              <MapPin className="w-3 h-3" />
-              {property.location}
+              <MapPin className="w-3 h-3 flex-shrink-0" />
+              <span className="truncate">{property.location}</span>
             </div>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="font-bold text-navy-800">{property.priceLabel}</span>
-            <div className="flex items-center gap-3 text-xs text-surface-500">
-              {property.bedrooms > 0 && <span className="flex items-center gap-1"><BedDouble className="w-3 h-3" />{property.bedrooms}</span>}
-              {property.bathrooms > 0 && <span className="flex items-center gap-1"><Bath className="w-3 h-3" />{property.bathrooms}</span>}
-              <span className="flex items-center gap-1"><Maximize2 className="w-3 h-3" />{property.area} sqft</span>
-            </div>
+          <div className="flex items-center justify-between pt-3 border-t border-surface-100">
+            <span className="font-bold text-navy-800 text-base">{property.priceLabel}</span>
+            <span className="text-xs font-semibold text-navy-700 group-hover:text-theme-primary flex items-center gap-1">
+              View Details <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </span>
           </div>
         </div>
       </motion.div>
@@ -91,7 +94,7 @@ export default function PropertyCard({ property, variant = 'default' }: Property
     <motion.div
       whileHover={{ y: -4 }}
       onClick={handleClick}
-      className="property-card group"
+      className="property-card group cursor-pointer flex flex-col h-full"
     >
       {/* Image */}
       <div className="relative overflow-hidden h-52">
@@ -116,64 +119,38 @@ export default function PropertyCard({ property, variant = 'default' }: Property
         >
           <Heart className={`w-4 h-4 ${isSaved ? 'fill-white' : ''}`} />
         </button>
-        {/* Type badge */}
-        <div className="absolute bottom-3 left-3">
-          <span className="badge bg-black/50 text-white backdrop-blur-sm text-[10px]">{property.type}</span>
+        {/* Type & BHK badge */}
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
+          <span className="badge bg-black/60 text-white backdrop-blur-sm text-[10px]">{property.type}</span>
+          {property.bedrooms > 0 && (
+            <span className="badge bg-black/60 text-white backdrop-blur-sm text-[10px]">{property.bedrooms} BHK</span>
+          )}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-display font-semibold text-surface-900 text-sm leading-snug line-clamp-2 flex-1">
+      <div className="p-5 flex flex-col flex-1 justify-between">
+        <div>
+          <h3 className="font-display font-semibold text-surface-900 text-base leading-snug line-clamp-2 mb-1.5">
             {property.title}
           </h3>
+
+          <div className="flex items-center gap-1.5 text-xs text-surface-500 mb-4">
+            <MapPin className="w-3.5 h-3.5 text-navy-600 flex-shrink-0" />
+            <span className="truncate">{property.location}</span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-1 text-xs text-surface-500 mb-4">
-          <MapPin className="w-3 h-3 flex-shrink-0" />
-          <span className="truncate">{property.location}</span>
-        </div>
-
-        {/* Specs */}
-        {property.bedrooms > 0 ? (
-          <div className="flex items-center gap-4 text-xs text-surface-600 mb-4 pb-4 border-b border-surface-100">
-            <span className="flex items-center gap-1.5">
-              <BedDouble className="w-3.5 h-3.5 text-surface-400" />
-              {property.bedrooms} Bed
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Bath className="w-3.5 h-3.5 text-surface-400" />
-              {property.bathrooms} Bath
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Maximize2 className="w-3.5 h-3.5 text-surface-400" />
-              {property.area.toLocaleString()} sqft
-            </span>
-          </div>
-        ) : (
-          <div className="flex items-center gap-4 text-xs text-surface-600 mb-4 pb-4 border-b border-surface-100">
-            <span className="flex items-center gap-1.5">
-              <Maximize2 className="w-3.5 h-3.5 text-surface-400" />
-              {property.area.toLocaleString()} sqft
-            </span>
-          </div>
-        )}
-
-        {/* Price + Views */}
-        <div className="flex items-center justify-between">
+        {/* Minimal Price & Action */}
+        <div className="pt-3 border-t border-surface-100 flex items-center justify-between">
           <div>
-            <p className="text-lg font-bold text-navy-800">{property.priceLabel}</p>
-            {property.bedrooms > 0 && (
-              <p className="text-[11px] text-surface-400">
-                ₹{Math.round(property.price / property.area).toLocaleString()}/sqft
-              </p>
-            )}
+            <p className="text-xs text-surface-400 font-medium">Guide Price</p>
+            <p className="text-lg font-bold text-navy-900">{property.priceLabel}</p>
           </div>
-          <div className="flex items-center gap-1 text-xs text-surface-400">
-            <Eye className="w-3 h-3" />
-            {property.views.toLocaleString()}
-          </div>
+          <span className="inline-flex items-center gap-1 text-xs font-bold text-navy-800 group-hover:text-theme-primary transition-colors">
+            View Details
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </span>
         </div>
       </div>
     </motion.div>

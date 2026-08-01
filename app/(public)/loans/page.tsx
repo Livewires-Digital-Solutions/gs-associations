@@ -204,61 +204,45 @@ export default function LoansPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="card p-6 hover:border-navy-200 transition-all duration-200 h-full flex flex-col"
+              className="card p-6 hover:border-navy-200 transition-all duration-200 h-full flex flex-col justify-between group"
             >
-              <div className="flex items-start justify-between gap-4 mb-5">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-navy-50 flex items-center justify-center flex-shrink-0">
-                    <span className="text-lg font-bold text-navy-800">
-                      {loan.bankName.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="font-display font-semibold text-surface-900">{loan.name}</h3>
-                    <p className="text-xs text-surface-500">{loan.bankName}</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end gap-1.5">
-                  {loan.popular && <span className="badge badge-gold text-xs">Most Popular</span>}
-                  <span className="badge badge-navy text-xs">{loan.type}</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
-                {[
-                  { label: 'Interest Rate', value: loan.interestRate },
-                  { label: 'Max Amount', value: loan.maxAmount },
-                  { label: 'Max Tenure', value: loan.tenure },
-                  { label: 'Processing Fee', value: loan.processingFee },
-                ].map(item => (
-                  <div key={item.label} className="bg-surface-50 rounded-xl p-3">
-                    <p className="text-[10px] text-surface-400 uppercase tracking-wide mb-1">{item.label}</p>
-                    <p className="text-sm font-semibold text-surface-800">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mb-5 flex-1">
-                <p className="text-xs font-semibold text-surface-600 uppercase tracking-wide mb-2">Eligibility</p>
-                <p className="text-sm text-surface-600 mb-4">{loan.eligibility}</p>
-                
-                <p className="text-xs font-semibold text-surface-600 uppercase tracking-wide mb-2">Key Features</p>
-                <div className="flex flex-wrap gap-2">
-                  {loan.features.map((f, j) => (
-                    <div key={j} className="flex items-center gap-1.5 text-xs text-surface-700">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                      {f}
+              <div>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-navy-50 flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg font-bold text-navy-800">
+                        {loan.bankName.charAt(0)}
+                      </span>
                     </div>
-                  ))}
+                    <div>
+                      <h3 className="font-display font-semibold text-surface-900 text-lg">{loan.name}</h3>
+                      <p className="text-xs text-surface-500 font-medium">{loan.bankName}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5">
+                    {loan.popular && <span className="badge badge-gold text-xs">Popular</span>}
+                    <span className="badge badge-navy text-xs">{loan.type}</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="bg-surface-50 rounded-xl p-3.5 border border-surface-100">
+                    <p className="text-[11px] text-surface-400 font-medium uppercase tracking-wide mb-0.5">Interest Rate</p>
+                    <p className="text-base font-bold text-navy-900">{loan.interestRate}</p>
+                  </div>
+                  <div className="bg-surface-50 rounded-xl p-3.5 border border-surface-100">
+                    <p className="text-[11px] text-surface-400 font-medium uppercase tracking-wide mb-0.5">Max Amount</p>
+                    <p className="text-base font-bold text-navy-900">{loan.maxAmount}</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex gap-3 mt-auto pt-4 border-t border-surface-100">
-                <Link href={`/loans/${loan.id}`} className="btn-primary text-sm flex-1 text-center justify-center">
-                  Apply Now
-                </Link>
-                <Link href={`/loans/${loan.id}`} className="btn-secondary text-sm flex-1 text-center justify-center">
-                  Learn More
+              <div className="pt-3 border-t border-surface-100">
+                <Link 
+                  href={`/loans/${loan.id}`} 
+                  className="btn-primary text-sm w-full text-center justify-center group-hover:bg-navy-900 transition-all"
+                >
+                  View Scheme & Apply
                 </Link>
               </div>
             </motion.div>
