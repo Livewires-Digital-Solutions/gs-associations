@@ -7,9 +7,9 @@ import { toast } from 'sonner';
 import { createLead } from '@/lib/db/leads';
 
 const contactInfo = [
-  { icon: <MapPin className="w-5 h-5" />, label: 'Office Address', value: 'Plot 42, Gachibowli Main Road,\nFinancial District, Hyderabad — 500032' },
-  { icon: <Phone className="w-5 h-5" />, label: 'Phone', value: '+91 40 6666 7777\n+91 98765 00001' },
-  { icon: <Mail className="w-5 h-5" />, label: 'Email', value: 'info@gsassociations.com\nsales@gsassociations.com' },
+  { icon: <MapPin className="w-5 h-5" />, label: 'Office Address', value: 'No. 42, Anna Salai,\nGuindy, Chennai — 600032' },
+  { icon: <Phone className="w-5 h-5" />, label: 'Phone — Gopinath', value: '+91 90031 67674' },
+  { icon: <Mail className="w-5 h-5" />, label: 'Email', value: 'gopi.thamba@gmail.com' },
   { icon: <Clock className="w-5 h-5" />, label: 'Working Hours', value: 'Monday – Saturday: 9:00 AM – 7:00 PM\nSunday: 10:00 AM – 4:00 PM (by appointment)' },
 ];
 
@@ -134,7 +134,7 @@ export default function ContactPage() {
               className="rounded-3xl overflow-hidden h-72 bg-surface-100 border border-surface-200 relative shadow-xl group"
             >
               <iframe 
-                src="https://maps.google.com/maps?q=Financial%20District,%20Gachibowli,%20Hyderabad&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Guindy,+Chennai,+Tamil+Nadu&t=&z=14&ie=UTF8&iwloc=&output=embed"
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 

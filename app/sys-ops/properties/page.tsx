@@ -31,7 +31,7 @@ function PropertyForm({
     price: property?.price?.toString() || '',
     priceLabel: property?.priceLabel || '',
     location: property?.location || '',
-    city: property?.city || 'Hyderabad',
+    city: property?.city || 'Chennai',
     area: property?.area?.toString() || '',
     bedrooms: property?.bedrooms?.toString() || '0',
     bathrooms: property?.bathrooms?.toString() || '0',
@@ -118,7 +118,7 @@ function PropertyForm({
           </div>
           <div>
             <label className="label mb-1.5 block">Location *</label>
-            <input type="text" value={form.location} onChange={e => setForm(p => ({ ...p, location: e.target.value }))} placeholder="Gachibowli, Hyderabad" className="input" required />
+            <input type="text" value={form.location} onChange={e => setForm(p => ({ ...p, location: e.target.value }))} placeholder="OMR, Chennai" className="input" required />
           </div>
           <div className="grid grid-cols-4 gap-4">
             <div>
@@ -288,8 +288,20 @@ export default function AdminProperties() {
                   <div className="flex items-center gap-1 text-surface-600"><Heart className="w-3 h-3" />{property.saves}</div>
                 </td>
                 <td className="table-cell">
-                  <button onClick={() => handleToggleFeatured(property)} className={`w-8 h-4 rounded-full transition-colors ${property.featured ? 'bg-gold-500' : 'bg-surface-300'}`}>
-                    <div className={`w-3 h-3 bg-white rounded-full mx-auto transition-none`} />
+                  <button
+                    onClick={() => handleToggleFeatured(property)}
+                    className={`relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                      property.featured ? 'bg-gold-500' : 'bg-surface-300'
+                    }`}
+                    role="switch"
+                    aria-checked={property.featured}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        property.featured ? 'translate-x-4' : 'translate-x-0'
+                      }`}
+                    />
                   </button>
                 </td>
                 <td className="table-cell">

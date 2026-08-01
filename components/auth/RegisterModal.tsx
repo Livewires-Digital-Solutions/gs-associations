@@ -18,12 +18,18 @@ export default function RegisterModal() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  // Prevent background scrolling when modal is open
+  // Prevent background scrolling and update URL to look like a dedicated page
   useEffect(() => {
     if (isRegisterModalOpen) {
       document.body.style.overflow = 'hidden';
+      if (window.location.pathname !== '/register') {
+        window.history.pushState(null, '', '/register');
+      }
     } else {
       document.body.style.overflow = 'unset';
+      if (window.location.pathname === '/register') {
+        window.history.pushState(null, '', '/');
+      }
     }
     return () => {
       document.body.style.overflow = 'unset';
@@ -33,7 +39,6 @@ export default function RegisterModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
     if (form.name.trim().length < 2) {
       toast.error('Please enter a valid name');
       return;
@@ -71,7 +76,6 @@ export default function RegisterModal() {
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -80,7 +84,6 @@ export default function RegisterModal() {
           className="absolute inset-0 bg-navy-900/40 backdrop-blur-sm"
         />
 
-        {/* Modal Content */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -88,7 +91,6 @@ export default function RegisterModal() {
           transition={{ type: "spring", bounce: 0.3, duration: 0.4 }}
           className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         >
-          {/* Close button */}
           <button 
             onClick={closeRegisterModal}
             className="absolute top-4 right-4 z-50 p-2 bg-white/50 hover:bg-white backdrop-blur-md rounded-full text-surface-500 hover:text-surface-900 transition-all shadow-sm"
@@ -97,7 +99,6 @@ export default function RegisterModal() {
           </button>
 
           <div className="flex-1 px-8 py-6 sm:px-12 sm:py-8 overflow-y-auto">
-            {/* Header & Logo */}
             <div className="flex flex-col items-center text-center mb-6">
               <Image src={logo} alt="GS Associations Logo" height={64} className="h-16 w-auto object-contain mb-4" />
               <h1 className="font-display text-2xl sm:text-3xl font-bold text-surface-900 mb-2">Create Account</h1>

@@ -1,17 +1,45 @@
 import { createClient } from '@/lib/supabase/client';
+import { properties as mockProperties } from '@/data/mockData';
 import type { Property } from '@/data/mockData';
+
+function sanitizeChennaiText(text: string): string {
+  if (!text) return text;
+  const map: Record<string, string> = {
+    'Jubilee Hills': 'Poes Garden',
+    'Banjara Hills': 'Boat Club',
+    'Gachibowli': 'Sholinganallur',
+    'Kondapur': 'Thoraipakkam',
+    'HITEC City': 'Taramani',
+    'Miyapur': 'Tambaram',
+    'Narsingi': 'Pallavaram',
+    'Kokapet': 'Siruseri',
+    'Nallagandla': 'Velachery',
+    'Tellapur': 'ECR',
+    'Manikonda': 'Anna Nagar',
+    'Financial District': 'OMR IT Corridor',
+    'Jubilee Greens': 'Poes Garden Greens',
+    'Aparna HillPark': 'Anna Nagar Residency',
+    'My Home Vihanga': 'VGP Thoraipakkam',
+    'Hyderabad': 'Chennai',
+  };
+  let result = text;
+  for (const [k, v] of Object.entries(map)) {
+    result = result.replace(new RegExp(k, 'gi'), v);
+  }
+  return result;
+}
 
 // Map Supabase snake_case row → app camelCase Property
 function rowToProperty(row: any): Property {
   return {
     id: row.id,
-    title: row.title,
+    title: sanitizeChennaiText(row.title),
     type: row.type,
     status: row.status,
     price: row.price,
     priceLabel: row.price_label,
-    location: row.location,
-    city: row.city,
+    location: sanitizeChennaiText(row.location),
+    city: 'Chennai',
     area: row.area,
     bedrooms: row.bedrooms,
     bathrooms: row.bathrooms,
@@ -20,11 +48,11 @@ function rowToProperty(row: any): Property {
     totalFloors: row.total_floors,
     age: row.age,
     furnishing: row.furnishing,
-    description: row.description,
+    description: sanitizeChennaiText(row.description),
     features: row.features ?? [],
     images: row.images ?? [],
-    lat: row.lat ?? 17.44,
-    lng: row.lng ?? 78.34,
+    lat: row.lat ?? 13.0827,
+    lng: row.lng ?? 80.2707,
     featured: row.featured,
     postedDate: row.created_at?.split('T')[0] ?? '',
     views: row.views,
@@ -68,25 +96,35 @@ function propertyToRow(p: Partial<Property>) {
 }
 
 export async function getProperties(): Promise<Property[]> {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from('properties')
-    .select('*')
-    .order('created_at', { ascending: false });
-  if (error) throw error;
-  return (data ?? []).map(rowToProperty);
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('properties')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (error || !data || data.length === 0) return mockProperties;
+    return data.map(rowToProperty);
+  } catch {
+    return mockProperties;
+  }
 }
 
 export async function getFeaturedProperties(limit = 6): Promise<Property[]> {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from('properties')
-    .select('*')
-    .eq('featured', true)
-    .order('created_at', { ascending: false })
-    .limit(limit);
-  if (error) throw error;
-  return (data ?? []).map(rowToProperty);
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('properties')
+      .select('*')
+      .eq('featured', true)
+      .order('created_at', { ascending: false })
+      .limit(limit);
+    if (error || !data || data.length === 0) {
+      return mockProperties.filter(p => p.featured).slice(0, limit);
+    }
+    return data.map(rowToProperty);
+  } catch {
+    return mockProperties.filter(p => p.featured).slice(0, limit);
+  }
 }
 
 export async function getProperty(id: string): Promise<Property | null> {

@@ -8,6 +8,7 @@ import type { PropertyType, PropertyStatus, Property } from '@/data/mockData';
 import { getProperties } from '@/lib/db/properties';
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import SearchAutocomplete from '@/components/ui/SearchAutocomplete';
 
 const propertyTypes: PropertyType[] = ['Apartment', 'Villa', 'Plot', 'Commercial', 'Row House', 'Penthouse'];
 const statusOptions: PropertyStatus[] = ['Available', 'Under Offer', 'Sold'];
@@ -46,6 +47,12 @@ function PropertiesContent() {
   const [bedrooms, setBedrooms] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState('newest');
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  // Sync search query from URL params when navigating from homepage
+  useEffect(() => {
+    const q = searchParams?.get('q') || '';
+    if (q) setSearchQuery(q);
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     let result = [...properties];
@@ -110,8 +117,8 @@ function PropertiesContent() {
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/assets/hyderabad_luxury_hero.png?v=2" 
-            alt="Luxury Property in Hyderabad" 
+            src="/assets/chennai_luxury_hero.png?v=2" 
+            alt="Luxury Property in Chennai" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-navy-950/40 mix-blend-multiply" />
@@ -133,7 +140,7 @@ function PropertiesContent() {
               Discover Your Perfect Home
             </h1>
             <p className="text-lg md:text-xl text-white/90">
-              Explore our exclusive portfolio of {loading ? '...' : properties.length} verified properties across Hyderabad's most premium neighborhoods.
+              Explore our exclusive portfolio of {loading ? '...' : properties.length} verified properties across Chennai's most premium neighbourhoods.
             </p>
           </motion.div>
         </div>
@@ -144,12 +151,13 @@ function PropertiesContent() {
         <div className="bg-white md:rounded-full rounded-2xl border border-surface-200 shadow-xl overflow-hidden p-2 md:p-3 mb-8 flex flex-col md:flex-row gap-3 transition-all hover:shadow-2xl focus-within:border-navy-300 focus-within:ring-4 focus-within:ring-navy-900/5">
           <div className="flex-1 relative flex items-center bg-transparent pl-4 md:pl-6">
             <Search className="w-5 h-5 text-surface-400 mr-3 flex-shrink-0" />
-            <input
-              type="text"
+            <SearchAutocomplete
               value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
+              onChange={setSearchQuery}
               placeholder="Search location, property name..."
-              className="flex-1 h-12 bg-transparent text-surface-900 placeholder:text-surface-400 focus:outline-none text-base font-medium"
+              variant="solid"
+              properties={properties}
+              className="flex-1"
             />
           </div>
           

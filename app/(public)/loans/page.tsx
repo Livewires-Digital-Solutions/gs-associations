@@ -148,10 +148,10 @@ export default function LoansPage() {
               Loan & Financial Services
             </span>
             <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
-              Comprehensive Loan Solutions
+              Instant Loan at your Fingertips
             </h1>
             <p className="text-lg md:text-xl text-white/90">
-              From home loans to working capital — we partner with 15+ leading banks to get you the best rates.
+              No Waiting. No Stress. We partner with 15+ leading banks and NBFCs to get you the best rate with minimal paperwork.
             </p>
           </motion.div>
         </div>

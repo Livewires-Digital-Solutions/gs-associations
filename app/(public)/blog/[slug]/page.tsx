@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { Clock, Eye, Calendar, Tag, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
 import { getBlogPost, getBlogPosts, incrementBlogView } from '@/lib/db/blogs';
 import { toast } from 'sonner';
+import InitialAvatar from '@/components/ui/InitialAvatar';
 import type { BlogPost } from '@/data/mockData';
 
 export default function BlogDetailPage() {
@@ -116,10 +117,10 @@ export default function BlogDetailPage() {
 
         {/* Author */}
         <div className="flex items-center gap-3 mb-10 pb-10 border-b border-surface-100">
-          <img src={blog.authorAvatar} alt={blog.author} className="w-12 h-12 rounded-full bg-surface-200" />
+          <InitialAvatar name={blog.author} size={48} />
           <div>
             <p className="font-semibold text-surface-900">{blog.author}</p>
-            <p className="text-sm text-surface-500">Property Advisor at GS Associations</p>
+            <p className="text-sm text-surface-500">Financial Advisor at GS Associates</p>
           </div>
         </div>
 

@@ -8,17 +8,17 @@ import { useAuthStore } from '@/stores/authStore';
 
 export default function AdminSettings() {
   const { currentUser } = useAuthStore();
-  const [siteName, setSiteName] = useState('GS Associations');
-  const [tagline, setTagline] = useState('Premium Real Estate, Hyderabad');
-  const [contactEmail, setContactEmail] = useState('info@gsassociations.com');
-  const [contactPhone, setContactPhone] = useState('+91 40 6666 7777');
-  const [address, setAddress] = useState('Plot 42, Gachibowli Main Road, Financial District, Hyderabad — 500032');
+  const [siteName, setSiteName] = useState('GS Associates');
+  const [tagline, setTagline] = useState('Financial Consulting & Loan Advisory, Chennai');
+  const [contactEmail, setContactEmail] = useState('gopi.thamba@gmail.com');
+  const [contactPhone, setContactPhone] = useState('+91 90031 67674');
+  const [address, setAddress] = useState('No. 42, Anna Salai, Guindy, Chennai — 600032');
   const [rera, setRera] = useState('P024000RERA001');
   const [notifications, setNotifications] = useState({ emailAlerts: true, smsAlerts: false, dailyDigest: true });
   const [leadCapture, setLeadCapture] = useState({ autoCapture: true, captureOnView: true, captureOnSave: true });
 
   const handleSave = () => {
-    toast.success('Settings saved successfully ✓');
+    toast.success('Settings saved successfully');
   };
 
   return (

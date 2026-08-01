@@ -1,13 +1,37 @@
 import { createClient } from '@/lib/supabase/client';
 import type { BlogPost } from '@/data/mockData';
 
+function sanitizeChennaiText(text: string): string {
+  if (!text) return text;
+  const map: Record<string, string> = {
+    'Jubilee Hills': 'Poes Garden',
+    'Banjara Hills': 'Boat Club',
+    'Gachibowli': 'Sholinganallur',
+    'Kondapur': 'Thoraipakkam',
+    'HITEC City': 'Taramani',
+    'Miyapur': 'Tambaram',
+    'Narsingi': 'Pallavaram',
+    'Kokapet': 'Siruseri',
+    'Nallagandla': 'Velachery',
+    'Tellapur': 'ECR',
+    'Manikonda': 'Anna Nagar',
+    'Financial District': 'OMR IT Corridor',
+    'Hyderabad': 'Chennai',
+  };
+  let result = text;
+  for (const [k, v] of Object.entries(map)) {
+    result = result.replace(new RegExp(k, 'gi'), v);
+  }
+  return result;
+}
+
 function rowToBlog(row: any): BlogPost {
   return {
     id: row.id,
     slug: row.slug,
-    title: row.title,
-    excerpt: row.excerpt,
-    content: row.content,
+    title: sanitizeChennaiText(row.title),
+    excerpt: sanitizeChennaiText(row.excerpt),
+    content: sanitizeChennaiText(row.content),
     category: row.category,
     author: row.author,
     authorAvatar: row.author_avatar ?? `https://api.dicebear.com/7.x/avataaars/svg?seed=${row.author}`,

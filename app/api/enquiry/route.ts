@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
               </div>
 
               <p style="font-size: 13px; color: #6b7280;">If you have any urgent questions, you can also call us directly.</p>
-              <p style="font-size: 12px; color: #9ca3af; margin-top: 28px;">© GS Associations · Hyderabad's Premier Real Estate Advisory</p>
+              <p style="font-size: 12px; color: #9ca3af; margin-top: 28px;">© GS Associates · Chennai's Premier Financial & Loan Advisory · gopi.thamba@gmail.com · +91 90031 67674</p>
             </div>
           </div>
         `,

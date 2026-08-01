@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client';
+import { loanPrograms as mockLoanPrograms } from '@/data/mockData';
 import type { LoanProgram } from '@/data/mockData';
 
 function rowToLoan(row: any): LoanProgram {
@@ -23,25 +24,33 @@ function rowToLoan(row: any): LoanProgram {
 }
 
 export async function getLoanPrograms(): Promise<LoanProgram[]> {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from('loan_programs')
-    .select('*')
-    .order('popular', { ascending: false })
-    .order('created_at', { ascending: false });
-  if (error) throw error;
-  return (data ?? []).map(rowToLoan);
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('loan_programs')
+      .select('*')
+      .order('popular', { ascending: false })
+      .order('created_at', { ascending: false });
+    if (error || !data || data.length === 0) return mockLoanPrograms;
+    return data.map(rowToLoan);
+  } catch {
+    return mockLoanPrograms;
+  }
 }
 
 export async function getLoanProgram(id: string): Promise<LoanProgram | null> {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from('loan_programs')
-    .select('*')
-    .eq('id', id)
-    .single();
-  if (error) return null;
-  return rowToLoan(data);
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('loan_programs')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error || !data) return mockLoanPrograms.find(l => l.id === id) ?? null;
+    return rowToLoan(data);
+  } catch {
+    return mockLoanPrograms.find(l => l.id === id) ?? null;
+  }
 }
 
 export async function createLoanProgram(loan: Omit<LoanProgram, 'id'>): Promise<LoanProgram> {

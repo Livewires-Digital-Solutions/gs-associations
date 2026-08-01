@@ -24,15 +24,15 @@ const statusColors: Record<string, string> = {
 
 export default function PropertyCard({ property, variant = 'default' }: PropertyCardProps) {
   const router = useRouter();
-  const { isAuthenticated, currentUser } = useAuthStore();
+  const { isAuthenticated, currentUser, openLoginModal } = useAuthStore();
   const { savedPropertyIds, saveProperty, unsaveProperty } = usePropertyStore();
   const isSaved = savedPropertyIds.includes(property.id);
 
   const handleSave = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!isAuthenticated) {
-      toast.error('Please sign in to save properties');
-      router.push('/login');
+      toast.info('Please sign in to save properties to your collection');
+      openLoginModal('Please sign in to save properties to your favorites and access your portfolio.');
       return;
     }
     if (isSaved) {
@@ -40,7 +40,7 @@ export default function PropertyCard({ property, variant = 'default' }: Property
       toast.success('Removed from saved properties');
     } else {
       saveProperty(property.id, currentUser?.id ?? '');
-      toast.success('Added to saved properties ✓');
+      toast.success('Added to saved properties');
     }
   };
 

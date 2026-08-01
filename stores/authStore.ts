@@ -13,7 +13,8 @@ interface AuthState {
   updateProfile: (data: Partial<User>) => void;
   setAuth: (user: any | null) => void;
   isLoginModalOpen: boolean;
-  openLoginModal: () => void;
+  loginPromptReason: string | null;
+  openLoginModal: (reason?: string) => void;
   closeLoginModal: () => void;
   isRegisterModalOpen: boolean;
   openRegisterModal: () => void;
@@ -27,10 +28,11 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
       isLoginModalOpen: false,
+      loginPromptReason: null,
       isRegisterModalOpen: false,
 
-      openLoginModal: () => set({ isLoginModalOpen: true }),
-      closeLoginModal: () => set({ isLoginModalOpen: false }),
+      openLoginModal: (reason?: string) => set({ isLoginModalOpen: true, loginPromptReason: reason || null }),
+      closeLoginModal: () => set({ isLoginModalOpen: false, loginPromptReason: null }),
       openRegisterModal: () => set({ isRegisterModalOpen: true }),
       closeRegisterModal: () => set({ isRegisterModalOpen: false }),
 
@@ -68,12 +70,14 @@ export const useAuthStore = create<AuthState>()(
           // Load profile from DB to get role
           const supabase = createClient();
           supabase.from('profiles').select('*').eq('id', user.id).single().then(({ data }) => {
+            const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAIL?.split(',').map(e => e.trim()) || [];
+            const isAdminEmail = user.email ? adminEmails.includes(user.email) : false;
             const mappedUser: User = {
               id: user.id,
               name: data?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
               email: user.email,
               phone: data?.phone || user.user_metadata?.phone || '',
-              role: data?.role || 'user',
+              role: isAdminEmail ? 'admin' : (data?.role || 'user'),
               avatar: data?.avatar || user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.id}`,
               joinedDate: new Date(user.created_at || Date.now()).toISOString().split('T')[0],
               savedProperties: [],

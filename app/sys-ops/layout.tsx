@@ -11,15 +11,15 @@ import {
 import { useAuthStore } from '@/stores/authStore';
 
 const navItems = [
-  { icon: <LayoutDashboard className="w-4 h-4" />, label: 'Dashboard', href: '/admin' },
-  { icon: <Home className="w-4 h-4" />, label: 'Properties', href: '/admin/properties' },
-  { icon: <Eye className="w-4 h-4" />, label: 'View Tracking', href: '/admin/tracking' },
-  { icon: <TrendingUp className="w-4 h-4" />, label: 'Leads', href: '/admin/leads' },
-  { icon: <Users className="w-4 h-4" />, label: 'Users', href: '/admin/users' },
-  { icon: <FileText className="w-4 h-4" />, label: 'Blog', href: '/admin/blog' },
-  { icon: <CreditCard className="w-4 h-4" />, label: 'Loans', href: '/admin/loans' },
-  { icon: <BarChart3 className="w-4 h-4" />, label: 'Analytics', href: '/admin/analytics' },
-  { icon: <Settings className="w-4 h-4" />, label: 'Settings', href: '/admin/settings' },
+  { icon: <LayoutDashboard className="w-4 h-4" />, label: 'Dashboard', href: '/sys-ops' },
+  { icon: <Home className="w-4 h-4" />, label: 'Properties', href: '/sys-ops/properties' },
+  { icon: <Eye className="w-4 h-4" />, label: 'View Tracking', href: '/sys-ops/tracking' },
+  { icon: <TrendingUp className="w-4 h-4" />, label: 'Leads', href: '/sys-ops/leads' },
+  { icon: <Users className="w-4 h-4" />, label: 'Users', href: '/sys-ops/users' },
+  { icon: <FileText className="w-4 h-4" />, label: 'Blog', href: '/sys-ops/blog' },
+  { icon: <CreditCard className="w-4 h-4" />, label: 'Loans', href: '/sys-ops/loans' },
+  { icon: <BarChart3 className="w-4 h-4" />, label: 'Analytics', href: '/sys-ops/analytics' },
+  { icon: <Settings className="w-4 h-4" />, label: 'Settings', href: '/sys-ops/settings' },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -104,7 +104,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span>Admin</span>
             <span>/</span>
             <span className="text-surface-900 font-medium capitalize">
-              {pathname?.split('/admin/')[1] || 'Dashboard'}
+              {pathname?.split('/sys-ops/')[1] || 'Dashboard'}
             </span>
           </div>
           <div className="flex items-center gap-3">

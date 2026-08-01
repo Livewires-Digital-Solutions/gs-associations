@@ -20,7 +20,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Hyderabad's trusted real estate and financial services partner since 2012. We help families find their dream homes, explore loan options, and investors build wealth through property.
+              Chennai's trusted financial consulting partner. We connect you with leading banks and NBFCs for home loans, business loans, secured overdraft, and bridge financing.
             </p>
             <div className="flex gap-3">
               {[
@@ -85,15 +85,15 @@ export default function Footer() {
             <div className="space-y-4 text-sm">
               <div>
                 <p className="text-white font-medium mb-1">Office Address</p>
-                <p>Plot 42, Gachibowli Main Road,<br />Financial District,<br />Hyderabad — 500032</p>
+                <p>No. 42, Anna Salai,<br />Guindy,<br />Chennai — 600032</p>
               </div>
               <div>
-                <p className="text-white font-medium mb-1">Phone</p>
-                <a href="tel:+914066667777" className="hover:text-white transition-colors">+91 40 6666 7777</a>
+                <p className="text-white font-medium mb-1">Contact — Gopinath</p>
+                <a href="tel:+919003167674" className="hover:text-white transition-colors">+91 90031 67674</a>
               </div>
               <div>
                 <p className="text-white font-medium mb-1">Email</p>
-                <a href="mailto:info@gsassociations.com" className="hover:text-white transition-colors">info@gsassociations.com</a>
+                <a href="mailto:gopi.thamba@gmail.com" className="hover:text-white transition-colors">gopi.thamba@gmail.com</a>
               </div>
               <div>
                 <p className="text-white font-medium mb-1">Hours</p>

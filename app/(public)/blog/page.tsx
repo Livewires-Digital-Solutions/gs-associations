@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Clock, Eye, ArrowRight, FileText } from 'lucide-react';
 import { getBlogPosts } from '@/lib/db/blogs';
+import InitialAvatar from '@/components/ui/InitialAvatar';
 import type { BlogPost } from '@/data/mockData';
 
 const categories = ['All', 'Market Trends', 'Home Loans', 'Investment Guide', 'Buyer Tips', 'Legal & Compliance', 'Interior Design'];
@@ -58,7 +59,7 @@ export default function BlogListPage() {
               Real Estate Insights
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto drop-shadow-sm">
-              Market trends, investment guides, legal tips, and expert advice for Hyderabad's property market.
+              Market trends, investment guides, legal tips, and expert advice for Chennai's property market.
             </p>
           </motion.div>
         </div>
@@ -132,7 +133,7 @@ export default function BlogListPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <img src={featured.authorAvatar} alt={featured.author} className="w-8 h-8 rounded-full bg-surface-200" />
+                      <InitialAvatar name={featured.author} size={32} />
                       <div>
                         <p className="text-sm font-medium text-surface-900">{featured.author}</p>
                         <p className="text-xs text-surface-500">{featured.publishedDate}</p>
@@ -182,7 +183,7 @@ export default function BlogListPage() {
                     <p className="text-sm text-surface-500 line-clamp-2 mb-4">{blog.excerpt}</p>
                     <div className="flex items-center justify-between text-xs text-surface-400 mt-auto">
                       <div className="flex items-center gap-2">
-                        <img src={blog.authorAvatar} alt="" className="w-5 h-5 rounded-full bg-surface-200" />
+                        <InitialAvatar name={blog.author} size={20} />
                         <span>{blog.author}</span>
                       </div>
                       <div className="flex items-center gap-3">

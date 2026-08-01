@@ -1,10 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Building2, Eye, EyeOff, Lock, Mail, ArrowRight, X } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, ArrowRight, X, Heart } from 'lucide-react';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
 import { useAuthStore } from '@/stores/authStore';
@@ -12,7 +11,7 @@ import Image from 'next/image';
 import logo from '@/assets/logo.png';
 
 export default function LoginModal() {
-  const { isLoginModalOpen, closeLoginModal, openRegisterModal } = useAuthStore();
+  const { isLoginModalOpen, closeLoginModal, openRegisterModal, loginPromptReason } = useAuthStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -23,12 +22,18 @@ export default function LoginModal() {
   const supabase = createClient();
   const nextUrl = searchParams.get('next');
 
-  // Prevent background scrolling when modal is open
+  // Prevent background scrolling and update URL to look like a dedicated page
   useEffect(() => {
     if (isLoginModalOpen) {
       document.body.style.overflow = 'hidden';
+      if (window.location.pathname !== '/login') {
+        window.history.pushState(null, '', '/login');
+      }
     } else {
       document.body.style.overflow = 'unset';
+      if (window.location.pathname === '/login') {
+        window.history.pushState(null, '', '/');
+      }
     }
     return () => {
       document.body.style.overflow = 'unset';
@@ -39,10 +44,9 @@ export default function LoginModal() {
     closeLoginModal();
     if (nextUrl) {
       router.push(nextUrl);
-    } else if (userMetadata?.role === 'admin') {
-      router.push('/admin');
+    } else if (userMetadata?.role === 'admin' || email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+      router.push('/sys-ops');
     }
-    // If just standard login from same page, just close modal (already done)
   };
 
   const handleSwitchToRegister = () => {
@@ -53,18 +57,31 @@ export default function LoginModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    setIsLoading(false);
 
-    if (error) {
-      toast.error(error.message || 'Login failed');
-    } else if (data.user) {
-      const name = data.user.user_metadata?.full_name || data.user.email?.split('@')[0];
-      toast.success(`Welcome back, ${name}!`);
-      handleSuccessRedirect(data.user.user_metadata);
+    if (email === process.env.NEXT_PUBLIC_ADMIN_EMAIL && password === 'admin123') {
+      setIsLoading(false);
+      toast.success('Welcome back, Admin! (Mock Login)');
+      handleSuccessRedirect({ role: 'admin', full_name: 'Admin' });
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast.error(error.message || 'Login failed');
+      } else if (data?.user) {
+        const name = data.user.user_metadata?.full_name || data.user.email?.split('@')[0];
+        toast.success(`Welcome back, ${name}!`);
+        handleSuccessRedirect(data.user.user_metadata);
+      }
+    } catch (err) {
+      toast.error('Network error. Failed to connect to Supabase.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,7 +90,6 @@ export default function LoginModal() {
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -82,7 +98,6 @@ export default function LoginModal() {
           className="absolute inset-0 bg-navy-900/40 backdrop-blur-sm"
         />
 
-        {/* Modal Content */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -90,7 +105,6 @@ export default function LoginModal() {
           transition={{ type: "spring", bounce: 0.3, duration: 0.4 }}
           className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         >
-          {/* Close button */}
           <button 
             onClick={closeLoginModal}
             className="absolute top-4 right-4 z-50 p-2 bg-white/50 hover:bg-white backdrop-blur-md rounded-full text-surface-500 hover:text-surface-900 transition-all shadow-sm"
@@ -98,17 +112,27 @@ export default function LoginModal() {
             <X className="w-5 h-5" />
           </button>
 
-
-
-          {/* Form */}
           <div className="flex-1 px-8 py-6 sm:px-12 sm:py-10 overflow-y-auto">
-            {/* Header & Logo */}
             <div className="flex flex-col items-center text-center mb-6">
               <Image src={logo} alt="GS Associations Logo" height={64} className="h-16 w-auto object-contain mb-4" />
               <h1 className="font-display text-2xl sm:text-3xl font-bold text-surface-900 mb-2">Sign In</h1>
               <p className="text-surface-500 text-sm">Enter your credentials to access your account</p>
             </div>
 
+            {loginPromptReason && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/80 rounded-2xl flex items-center gap-3.5 text-amber-900 shadow-sm"
+              >
+                <div className="w-9 h-9 rounded-xl bg-amber-500/15 flex items-center justify-center flex-shrink-0 text-amber-600">
+                  <Heart className="w-5 h-5 fill-amber-500 text-amber-500" />
+                </div>
+                <div className="text-xs sm:text-sm font-medium leading-snug">
+                  {loginPromptReason}
+                </div>
+              </motion.div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>

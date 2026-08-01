@@ -82,8 +82,8 @@ export default function PropertyDetailPage() {
 
   const handleSave = async () => {
     if (!isAuthenticated || !currentUser) {
-      toast.error('Please sign in to save properties');
-      router.push('/login');
+      toast.info('Please sign in to save properties to your collection');
+      openLoginModal('Please sign in to save properties to your favorites and access your portfolio.');
       return;
     }
     try {

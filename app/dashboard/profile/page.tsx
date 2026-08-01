@@ -26,7 +26,7 @@ export default function ProfileSettings() {
     e.preventDefault();
     updateProfile(form);
     setSaved(true);
-    toast.success('Profile updated successfully ✓');
+    toast.success('Profile updated successfully');
     setTimeout(() => setSaved(false), 3000);
   };
 
@@ -84,7 +84,7 @@ export default function ProfileSettings() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label mb-1.5 block">Preferred Location</label>
-              <input type="text" value={form.location} onChange={e => setForm(p => ({ ...p, location: e.target.value }))} placeholder="e.g. Gachibowli" className="input" />
+              <input type="text" value={form.location} onChange={e => setForm(p => ({ ...p, location: e.target.value }))} placeholder="e.g. OMR, Chennai" className="input" />
             </div>
             <div>
               <label className="label mb-1.5 block">Budget Range</label>

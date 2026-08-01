@@ -87,7 +87,7 @@ export default function AdminDashboard() {
           <h1 className="font-display text-2xl font-bold text-surface-900">Admin Dashboard</h1>
           <p className="text-surface-500 text-sm">Welcome back! Here's what's happening today.</p>
         </div>
-        <Link href="/admin/leads" className="btn-primary text-sm">
+        <Link href="/sys-ops/leads" className="btn-primary text-sm">
           View All Leads
           <ArrowRight className="w-4 h-4" />
         </Link>
@@ -180,7 +180,7 @@ export default function AdminDashboard() {
         <div className="card overflow-hidden">
           <div className="p-5 border-b border-surface-100 flex items-center justify-between">
             <h2 className="font-semibold text-surface-900">Recent Leads</h2>
-            <Link href="/admin/leads" className="text-xs text-navy-700 font-medium hover:text-navy-900">View all →</Link>
+            <Link href="/sys-ops/leads" className="text-xs text-navy-700 font-medium hover:text-navy-900">View all →</Link>
           </div>
           <div className="divide-y divide-surface-100">
             {recentLeads.map(lead => (
@@ -202,7 +202,7 @@ export default function AdminDashboard() {
         <div className="card overflow-hidden">
           <div className="p-5 border-b border-surface-100 flex items-center justify-between">
             <h2 className="font-semibold text-surface-900">Top Properties by Leads</h2>
-            <Link href="/admin/tracking" className="text-xs text-navy-700 font-medium hover:text-navy-900">View tracking →</Link>
+            <Link href="/sys-ops/tracking" className="text-xs text-navy-700 font-medium hover:text-navy-900">View tracking →</Link>
           </div>
           <div className="p-5">
             <ResponsiveContainer width="100%" height={220}>

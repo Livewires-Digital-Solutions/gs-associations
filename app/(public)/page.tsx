@@ -6,13 +6,15 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 import {
-  Search, ArrowRight, MapPin, Shield, TrendingUp, Award,
+  ArrowRight, MapPin, Shield, TrendingUp, Award,
   ChevronRight, Star, Building2, Users, CheckCircle2, Sparkles,
-  Wallet, Landmark, Home, Briefcase
+  Landmark, Wallet, Briefcase
 } from 'lucide-react';
 import { getFeaturedProperties } from '@/lib/db/properties';
 import { getFeaturedBlogPosts } from '@/lib/db/blogs';
 import PropertyCard from '@/components/property/PropertyCard';
+import InitialAvatar from '@/components/ui/InitialAvatar';
+import SearchAutocomplete from '@/components/ui/SearchAutocomplete';
 import type { Property, BlogPost } from '@/data/mockData';
 
 // Theme Config Variables
@@ -78,51 +80,66 @@ function AnimatedCounter({ value, prefix = '', suffix = '', delay = 0 }: { value
 }
 
 const stats = [
-  { value: 1200, suffix: '+', label: 'Properties Sold' },
-  { value: 15000, suffix: '+', label: 'Happy Families' },
+  { value: 15, suffix: '+', label: 'Bank & NBFC Partners' },
+  { value: 5000, suffix: '+', label: 'Loans Sanctioned' },
   { value: 12, suffix: '+', label: 'Years of Trust' },
-  { prefix: '₹', value: 2400, suffix: ' Cr', label: 'Worth Transacted' },
+  { prefix: '₹', value: 0, label: 'Advisory Fees' },
 ];
 
 const whyUs = [
   {
-    icon: <Shield className="w-6 h-6" />,
-    title: 'RERA Verified',
-    desc: 'Every property on our platform is RERA registered and legally verified.',
+    icon: <Landmark className="w-6 h-6" />,
+    title: 'All Major Banks & NBFCs',
+    desc: 'We connect you with 15+ leading banks and NBFCs to find the most competitive loan for your profile.',
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: 'Market Intelligence',
-    desc: 'Data-driven insights on price trends, rental yields, and appreciation.',
+    title: 'Competitive Interest Rates',
+    desc: 'Our multi-lender access ensures you always get the best available interest rate — not just what one bank offers.',
+  },
+  {
+    icon: <Shield className="w-6 h-6" />,
+    title: 'Minimal Documentation',
+    desc: 'We streamline the paperwork so you spend less time collecting documents and more time growing.',
   },
   {
     icon: <Award className="w-6 h-6" />,
-    title: 'Expert Advisory',
-    desc: 'Dedicated relationship managers with 10+ years of market experience.',
+    title: 'Expert Financial Guidance',
+    desc: 'Personalized advice from experienced advisors who understand your income, goals, and eligibility.',
+  },
+  {
+    icon: <Wallet className="w-6 h-6" />,
+    title: 'Flexible Repayment Options',
+    desc: 'EMI plans tailored to your income and lifestyle — from short-term working capital to 30-year home loans.',
+  },
+  {
+    icon: <Briefcase className="w-6 h-6" />,
+    title: 'Fast Approvals',
+    desc: 'Quick processing and doorstep service means your loan moves forward without unnecessary delays.',
   },
 ];
 
 const testimonials = [
   {
-    name: 'Vikram Iyer',
-    role: 'Software Engineer, Google',
-    text: 'GS Associations made buying my first home completely stress-free. Their team guided me through every step.',
+    name: 'Karthik Sundaram',
+    role: 'First-Time Home Buyer, Chennai',
+    text: 'Gopinath and the team made my home loan journey completely hassle-free. Got approval in 3 days with the best rate I could find. Highly recommended!',
     rating: 5,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=vik',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=karthik',
   },
   {
-    name: 'Anjali Sharma',
-    role: 'Doctor, Apollo Hospitals',
-    text: 'The property tracking feature helped me shortlist from 50 properties down to 3. Bought the perfect villa.',
+    name: 'Meenakshi Rajan',
+    role: 'Business Owner, Anna Nagar',
+    text: 'Needed an urgent business loan with no collateral. GS Associates connected me with the right NBFC and got it sanctioned within a week. Lifesavers!',
     rating: 5,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=anj',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=meenakshi',
   },
   {
-    name: 'Raj Malhotra',
-    role: 'Entrepreneur',
-    text: 'Invested in 3 commercial properties through GS. The ROI analysis they provided was spot on.',
+    name: 'Suresh Babu',
+    role: 'Contractor, Velachery',
+    text: 'The OD facility they arranged for my business has been a game changer. Interest only on what I use, and funds available whenever I need them.',
     rating: 5,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=raj',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sureshbabu',
   },
 ];
 
@@ -170,7 +187,7 @@ function TestimonialCarousel({ testimonials }: { testimonials: any[] }) {
               </div>
               <p className="text-surface-700 text-base md:text-lg leading-relaxed mb-8 italic flex-1">"{t.text}"</p>
               <div className="flex items-center gap-4 mt-auto">
-                <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full bg-surface-200" />
+                <InitialAvatar name={t.name} size={48} />
                 <div>
                   <p className="font-bold text-surface-900">{t.name}</p>
                   <p className="text-sm text-surface-500 font-medium">{t.role}</p>
@@ -231,7 +248,7 @@ export default function HomePage() {
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center bg-[url('/assets/bg-image.png')] bg-cover bg-center bg-no-repeat overflow-hidden">
         {/* Dark Fade from Left */}
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/60 to-transparent pointer-events-none" />
 
         <div className="container-app w-full relative z-10 pt-32 pb-20">
           <motion.div
@@ -244,7 +261,7 @@ export default function HomePage() {
               <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
                 <div className="w-2 h-2 rounded-full bg-theme-tertiary animate-pulse" />
                 <span className="text-white text-xs font-medium tracking-wide uppercase">
-                  Premium Real Estate & Advisory
+                  Premium Real Estate &amp; Financial Advisory
                 </span>
               </div>
             </motion.div>
@@ -253,7 +270,7 @@ export default function HomePage() {
               variants={itemVariants}
               className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6 drop-shadow-md"
             >
-              Properties &
+              Properties &amp;
               <span className="block text-theme-tertiary">Financial Solutions</span>
               Under One Roof
             </motion.h1>
@@ -266,34 +283,27 @@ export default function HomePage() {
               Expert guidance for every step of your property and financial journey.
             </motion.p>
 
-            {/* Simple Glassmorphic Search */}
+            {/* Glassmorphic Search with Autocomplete */}
             <motion.form
               variants={itemVariants}
               onSubmit={handleSearch}
               className="relative max-w-2xl mb-8"
             >
-              <div className="flex items-center w-full h-14 md:h-16 bg-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-lg overflow-hidden pr-2 pl-6 transition-all hover:bg-white/15">
-                <Search className="w-5 h-5 text-white/70 mr-3 flex-shrink-0" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search location, property, or type..."
-                  className="flex-1 h-full bg-transparent text-white placeholder:text-white/60 focus:outline-none text-base font-medium"
-                />
-                <button type="submit" className="h-10 md:h-12 px-6 bg-white/20 hover:bg-white/30 border border-white/20 text-white text-sm font-semibold rounded-full transition-all flex items-center gap-2 flex-shrink-0">
-                  <span>Search</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
+              <SearchAutocomplete
+                value={searchQuery}
+                onChange={setSearchQuery}
+                onSearch={(val) => router.push(`/properties?q=${encodeURIComponent(val)}`)}
+                placeholder="Search location, property, or type..."
+                variant="glass"
+                properties={featuredProperties}
+              />
             </motion.form>
 
-            {/* Quick links */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-2">
-              {['Gachibowli', 'Jubilee Hills', 'Kondapur', 'Banjara Hills', 'Kokapet', 'Narsingi'].map(loc => (
+              {['OMR', 'Adyar', 'Anna Nagar', 'Nungambakkam', 'Velachery', 'Guindy'].map(loc => (
                 <button
                   key={loc}
-                  onClick={() => router.push(`/properties?location=${loc}`)}
+                  onClick={() => router.push(`/properties?q=${encodeURIComponent(loc)}`)}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white/80 hover:text-white text-xs font-medium transition-all"
                 >
                   <MapPin className="w-3 h-3" />
@@ -302,6 +312,7 @@ export default function HomePage() {
               ))}
             </motion.div>
           </motion.div>
+
 
 
         </div>
@@ -346,12 +357,11 @@ export default function HomePage() {
         <div className="absolute -right-[10%] top-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none z-0 mix-blend-screen" />
         <div className="container-app relative z-10">
           <div className="text-center mb-12 relative">
-
             <div className="relative z-10">
               <p className="section-label text-theme-tertiary">What We Offer</p>
               <h2 className="section-heading text-white">Two Powerful Services,<br />One Trusted Partner</h2>
               <p className="section-subheading max-w-2xl mx-auto text-white/80">
-                GS Associations brings together premium property services and comprehensive financial solutions to help you achieve your goals.
+                GS Associates brings together premium property advisory and comprehensive financial solutions to help you achieve your goals.
               </p>
             </div>
           </div>
@@ -364,22 +374,18 @@ export default function HomePage() {
               viewport={{ once: true }}
               className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 border border-surface-200 flex flex-col group hover:-translate-y-1"
             >
-              {/* Massive Asset on Same BG */}
               <div className="w-full h-64 sm:h-72 mb-2 relative flex items-center justify-center">
-                <img 
-                  src="/assets/property_service.png" 
-                  alt="Property Services" 
-                  className="w-full h-full object-contain mix-blend-darken opacity-95 group-hover:scale-105 transition-transform duration-500" 
+                <img
+                  src="/assets/property_service.png"
+                  alt="Property Services"
+                  className="w-full h-full object-contain mix-blend-darken opacity-95 group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              
               <div className="flex flex-col flex-1 items-start text-left w-full">
                 <h3 className="font-display font-bold text-2xl text-navy-950 mb-3">Property Advisory</h3>
                 <p className="text-surface-600 text-sm leading-relaxed font-medium mb-6">
-                  Explore premium property listings across Hyderabad with our expert advisory and zero-hassle buying support. We handle the complexity.
+                  Explore premium property listings across Chennai with our expert advisory and zero-hassle buying support. We handle the complexity.
                 </p>
-                
-                {/* Tightly Packed Bullets */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-10 w-full">
                   {['500+ Verified Properties', 'RERA Compliant', 'End-to-End Advisory', 'Dedicated Manager'].map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5 text-sm text-navy-800 font-semibold">
@@ -388,7 +394,6 @@ export default function HomePage() {
                     </div>
                   ))}
                 </div>
-                
                 <Link href="/properties" className="mt-auto inline-flex items-center justify-center w-full gap-2 px-6 py-4 rounded-xl bg-navy-950 text-white text-sm font-bold hover:bg-theme-primary transition-all shadow-md group/btn">
                   Explore Properties
                   <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
@@ -404,31 +409,26 @@ export default function HomePage() {
               transition={{ delay: 0.1 }}
               className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 border border-surface-200 flex flex-col group hover:-translate-y-1"
             >
-              {/* Massive Asset on Same BG */}
               <div className="w-full h-64 sm:h-72 mb-2 relative flex items-center justify-center">
-                <img 
-                  src="/assets/loan_service.png" 
-                  alt="Loan Services" 
-                  className="w-full h-full object-contain mix-blend-darken opacity-95 group-hover:scale-105 transition-transform duration-500" 
+                <img
+                  src="/assets/loan_service.png"
+                  alt="Loan Services"
+                  className="w-full h-full object-contain mix-blend-darken opacity-95 group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              
               <div className="flex flex-col flex-1 items-start text-left w-full">
                 <h3 className="font-display font-bold text-2xl text-navy-950 mb-3">Financial Solutions</h3>
                 <p className="text-surface-600 text-sm leading-relaxed font-medium mb-6">
-                  Compare rates from 15+ leading banking partners. We secure the best financing tailored to your needs with absolute transparency.
+                  Compare rates from 15+ leading banking partners. We secure the best financing tailored to your needs — home loans, business loans, OD &amp; bridge financing.
                 </p>
-                
-                {/* Tightly Packed Bullets */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-10 w-full">
-                  {['Home & LAP Loans', '15+ Bank Partners', 'Lowest Rates', 'Zero Cost Consult'].map((item, i) => (
+                  {['Home &amp; Business Loans', '15+ Bank Partners', 'Competitive Rates', 'Zero Advisory Fees'].map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5 text-sm text-navy-800 font-semibold">
                       <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0" />
                       <span className="truncate">{item}</span>
                     </div>
                   ))}
                 </div>
-                
                 <Link href="/loans" className="mt-auto inline-flex items-center justify-center w-full gap-2 px-6 py-4 rounded-xl bg-gold-400 text-navy-950 text-sm font-bold hover:bg-gold-300 transition-all shadow-md group/btn">
                   Explore Loan Options
                   <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
@@ -446,7 +446,7 @@ export default function HomePage() {
             <p className="section-label text-gold-600">Handpicked For You</p>
             <h2 className="section-heading text-surface-900">Featured Properties</h2>
             <p className="section-subheading text-surface-500 max-w-lg mx-auto">
-              Curated selection of Hyderabad's most sought-after properties — each verified, RERA compliant, and ready for viewing.
+              Curated selection of Chennai's most sought-after properties — each verified, RERA compliant, and ready for viewing.
             </p>
           </div>
 
@@ -477,8 +477,8 @@ export default function HomePage() {
       <section className="section bg-white py-24">
         <div className="container-app">
           <div className="text-center mb-16">
-            <p className="section-label">Why GS Associations</p>
-            <h2 className="section-heading">Buying Property Should Be<br />Simple & Trustworthy</h2>
+            <p className="section-label">Why GS Associates</p>
+            <h2 className="section-heading">Getting a Loan Should Be<br />Simple &amp; Stress-Free</h2>
           </div>
 
           <div className="max-w-6xl mx-auto flex flex-col gap-6">
@@ -550,7 +550,7 @@ export default function HomePage() {
               transition={{ delay: 0.2 }}
               className="bg-blue-50 p-6 md:p-8 rounded-[2rem] border border-blue-100 flex flex-wrap gap-6 md:gap-10 justify-center items-center shadow-sm"
             >
-              {['Bank Approved Projects', 'Zero Brokerage on Select', 'Legal Team On-Site', 'Price Match Guarantee'].map(t => (
+              {['Loan from All Major Banks', 'Zero Advisory Fees', 'Fast Approvals', 'Minimal Documentation', 'Expert Guidance', 'Flexible Repayment'].map(t => (
                 <div key={t} className="flex items-center gap-3 text-sm md:text-base text-navy-950 font-semibold">
                   <CheckCircle2 className="w-5 h-5 text-gold-500 flex-shrink-0" />
                   {t}
@@ -684,10 +684,10 @@ export default function HomePage() {
             <div className="flex-1 text-center md:text-left">
               <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-4">Get Started Today</p>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-5">
-                Your Property & Loan<br />Journey Starts Here
+                Your Loan Journey<br />Starts Here
               </h2>
               <p className="text-white/60 text-lg mb-0 max-w-lg mx-auto md:mx-0">
-                Register for free to access complete property details, explore loan options, save favorites, and connect with our expert advisors.
+                Call Gopinath directly or fill out a quick form — free consultation, no spam, response within 2 hours.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">

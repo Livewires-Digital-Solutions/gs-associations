@@ -13,8 +13,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'GS Associations',
-  description: 'Premium Real Estate in Hyderabad',
+  title: 'GS Associates | Financial Consulting & Loan Advisory, Chennai',
+  description: 'GS Associates — Chennai\'s trusted loan advisory. Home Loans, Business Loans, Secured OD & Bridge Financing from 15+ leading banks. Zero fees. Call Gopinath: +91 90031 67674.',
 };
 
 export default function RootLayout({

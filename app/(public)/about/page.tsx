@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, Award, Users, Building2, TrendingUp, CheckCircle2 } from 'lucide-react';
+import InitialAvatar from '@/components/ui/InitialAvatar';
 
 function JackpotDigit({ value, delay, start }: { value: string, delay: number, start: boolean }) {
   if (isNaN(Number(value))) return <span className="px-[1px]">{value}</span>;
@@ -54,38 +55,26 @@ function AnimatedCounter({ value, prefix = '', suffix = '', delay = 0 }: { value
 
 const team = [
   {
-    name: 'Rajesh Gupta', role: 'Founder & CEO', bio: 'With 20 years in Hyderabad real estate, Rajesh founded GS Associations with a mission to make property buying transparent and trustworthy.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=rajesh',
+    name: 'Gopinath', role: 'Founder & Financial Advisor', bio: 'Gopinath founded GS Associates with a mission to make loan access simple and transparent. He personally guides every client through bank and NBFC options to get the best rate.',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=gopinath',
   },
   {
-    name: 'Priya Nair', role: 'Head of Sales', bio: 'Priya has closed over ₹500 Crore in residential transactions and is renowned for her deep knowledge of Hyderabad\'s premium markets.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=priya',
+    name: 'Priya Nair', role: 'Home Loan Specialist', bio: 'Priya has helped 500+ families secure their first home loans. She specialises in PMAY subsidies, co-applicant structuring, and negotiating lower processing fees with banks.',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=priyanair',
   },
   {
-    name: 'Suresh Reddy', role: 'Head of Investments', bio: 'Suresh specializes in commercial and investment properties. His data-driven approach has helped 300+ investors build profitable portfolios.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=suresh',
-  },
-  {
-    name: 'Ravi Shankar', role: 'Head of Operations', bio: 'Ravi ensures every client experience is seamless — from first enquiry to property registration. His process obsession sets GS apart.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ravi',
-  },
-  {
-    name: 'Meena Krishnamurthy', role: 'Legal Head', bio: 'Meena leads our in-house legal team ensuring every property transaction is watertight. RERA compliance expert.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=meena',
-  },
-  {
-    name: 'Arun Sharma', role: 'Loan Advisory Head', bio: 'Arun\'s team has helped secure home loans for 5,000+ families at rates 0.5-1% below market average through bank partnerships.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=arun',
+    name: 'Suresh Kumar', role: 'Business Loan Advisor', bio: 'Suresh specialises in unsecured business loans and OD facilities. His deep relationships with leading NBFCs mean faster sanctions for SMEs and self-employed clients.',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sureshkumar',
   },
 ];
 
 const milestones = [
-  { year: '2012', event: 'GS Associations founded in Hyderabad with a team of 5 advisors' },
-  { year: '2015', event: 'Expanded to 3 offices across Hyderabad. Crossed ₹100 Crore in transactions' },
-  { year: '2018', event: 'Launched GS Loan Advisory — partnered with 10 leading banks' },
-  { year: '2020', event: 'Digital transformation. First real estate portal in Hyderabad with live tracking' },
-  { year: '2022', event: 'Crossed 1,000 successfully closed transactions. Team grew to 80+ professionals' },
-  { year: '2024', event: 'Launched GS Associations 2.0 — AI-powered property matching and lead tracking' },
+  { year: '2012', event: 'GS Associates founded by Gopinath with a vision to simplify loan access for Chennai families' },
+  { year: '2015', event: 'Partnered with 5 leading banks and NBFCs — expanded to business loans and OD facilities' },
+  { year: '2018', event: 'Crossed 1,000 successful loan sanctions. Added Bridge Loan Financing to our product portfolio' },
+  { year: '2020', event: 'Launched digital inquiry platform. Zero-paperwork process introduced for select lenders' },
+  { year: '2022', event: 'Crossed 5,000+ loan sanctions. Expanded partnerships to 15+ banks and NBFCs across Chennai' },
+  { year: '2024', event: 'GS Associates continues to deliver zero-fee advisory with the fastest approval times in Chennai' },
 ];
 
 export default function AboutPage() {
@@ -116,10 +105,10 @@ export default function AboutPage() {
               Our Story
             </span>
             <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-md">
-              Hyderabad's Most Trusted<br />Real Estate Partner
+              Chennai's Most Trusted<br />Financial Advisor
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto drop-shadow-sm">
-              Since 2012, GS Associations has helped over 15,000 families and investors navigate Hyderabad's dynamic property market with honesty, data, and expertise.
+              GS Associates connects families and businesses with the right lenders — quick processing, minimal paperwork, and expert guidance at every step.
             </p>
           </motion.div>
         </div>
@@ -129,10 +118,10 @@ export default function AboutPage() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-6 md:py-8 mb-20">
           {[
-            { value: 1200, suffix: '+', label: 'Properties Sold' },
-            { value: 15000, suffix: '+', label: 'Happy Families' },
-            { value: 2400, prefix: '₹', suffix: ' Cr', label: 'Worth Transacted' },
+            { value: 15, suffix: '+', label: 'Bank & NBFC Partners' },
+            { value: 5000, suffix: '+', label: 'Loans Sanctioned' },
             { value: 12, suffix: '+', label: 'Years of Excellence' },
+            { prefix: '₹', value: 0, label: 'Advisory Fees' },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -155,15 +144,15 @@ export default function AboutPage() {
           <div>
             <p className="section-label mb-3">Our Mission</p>
             <h2 className="font-display text-3xl font-bold text-surface-900 mb-5">
-              Making Real Estate Buying Honest, Simple, and Rewarding
+              Making Loan Access Simple, Fast, and Stress-Free
             </h2>
             <p className="text-surface-600 leading-relaxed mb-5 text-sm">
-              In a market often plagued by opacity, GS Associations was built on a radical idea: what if real estate advisors truly worked for buyers, not just commissions? That principle drives everything we do.
+              GS Associates was built on one principle: every client deserves honest, conflict-free financial advice. Gopinath personally guides each client through their options — no hidden fees, no pressure, just the best loan for their situation.
             </p>
             <p className="text-surface-600 leading-relaxed mb-6 text-sm">
-              We invest in technology, training, and data to ensure every client gets accurate information, fair pricing, and a partner who's with them long after the keys are handed over.
+              By working with multiple banks and NBFCs rather than just one, we ensure you always get a competitive rate, flexible terms, and a repayment plan that fits your income and lifestyle.
             </p>
-            {['RERA compliance expertise', 'In-house legal verification', 'Zero hidden charges', 'Lifetime advisory support', 'Bank-approved properties only'].map((item, i) => (
+            {['Zero advisory fees', 'Loans from all major banks & NBFCs', 'Minimal documentation', 'Fast approvals — avg. 72 hours', 'Personalized EMI planning'].map((item, i) => (
               <div key={i} className="flex items-center gap-2.5 text-sm text-surface-700 mb-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 {item}
@@ -184,14 +173,14 @@ export default function AboutPage() {
               
               <img
                 src="/assets/ceo.png"
-                alt="Rajesh Gupta - Founder & CEO"
+                alt="Gopinath - Founder & Financial Advisor"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[105%] w-auto object-contain object-bottom drop-shadow-2xl z-10"
               />
 
               {/* Sleek Minimalist Nameplate */}
               <div className="absolute -bottom-4 right-8 md:-right-4 bg-white/95 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl border border-surface-200 z-20 text-center">
-                <p className="font-display font-bold text-navy-900 text-lg mb-0.5">Rajesh Gupta</p>
-                <p className="text-gold-600 text-[10px] font-bold uppercase tracking-widest">Founder & CEO</p>
+                <p className="font-display font-bold text-navy-900 text-lg mb-0.5">Gopinath</p>
+                <p className="text-gold-600 text-[10px] font-bold uppercase tracking-widest">Founder &amp; Financial Advisor</p>
               </div>
             </div>
           </div>
@@ -201,7 +190,7 @@ export default function AboutPage() {
         <div className="mb-24">
           <div className="text-center mb-16">
             <p className="section-label">Our Journey</p>
-            <h2 className="section-heading">12 Years of Building Trust</h2>
+            <h2 className="section-heading">Years of Building Trust</h2>
           </div>
           <div className="max-w-4xl mx-auto relative px-4 sm:px-6">
             {/* Main vertical line */}
@@ -258,11 +247,9 @@ export default function AboutPage() {
                 transition={{ delay: i * 0.1 }}
                 className="card p-6 text-center group hover:border-navy-200"
               >
-                <img
-                  src={member.avatar}
-                  alt={member.name}
-                  className="w-20 h-20 rounded-full bg-surface-200 mx-auto mb-4"
-                />
+                <div className="flex justify-center mb-4">
+                  <InitialAvatar name={member.name} size={80} />
+                </div>
                 <h3 className="font-display font-semibold text-surface-900 mb-0.5">{member.name}</h3>
                 <p className="text-xs text-gold-600 font-medium mb-3">{member.role}</p>
                 <p className="text-sm text-surface-500 leading-relaxed">{member.bio}</p>
@@ -273,8 +260,8 @@ export default function AboutPage() {
 
         {/* CTA */}
         <div className="rounded-3xl bg-navy-800 p-10 text-center text-white">
-          <h2 className="font-display text-3xl font-bold mb-3">Ready to Work with Hyderabad's Best?</h2>
-          <p className="text-white/70 mb-6">Join 15,000+ families who've found their dream property with GS Associations.</p>
+          <h2 className="font-display text-3xl font-bold mb-3">Ready to Get Your Loan Approved?</h2>
+          <p className="text-white/70 mb-6">Speak directly with Gopinath — free consultation, no pressure, best rates guaranteed.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/properties" className="btn-gold">Browse Properties <ArrowRight className="w-4 h-4" /></Link>
             <Link href="/contact" className="btn-ghost text-white hover:bg-white/10 border border-white/20">Get in Touch</Link>

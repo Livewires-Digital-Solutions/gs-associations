@@ -13,13 +13,12 @@ import logo from '@/assets/logo.png';
 import logoWhite from '@/assets/logowhite.png';
 import { useAuthStore } from '@/stores/authStore';
 import { createClient } from '@/lib/supabase/client';
-
 const navLinks = [
   { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
   { label: 'Properties', href: '/properties' },
   { label: 'Loans', href: '/loans' },
   { label: 'Blog', href: '/blog' },
-  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -147,8 +146,8 @@ export default function Navbar() {
                         <p className="text-sm font-semibold text-surface-900">{currentUser.name}</p>
                         <p className="text-xs text-surface-500 mt-0.5">{currentUser.email}</p>
                       </div>
-                      {currentUser.role === 'admin' ? (
-                        <MenuItem icon={<LayoutDashboard className="w-4 h-4" />} label="Admin Dashboard" href="/admin" onClick={() => setUserMenuOpen(false)} />
+                      {(currentUser.role === 'admin' || currentUser.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) ? (
+                        <MenuItem icon={<LayoutDashboard className="w-4 h-4" />} label="Admin Dashboard" href="/sys-ops" onClick={() => setUserMenuOpen(false)} />
                       ) : (
                         <>
                           <MenuItem icon={<LayoutDashboard className="w-4 h-4" />} label="Dashboard" href="/dashboard" onClick={() => setUserMenuOpen(false)} />
@@ -229,7 +228,7 @@ export default function Navbar() {
               <div className="border-t border-surface-100 mt-2 pt-2 flex flex-col gap-2">
                 {isAuthenticated ? (
                   <>
-                    <Link href={currentUser?.role === 'admin' ? '/admin' : '/dashboard'} onClick={() => setMobileOpen(false)} className="btn-secondary w-full justify-center">
+                    <Link href={(currentUser?.role === 'admin' || currentUser?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) ? '/sys-ops' : '/dashboard'} onClick={() => setMobileOpen(false)} className="btn-secondary w-full justify-center">
                       Dashboard
                     </Link>
                     <button onClick={() => { handleLogout(); setMobileOpen(false); }} className="btn-ghost w-full justify-center text-red-600">

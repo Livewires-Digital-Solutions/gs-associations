@@ -81,7 +81,7 @@ function BlogForm({ blog, onSave, onClose }: { blog?: BlogPost; onSave: (data: P
           </div>
           <div>
             <label className="label mb-1.5 block">Tags (comma-separated)</label>
-            <input type="text" value={form.tags} onChange={e => setForm(p => ({ ...p, tags: e.target.value }))} placeholder="Investment, Hyderabad, 2024" className="input" />
+            <input type="text" value={form.tags} onChange={e => setForm(p => ({ ...p, tags: e.target.value }))} placeholder="Investment, Chennai, 2024" className="input" />
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.featured} onChange={e => setForm(p => ({ ...p, featured: e.target.checked }))} className="rounded" />
@@ -199,8 +199,20 @@ export default function AdminBlog() {
                   <div className="flex items-center gap-1 text-surface-600"><Eye className="w-3 h-3" />{blog.views.toLocaleString()}</div>
                 </td>
                 <td className="table-cell">
-                  <button onClick={() => toggleBlogFeatured(blog.id)} className={`w-8 h-4 rounded-full transition-colors ${blog.featured ? 'bg-gold-500' : 'bg-surface-300'}`}>
-                    <div className="w-3 h-3 bg-white rounded-full mx-auto" />
+                  <button
+                    onClick={() => toggleBlogFeatured(blog.id)}
+                    className={`relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                      blog.featured ? 'bg-gold-500' : 'bg-surface-300'
+                    }`}
+                    role="switch"
+                    aria-checked={blog.featured}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        blog.featured ? 'translate-x-4' : 'translate-x-0'
+                      }`}
+                    />
                   </button>
                 </td>
                 <td className="table-cell">

@@ -1,6 +1,6 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// GS ASSOCIATIONS — COMPLETE MOCK DATA
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// GS ASSOCIATIONS â€” COMPLETE MOCK DATA
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export type PropertyType = 'Apartment' | 'Villa' | 'Plot' | 'Commercial' | 'Row House' | 'Penthouse';
 export type PropertyStatus = 'Available' | 'Sold' | 'Under Offer';
@@ -8,7 +8,7 @@ export type FurnishingStatus = 'Furnished' | 'Semi-Furnished' | 'Unfurnished';
 export type LeadStatus = 'New' | 'Contacted' | 'Qualified' | 'Closed';
 export type UserRole = 'user' | 'admin';
 
-// ─── PROPERTY ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ PROPERTY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface Property {
   id: string;
   title: string;
@@ -41,7 +41,7 @@ export interface Property {
   rera?: string;
 }
 
-// ─── USER ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ USER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface User {
   id: string;
   name: string;
@@ -58,7 +58,7 @@ export interface User {
   isVerified: boolean;
 }
 
-// ─── LEAD ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ LEAD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface Lead {
   id: string;
   userId: string;
@@ -74,7 +74,7 @@ export interface Lead {
   source: 'Property View' | 'Contact Form' | 'Loan Inquiry' | 'Schedule Visit';
 }
 
-// ─── BLOG ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ BLOG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface BlogPost {
   id: string;
   slug: string;
@@ -92,7 +92,7 @@ export interface BlogPost {
   views: number;
 }
 
-// ─── LOAN PROGRAM ────────────────────────────────────────────────────────────
+// â”€â”€â”€ LOAN PROGRAM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface LoanProgram {
   id: string;
   name: string;
@@ -112,9 +112,9 @@ export interface LoanProgram {
   process?: { title: string; desc: string }[];
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // PROPERTIES DATA (20 properties)
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const propertyImages = {
   apt1: [
@@ -161,13 +161,13 @@ const propertyImages = {
 export const properties: Property[] = [
   {
     id: 'prop-001',
-    title: 'Skyline Residences — 3BHK Premium Apartment',
+    title: 'Skyline Residences â€” 3BHK Premium Apartment',
     type: 'Apartment',
     status: 'Available',
     price: 9500000,
-    priceLabel: '₹95 Lakhs',
-    location: 'Gachibowli, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹95 Lakhs',
+    location: 'OMR (Old Mahabalipuram Road), Chennai',
+    city: 'Chennai',
     area: 1820,
     bedrooms: 3,
     bathrooms: 3,
@@ -176,7 +176,7 @@ export const properties: Property[] = [
     totalFloors: 28,
     age: 'New',
     furnishing: 'Semi-Furnished',
-    description: 'Experience luxury living at Skyline Residences, a premium gated community in the heart of Gachibowli — Hyderabad\'s thriving IT corridor. The 3BHK apartment offers expansive city views, high-end finishes, and world-class amenities including a rooftop pool, gym, and co-working spaces. Just minutes from major tech parks and the financial district.',
+    description: 'Experience luxury living at Skyline Residences, a premium gated community in the heart of OMR - Chennai\'s thriving IT corridor. The 3BHK apartment offers expansive city views, high-end finishes, and world-class amenities including a rooftop pool, gym, and co-working spaces. Just minutes from major tech parks and the financial district.',
     features: ['Swimming Pool', 'Gymnasium', 'Rooftop Garden', 'Co-Working Space', 'EV Charging', '24/7 Security', 'Power Backup', 'Clubhouse', 'Children\'s Play Area', 'Landscaped Gardens'],
     images: propertyImages.apt1,
     lat: 17.4401,
@@ -192,13 +192,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-002',
-    title: 'Emerald Heights — 4BHK Luxury Villa',
+    title: 'Emerald Heights â€” 4BHK Luxury Villa',
     type: 'Villa',
     status: 'Available',
     price: 32000000,
-    priceLabel: '₹3.2 Crore',
-    location: 'Jubilee Hills, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹3.2 Crore',
+    location: 'Adyar, Chennai',
+    city: 'Chennai',
     area: 4200,
     bedrooms: 4,
     bathrooms: 4,
@@ -207,7 +207,7 @@ export const properties: Property[] = [
     totalFloors: 2,
     age: '2 Years',
     furnishing: 'Furnished',
-    description: 'A stunning standalone villa in Jubilee Hills — Hyderabad\'s most prestigious residential address. The 4BHK villa features a private pool, home theatre, Italian marble flooring, modular kitchen, and a beautifully landscaped garden. This is an architectural masterpiece designed for the discerning homeowner.',
+    description: 'A stunning standalone villa in Adyar - Chennai\'s most prestigious residential address. The 4BHK villa features a private pool, home theatre, Italian marble flooring, modular kitchen, and a beautifully landscaped garden. This is an architectural masterpiece designed for the discerning homeowner.',
     features: ['Private Pool', 'Home Theatre', 'Smart Home System', 'Italian Marble Flooring', 'Modular Kitchen', 'Landscaped Garden', 'Staff Quarters', 'Solar Panels', 'Rainwater Harvesting', 'CCTV Surveillance'],
     images: propertyImages.villa1,
     lat: 17.4302,
@@ -223,13 +223,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-003',
-    title: 'Prestige Gateway — 2BHK Modern Apartment',
+    title: 'Prestige Gateway â€” 2BHK Modern Apartment',
     type: 'Apartment',
     status: 'Available',
     price: 5800000,
-    priceLabel: '₹58 Lakhs',
-    location: 'Kondapur, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹58 Lakhs',
+    location: 'Velachery, Chennai',
+    city: 'Chennai',
     area: 1150,
     bedrooms: 2,
     bathrooms: 2,
@@ -238,7 +238,7 @@ export const properties: Property[] = [
     totalFloors: 15,
     age: 'New',
     furnishing: 'Unfurnished',
-    description: 'Prestige Gateway offers smartly designed 2BHK apartments in Kondapur — one of Hyderabad\'s most sought-after localities. Ideal for first-time homebuyers and young professionals. The complex offers excellent connectivity to Hitech City and Gachibowli.',
+    description: 'Prestige Gateway offers smartly designed 2BHK apartments in Velachery - one of Chennai\'s most sought-after localities. Ideal for first-time homebuyers and young professionals. The complex offers excellent connectivity to Tidel Park and Sholinganallur.',
     features: ['Gymnasium', 'Swimming Pool', 'Children\'s Play Area', 'Club House', 'Power Backup', '24/7 Security', 'Visitor Parking', 'Landscaped Garden'],
     images: propertyImages.apt2,
     lat: 17.4609,
@@ -254,13 +254,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-004',
-    title: 'GreenFields Plot — 250 Sq Yd Premium Plot',
+    title: 'GreenFields Plot â€” 250 Sq Yd Premium Plot',
     type: 'Plot',
     status: 'Available',
     price: 7500000,
-    priceLabel: '₹75 Lakhs',
-    location: 'Kompally, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹75 Lakhs',
+    location: 'Ambattur, Chennai',
+    city: 'Chennai',
     area: 2250,
     bedrooms: 0,
     bathrooms: 0,
@@ -285,13 +285,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-005',
-    title: 'The Pinnacle — Penthouse with Panoramic Views',
+    title: 'The Pinnacle â€” Penthouse with Panoramic Views',
     type: 'Penthouse',
     status: 'Available',
     price: 58000000,
-    priceLabel: '₹5.8 Crore',
-    location: 'Financial District, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹5.8 Crore',
+    location: 'Perungudi, Chennai',
+    city: 'Chennai',
     area: 6800,
     bedrooms: 5,
     bathrooms: 5,
@@ -300,8 +300,8 @@ export const properties: Property[] = [
     totalFloors: 42,
     age: 'New',
     furnishing: 'Furnished',
-    description: 'The crown jewel of Hyderabad\'s skyline. This duplex penthouse on the 42nd floor offers 360-degree views of the city, a private terrace with a plunge pool, a butler\'s pantry, home automation, and bespoke interiors by a renowned design firm. A rare trophy asset.',
-    features: ['Private Terrace Pool', 'Butler\'s Pantry', 'Home Automation', 'Private Lift Lobby', '360° Views', 'Wine Cellar', 'Bespoke Interiors', 'Smart Glass Windows', 'Concierge Service', 'Helipad Access'],
+    description: 'The crown jewel of Chennai\'s skyline. This duplex penthouse on the 42nd floor offers 360-degree views of the city, a private terrace with a plunge pool, a butler\'s pantry, home automation, and bespoke interiors by a renowned design firm. A rare trophy asset.',
+    features: ['Private Terrace Pool', 'Butler\'s Pantry', 'Home Automation', 'Private Lift Lobby', '360Â° Views', 'Wine Cellar', 'Bespoke Interiors', 'Smart Glass Windows', 'Concierge Service', 'Helipad Access'],
     images: propertyImages.pent,
     lat: 17.4129,
     lng: 78.3639,
@@ -316,13 +316,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-006',
-    title: 'Business Hub — Premium Office Space',
+    title: 'Business Hub â€” Premium Office Space',
     type: 'Commercial',
     status: 'Available',
     price: 18500000,
-    priceLabel: '₹1.85 Crore',
-    location: 'HITEC City, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹1.85 Crore',
+    location: 'Tidel Park, Chennai',
+    city: 'Chennai',
     area: 3200,
     bedrooms: 0,
     bathrooms: 6,
@@ -331,7 +331,7 @@ export const properties: Property[] = [
     totalFloors: 20,
     age: '3 Years',
     furnishing: 'Furnished',
-    description: 'A Grade-A commercial office space in HITEC City — Hyderabad\'s premier tech hub. Features modular workstations, fiber-optic connectivity, centralized HVAC, and a fully equipped boardroom. Ideal for IT companies, startups, and MNCs. Close to Mindspace and Raheja Mindspace tech parks.',
+    description: 'A Grade-A commercial office space in Tidel Park - Chennai\'s premier tech hub. Features modular workstations, fiber-optic connectivity, centralized HVAC, and a fully equipped boardroom. Ideal for IT companies, startups, and MNCs. Close to SIPCOT IT Park and DLF Cybercity.',
     features: ['Grade-A Building', 'Modular Workstations', 'Fiber Optic Internet', 'Central HVAC', 'Boardroom', 'Cafeteria', 'Ample Parking', 'DG Power Backup', 'Access Control', 'CCTV Surveillance'],
     images: propertyImages.comm,
     lat: 17.4477,
@@ -347,13 +347,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-007',
-    title: 'Serene Palms — 3BHK Row House',
+    title: 'Serene Palms â€” 3BHK Row House',
     type: 'Row House',
     status: 'Available',
     price: 14500000,
-    priceLabel: '₹1.45 Crore',
-    location: 'Manikonda, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹1.45 Crore',
+    location: 'Pallavaram, Chennai',
+    city: 'Chennai',
     area: 2800,
     bedrooms: 3,
     bathrooms: 3,
@@ -362,7 +362,7 @@ export const properties: Property[] = [
     totalFloors: 2,
     age: '1 Year',
     furnishing: 'Semi-Furnished',
-    description: 'Spacious row houses with private gardens in the peaceful Manikonda neighborhood. These independent units offer the best of both worlds — privacy of a villa with the security of a gated community. Walking distance from DLF Cyber City.',
+    description: 'Spacious row houses with private gardens in the peaceful Anna Nagar neighborhood. These independent units offer the best of both worlds â€” privacy of a villa with the security of a gated community. Walking distance from DLF Cyber City.',
     features: ['Private Garden', 'Gated Community', 'Terrace', 'Gymnasium', 'Children\'s Park', '24/7 Security', 'Power Backup', 'Club House'],
     images: propertyImages.row,
     lat: 17.3950,
@@ -378,13 +378,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-008',
-    title: 'Lotus Gardens — 2BHK Affordable Apartment',
+    title: 'Lotus Gardens â€” 2BHK Affordable Apartment',
     type: 'Apartment',
     status: 'Available',
     price: 3800000,
-    priceLabel: '₹38 Lakhs',
-    location: 'Miyapur, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹38 Lakhs',
+    location: 'Avadi, Chennai',
+    city: 'Chennai',
     area: 920,
     bedrooms: 2,
     bathrooms: 2,
@@ -393,7 +393,7 @@ export const properties: Property[] = [
     totalFloors: 10,
     age: '4 Years',
     furnishing: 'Unfurnished',
-    description: 'Affordable and well-planned 2BHK apartments in Miyapur. Great connectivity via the Metro Rail. Suitable for middle-income families and investors looking for rental yield. The society has all essential amenities.',
+    description: 'Affordable and well-planned 2BHK apartments in Tambaram. Great connectivity via the Metro Rail. Suitable for middle-income families and investors looking for rental yield. The society has all essential amenities.',
     features: ['Metro Connectivity', 'Gymnasium', 'Swimming Pool', 'Children\'s Play Area', 'Power Backup', '24/7 Security', 'Visitor Parking'],
     images: propertyImages.apt2,
     lat: 17.4990,
@@ -409,13 +409,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-009',
-    title: 'Crystal Villas — 5BHK Ultra Luxury Villa',
+    title: 'Crystal Villas â€” 5BHK Ultra Luxury Villa',
     type: 'Villa',
     status: 'Available',
     price: 75000000,
-    priceLabel: '₹7.5 Crore',
-    location: 'Banjara Hills, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹7.5 Crore',
+    location: 'Nungambakkam, Chennai',
+    city: 'Chennai',
     area: 8500,
     bedrooms: 5,
     bathrooms: 6,
@@ -424,7 +424,7 @@ export const properties: Property[] = [
     totalFloors: 3,
     age: 'New',
     furnishing: 'Furnished',
-    description: 'Opulent 5BHK villa in Banjara Hills — the pinnacle of luxury residential living. Three floors of living space with an infinity pool, gym, spa room, home cinema, and a rooftop sky lounge. This villa is designed for those who demand the absolute best.',
+    description: 'Opulent 5BHK villa in Boat Club â€” the pinnacle of luxury residential living. Three floors of living space with an infinity pool, gym, spa room, home cinema, and a rooftop sky lounge. This villa is designed for those who demand the absolute best.',
     features: ['Infinity Pool', 'Spa Room', 'Home Cinema', 'Sky Lounge', 'Smart Home Automation', 'EV Charging', 'Chef\'s Kitchen', 'Wine Room', 'Panic Room', 'Helicopter Pad'],
     images: propertyImages.villa2,
     lat: 17.4139,
@@ -440,13 +440,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-010',
-    title: 'Metro Towers — 1BHK Investment Property',
+    title: 'Metro Towers â€” 1BHK Investment Property',
     type: 'Apartment',
     status: 'Available',
     price: 2800000,
-    priceLabel: '₹28 Lakhs',
-    location: 'LB Nagar, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹28 Lakhs',
+    location: 'Medavakkam, Chennai',
+    city: 'Chennai',
     area: 620,
     bedrooms: 1,
     bathrooms: 1,
@@ -471,13 +471,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-011',
-    title: 'Tech Park Heights — 3BHK Smart Home',
+    title: 'Tech Park Heights â€” 3BHK Smart Home',
     type: 'Apartment',
     status: 'Under Offer',
     price: 11500000,
-    priceLabel: '₹1.15 Crore',
-    location: 'Nanakramguda, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹1.15 Crore',
+    location: 'Sholinganallur, Chennai',
+    city: 'Chennai',
     area: 2100,
     bedrooms: 3,
     bathrooms: 3,
@@ -486,7 +486,7 @@ export const properties: Property[] = [
     totalFloors: 30,
     age: 'New',
     furnishing: 'Semi-Furnished',
-    description: 'Smart home integrated 3BHK at Nanakramguda — the emerging financial district. Equipped with Alexa-enabled controls, energy-efficient appliances, solar water heating, and a building management system. Direct walkway to the upcoming Nanakramguda business district.',
+    description: 'Smart home integrated 3BHK at Nanakramguda â€” the emerging financial district. Equipped with Alexa-enabled controls, energy-efficient appliances, solar water heating, and a building management system. Direct walkway to the upcoming Nanakramguda business district.',
     features: ['Smart Home (Alexa)', 'Solar Water Heating', 'EV Charging', 'Rooftop Pool', 'Co-Working Lounge', 'Concierge', 'Smart Locks', 'Video Door Phone', 'Gym', 'Jogging Track'],
     images: propertyImages.apt2,
     lat: 17.4179,
@@ -502,13 +502,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-012',
-    title: 'Commercial Arcade — Retail + Office Complex',
+    title: 'Commercial Arcade â€” Retail + Office Complex',
     type: 'Commercial',
     status: 'Available',
     price: 45000000,
-    priceLabel: '₹4.5 Crore',
-    location: 'Kukatpally, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹4.5 Crore',
+    location: 'Anna Nagar, Chennai',
+    city: 'Chennai',
     area: 7500,
     bedrooms: 0,
     bathrooms: 10,
@@ -533,13 +533,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-013',
-    title: 'Sunrise Villas — 4BHK Gated Community Villa',
+    title: 'Sunrise Villas â€” 4BHK Gated Community Villa',
     type: 'Villa',
     status: 'Available',
     price: 24000000,
-    priceLabel: '₹2.4 Crore',
-    location: 'Shamshabad, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹2.4 Crore',
+    location: 'Tambaram, Chennai',
+    city: 'Chennai',
     area: 3800,
     bedrooms: 4,
     bathrooms: 4,
@@ -548,7 +548,7 @@ export const properties: Property[] = [
     totalFloors: 2,
     age: '3 Years',
     furnishing: 'Semi-Furnished',
-    description: 'Well-appointed 4BHK villa in Sunrise Villas — a premium plotted development near the international airport. Excellent connectivity via the Outer Ring Road. The community features a clubhouse, swimming pool, and landscaped gardens.',
+    description: 'Well-appointed 4BHK villa in Sunrise Villas â€” a premium plotted development near the international airport. Excellent connectivity via the Outer Ring Road. The community features a clubhouse, swimming pool, and landscaped gardens.',
     features: ['Gated Community', 'Club House', 'Swimming Pool', 'Landscaped Gardens', 'Jogging Track', '24/7 Security', 'Power Backup', 'Water Treatment Plant'],
     images: propertyImages.villa2,
     lat: 17.2543,
@@ -564,13 +564,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-014',
-    title: 'GS Icon — 500 Sq Yd Investment Plot',
+    title: 'GS Icon â€” 500 Sq Yd Investment Plot',
     type: 'Plot',
     status: 'Available',
     price: 15000000,
-    priceLabel: '₹1.5 Crore',
-    location: 'Maheshwaram, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹1.5 Crore',
+    location: 'Mahindra City, Chennai',
+    city: 'Chennai',
     area: 4500,
     bedrooms: 0,
     bathrooms: 0,
@@ -595,13 +595,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-015',
-    title: 'The Reserve — 3BHK Lake View Apartment',
+    title: 'The Reserve â€” 3BHK Lake View Apartment',
     type: 'Apartment',
     status: 'Available',
     price: 16500000,
-    priceLabel: '₹1.65 Crore',
-    location: 'Narsingi, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹1.65 Crore',
+    location: 'Perambur, Chennai',
+    city: 'Chennai',
     area: 2450,
     bedrooms: 3,
     bathrooms: 3,
@@ -610,7 +610,7 @@ export const properties: Property[] = [
     totalFloors: 22,
     age: 'New',
     furnishing: 'Semi-Furnished',
-    description: 'Premium lake-facing apartments with stunning panoramic views. The Reserve is a boutique high-rise offering just 4 apartments per floor, ensuring exclusivity and privacy. Each unit opens to a large balcony overlooking Narsingi lake.',
+    description: 'Premium lake-facing apartments with stunning panoramic views. The Reserve is a boutique high-rise offering just 4 apartments per floor, ensuring exclusivity and privacy. Each unit opens to a large balcony overlooking Pallavaram lake.',
     features: ['Lake View', 'Private Lift Lobby', 'Infinity Pool', 'Spa', 'Concierge', 'EV Charging', 'Smart Home', 'Dog Park', 'Herb Garden', 'Rooftop Bar'],
     images: propertyImages.pent,
     lat: 17.3779,
@@ -626,13 +626,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-016',
-    title: 'Heritage Homes — 2BHK Row House',
+    title: 'Heritage Homes â€” 2BHK Row House',
     type: 'Row House',
     status: 'Sold',
     price: 8500000,
-    priceLabel: '₹85 Lakhs',
-    location: 'Uppal, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹85 Lakhs',
+    location: 'Chromepet, Chennai',
+    city: 'Chennai',
     area: 1600,
     bedrooms: 2,
     bathrooms: 2,
@@ -641,7 +641,7 @@ export const properties: Property[] = [
     totalFloors: 2,
     age: '6 Years',
     furnishing: 'Unfurnished',
-    description: 'Well-maintained row house in a mature gated community in Uppal. Near to major IT parks in the East Hyderabad corridor. Excellent rental demand from IT professionals. Metro connectivity within 500 meters.',
+    description: 'Well-maintained row house in a mature gated community in Uppal. Near to major IT parks in the South Chennai corridor. Excellent rental demand from IT professionals. Metro connectivity within 500 meters.',
     features: ['Gated Community', 'CCTV', '24/7 Security', 'Power Backup', 'Rain Water Harvesting', 'Solar Lighting', 'Community Hall'],
     images: propertyImages.row,
     lat: 17.4049,
@@ -657,13 +657,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-017',
-    title: 'GS Grand — 4BHK Duplex Apartment',
+    title: 'GS Grand â€” 4BHK Duplex Apartment',
     type: 'Apartment',
     status: 'Available',
     price: 22000000,
-    priceLabel: '₹2.2 Crore',
-    location: 'Kokapet, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹2.2 Crore',
+    location: 'Porur, Chennai',
+    city: 'Chennai',
     area: 3900,
     bedrooms: 4,
     bathrooms: 4,
@@ -672,7 +672,7 @@ export const properties: Property[] = [
     totalFloors: 28,
     age: 'New',
     furnishing: 'Furnished',
-    description: 'Magnificent 4BHK duplex apartment spread across 2 floors in Kokapet — Hyderabad\'s rising luxury destination. Features a double-height living room, private terrace, and premium imported fittings throughout. The complex boasts a 7-tier security system.',
+    description: 'Magnificent 4BHK duplex apartment spread across 2 floors in Porur - Chennai\'s rising luxury destination. Features a double-height living room, private terrace, and premium imported fittings throughout. The complex boasts a 7-tier security system.',
     features: ['Double-Height Living Room', 'Private Terrace', 'Duplex Layout', 'Imported Fittings', '7-Tier Security', 'Olympic Pool', 'Sports Court', 'Concierge', 'Valet Parking', 'Spa'],
     images: propertyImages.pent,
     lat: 17.4009,
@@ -688,13 +688,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-018',
-    title: 'TechSpaces — Premium Coworking & Office',
+    title: 'TechSpaces â€” Premium Coworking & Office',
     type: 'Commercial',
     status: 'Available',
     price: 28000000,
-    priceLabel: '₹2.8 Crore',
-    location: 'Raidurgam, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹2.8 Crore',
+    location: 'Guindy, Chennai',
+    city: 'Chennai',
     area: 5000,
     bedrooms: 0,
     bathrooms: 8,
@@ -703,8 +703,8 @@ export const properties: Property[] = [
     totalFloors: 10,
     age: '1 Year',
     furnishing: 'Furnished',
-    description: 'A modern office space designed for the future of work. TechSpaces at Raidurgam offers open-plan zones, private cabins, conference rooms with AV systems, a café, and a gaming lounge. Plug-and-play setup for IT and startup companies.',
-    features: ['Plug & Play Setup', 'Conference Rooms', 'AV Systems', 'Café', 'Gaming Lounge', 'High-Speed Internet', 'Reception Services', 'Hot Desks', 'Private Cabins', 'Event Space'],
+    description: 'A modern office space designed for the future of work. TechSpaces at Raidurgam offers open-plan zones, private cabins, conference rooms with AV systems, a cafÃ©, and a gaming lounge. Plug-and-play setup for IT and startup companies.',
+    features: ['Plug & Play Setup', 'Conference Rooms', 'AV Systems', 'CafÃ©', 'Gaming Lounge', 'High-Speed Internet', 'Reception Services', 'Hot Desks', 'Private Cabins', 'Event Space'],
     images: propertyImages.comm,
     lat: 17.4249,
     lng: 78.3489,
@@ -719,13 +719,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-019',
-    title: 'Azure Sky — 3BHK Premium Apartment',
+    title: 'Azure Sky â€” 3BHK Premium Apartment',
     type: 'Apartment',
     status: 'Available',
     price: 13500000,
-    priceLabel: '₹1.35 Crore',
-    location: 'Puppalaguda, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹1.35 Crore',
+    location: 'Pallikaranai, Chennai',
+    city: 'Chennai',
     area: 2200,
     bedrooms: 3,
     bathrooms: 3,
@@ -750,13 +750,13 @@ export const properties: Property[] = [
   },
   {
     id: 'prop-020',
-    title: 'Golden Acres — 1 Acre Farm Land with Bungalow',
+    title: 'Golden Acres â€” 1 Acre Farm Land with Bungalow',
     type: 'Villa',
     status: 'Available',
     price: 120000000,
-    priceLabel: '₹12 Crore',
-    location: 'Chevella, Hyderabad',
-    city: 'Hyderabad',
+    priceLabel: 'â‚¹12 Crore',
+    location: 'Sriperumbudur, Chennai',
+    city: 'Chennai',
     area: 43560,
     bedrooms: 6,
     bathrooms: 7,
@@ -765,7 +765,7 @@ export const properties: Property[] = [
     totalFloors: 2,
     age: '8 Years',
     furnishing: 'Furnished',
-    description: 'A rare 1-acre farmhouse estate on the Hyderabad outskirts with a fully renovated 6-bedroom bungalow. Organic farm, fruit orchard, private lake, horse stable, and staff quarters. A weekend retreat or a long-term lifestyle investment.',
+    description: 'A rare 1-acre farmhouse estate on the Chennai outskirts with a fully renovated 6-bedroom bungalow. Organic farm, fruit orchard, private lake, horse stable, and staff quarters. A weekend retreat or a long-term lifestyle investment.',
     features: ['1 Acre Land', 'Organic Farm', 'Fruit Orchard', 'Private Lake', 'Horse Stable', 'Staff Quarters', 'Borewell', 'Solar Power', 'Swimming Pool', 'Outdoor Kitchen'],
     images: propertyImages.villa2,
     lat: 17.3109,
@@ -781,137 +781,137 @@ export const properties: Property[] = [
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // USERS DATA (20 users)
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const users: User[] = [
-  { id: 'user-001', name: 'Arjun Mehta', email: 'arjun.mehta@gmail.com', phone: '+91 99001 12345', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=arjun', joinedDate: '2024-01-05', savedProperties: ['prop-001', 'prop-005'], viewedProperties: ['prop-001', 'prop-002', 'prop-005', 'prop-009'], budget: '₹1-2 Crore', location: 'Gachibowli', lookingFor: 'Apartment', isVerified: true },
-  { id: 'user-002', name: 'Sneha Kapoor', email: 'sneha.kapoor@outlook.com', phone: '+91 98112 67890', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sneha', joinedDate: '2024-01-08', savedProperties: ['prop-002', 'prop-009'], viewedProperties: ['prop-002', 'prop-009', 'prop-017'], budget: '₹2-5 Crore', location: 'Jubilee Hills', lookingFor: 'Villa', isVerified: true },
-  { id: 'user-003', name: 'Rahul Joshi', email: 'rahul.joshi@techcorp.in', phone: '+91 77001 54321', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=rahul', joinedDate: '2024-01-10', savedProperties: ['prop-003'], viewedProperties: ['prop-003', 'prop-008', 'prop-010'], budget: '₹40-80 Lakhs', location: 'Kondapur', lookingFor: 'Apartment', isVerified: true },
-  { id: 'user-004', name: 'Pooja Sharma', email: 'pooja.sharma@infosys.com', phone: '+91 88456 11223', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=pooja', joinedDate: '2024-01-12', savedProperties: ['prop-015', 'prop-019'], viewedProperties: ['prop-015', 'prop-017', 'prop-019'], budget: '₹1-2 Crore', location: 'Narsingi', lookingFor: 'Apartment', isVerified: true },
-  { id: 'user-005', name: 'Vikram Nair', email: 'vikram.nair@wipro.com', phone: '+91 90001 33445', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=vikram', joinedDate: '2024-01-15', savedProperties: ['prop-006', 'prop-012', 'prop-018'], viewedProperties: ['prop-006', 'prop-012', 'prop-018'], budget: '₹3-8 Crore', location: 'HITEC City', lookingFor: 'Commercial', isVerified: false },
-  { id: 'user-006', name: 'Ananya Reddy', email: 'ananya.reddy@gmail.com', phone: '+91 91234 56789', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ananya', joinedDate: '2024-01-18', savedProperties: ['prop-004', 'prop-014'], viewedProperties: ['prop-004', 'prop-007', 'prop-013', 'prop-014'], budget: '₹60-150 Lakhs', location: 'Kompally', lookingFor: 'Plot', isVerified: true },
-  { id: 'user-007', name: 'Karthik Iyer', email: 'karthik.iyer@tcs.com', phone: '+91 82345 67890', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=karthik', joinedDate: '2024-01-20', savedProperties: ['prop-001', 'prop-011'], viewedProperties: ['prop-001', 'prop-011', 'prop-019'], budget: '₹80 Lakhs-1.5 Crore', location: 'Gachibowli', lookingFor: 'Apartment', isVerified: true },
-  { id: 'user-008', name: 'Divya Menon', email: 'divya.menon@hcl.in', phone: '+91 93456 78901', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=divya', joinedDate: '2024-01-22', savedProperties: ['prop-007'], viewedProperties: ['prop-007', 'prop-013', 'prop-016'], budget: '₹80 Lakhs-1.5 Crore', location: 'Manikonda', lookingFor: 'Row House', isVerified: true },
-  { id: 'user-009', name: 'Sanjay Gupta', email: 'sanjay.gupta@razorpay.com', phone: '+91 94567 89012', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sanjay', joinedDate: '2024-01-25', savedProperties: ['prop-005', 'prop-020'], viewedProperties: ['prop-005', 'prop-009', 'prop-017', 'prop-020'], budget: '₹5+ Crore', location: 'Banjara Hills', lookingFor: 'Villa', isVerified: true },
-  { id: 'user-010', name: 'Meera Pillai', email: 'meera.pillai@swiggy.com', phone: '+91 95678 90123', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=meera', joinedDate: '2024-01-28', savedProperties: ['prop-003', 'prop-008'], viewedProperties: ['prop-003', 'prop-008', 'prop-010'], budget: '₹40-70 Lakhs', location: 'Miyapur', lookingFor: 'Apartment', isVerified: false },
-  { id: 'user-011', name: 'Aditya Kumar', email: 'aditya.kumar@amazon.in', phone: '+91 96789 01234', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=aditya', joinedDate: '2024-02-01', savedProperties: ['prop-015'], viewedProperties: ['prop-015', 'prop-017', 'prop-005'], budget: '₹2-4 Crore', location: 'Kokapet', lookingFor: 'Apartment', isVerified: true },
-  { id: 'user-012', name: 'Kavitha Rao', email: 'kavitha.rao@microsoft.com', phone: '+91 97890 12345', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=kavitha', joinedDate: '2024-02-03', savedProperties: ['prop-002', 'prop-013'], viewedProperties: ['prop-002', 'prop-013', 'prop-020'], budget: '₹2-3 Crore', location: 'Shamshabad', lookingFor: 'Villa', isVerified: true },
-  { id: 'user-013', name: 'Nikhil Singh', email: 'nikhil.singh@zepto.com', phone: '+91 98901 23456', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nikhil', joinedDate: '2024-02-05', savedProperties: ['prop-018'], viewedProperties: ['prop-006', 'prop-012', 'prop-018'], budget: '₹2-4 Crore', location: 'Raidurgam', lookingFor: 'Commercial', isVerified: true },
-  { id: 'user-014', name: 'Lakshmi Venkat', email: 'lakshmi.venkat@hdfc.com', phone: '+91 99012 34567', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=lakshmi', joinedDate: '2024-02-08', savedProperties: ['prop-004'], viewedProperties: ['prop-004', 'prop-014'], budget: '₹50-100 Lakhs', location: 'Maheshwaram', lookingFor: 'Plot', isVerified: true },
-  { id: 'user-015', name: 'Rohit Bajaj', email: 'rohit.bajaj@paytm.com', phone: '+91 90123 45678', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=rohit', joinedDate: '2024-02-10', savedProperties: ['prop-011', 'prop-019'], viewedProperties: ['prop-011', 'prop-019', 'prop-001'], budget: '₹1-1.5 Crore', location: 'Nanakramguda', lookingFor: 'Apartment', isVerified: false },
-  { id: 'user-016', name: 'Preethi Iyer', email: 'preethi.iyer@ola.com', phone: '+91 91234 56780', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=preethi', joinedDate: '2024-02-12', savedProperties: ['prop-007', 'prop-016'], viewedProperties: ['prop-007', 'prop-016', 'prop-013'], budget: '₹80 Lakhs-1.5 Crore', location: 'Uppal', lookingFor: 'Row House', isVerified: true },
-  { id: 'user-017', name: 'Ashwin Prakash', email: 'ashwin.prakash@groww.in', phone: '+91 92345 67891', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ashwin', joinedDate: '2024-02-14', savedProperties: ['prop-009'], viewedProperties: ['prop-009', 'prop-020', 'prop-005'], budget: '₹5+ Crore', location: 'Banjara Hills', lookingFor: 'Villa', isVerified: true },
-  { id: 'user-018', name: 'Sunita Desai', email: 'sunita.desai@icici.com', phone: '+91 93456 78902', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sunita', joinedDate: '2024-02-16', savedProperties: ['prop-001', 'prop-003'], viewedProperties: ['prop-001', 'prop-003', 'prop-011'], budget: '₹60-100 Lakhs', location: 'Kondapur', lookingFor: 'Apartment', isVerified: true },
-  { id: 'user-019', name: 'Manohar Reddy', email: 'manohar.reddy@sbi.co.in', phone: '+91 94567 89013', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=manohar', joinedDate: '2024-02-18', savedProperties: ['prop-014'], viewedProperties: ['prop-004', 'prop-014'], budget: '₹1-2 Crore', location: 'Kompally', lookingFor: 'Plot', isVerified: false },
-  { id: 'user-020', name: 'Deepa Krishnan', email: 'deepa.krishnan@accenture.com', phone: '+91 95678 90124', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=deepa', joinedDate: '2024-02-20', savedProperties: ['prop-015', 'prop-017'], viewedProperties: ['prop-015', 'prop-017', 'prop-009'], budget: '₹1.5-3 Crore', location: 'Narsingi', lookingFor: 'Apartment', isVerified: true },
+  { id: 'user-001', name: 'Arjun Mehta', email: 'arjun.mehta@gmail.com', phone: '+91 99001 12345', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=arjun', joinedDate: '2024-01-05', savedProperties: ['prop-001', 'prop-005'], viewedProperties: ['prop-001', 'prop-002', 'prop-005', 'prop-009'], budget: 'â‚¹1-2 Crore', location: 'Sholinganallur', lookingFor: 'Apartment', isVerified: true },
+  { id: 'user-002', name: 'Sneha Kapoor', email: 'sneha.kapoor@outlook.com', phone: '+91 98112 67890', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sneha', joinedDate: '2024-01-08', savedProperties: ['prop-002', 'prop-009'], viewedProperties: ['prop-002', 'prop-009', 'prop-017'], budget: 'â‚¹2-5 Crore', location: 'Poes Garden', lookingFor: 'Villa', isVerified: true },
+  { id: 'user-003', name: 'Rahul Joshi', email: 'rahul.joshi@techcorp.in', phone: '+91 77001 54321', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=rahul', joinedDate: '2024-01-10', savedProperties: ['prop-003'], viewedProperties: ['prop-003', 'prop-008', 'prop-010'], budget: 'â‚¹40-80 Lakhs', location: 'Thoraipakkam', lookingFor: 'Apartment', isVerified: true },
+  { id: 'user-004', name: 'Pooja Sharma', email: 'pooja.sharma@infosys.com', phone: '+91 88456 11223', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=pooja', joinedDate: '2024-01-12', savedProperties: ['prop-015', 'prop-019'], viewedProperties: ['prop-015', 'prop-017', 'prop-019'], budget: 'â‚¹1-2 Crore', location: 'Pallavaram', lookingFor: 'Apartment', isVerified: true },
+  { id: 'user-005', name: 'Vikram Nair', email: 'vikram.nair@wipro.com', phone: '+91 90001 33445', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=vikram', joinedDate: '2024-01-15', savedProperties: ['prop-006', 'prop-012', 'prop-018'], viewedProperties: ['prop-006', 'prop-012', 'prop-018'], budget: 'â‚¹3-8 Crore', location: 'Taramani', lookingFor: 'Commercial', isVerified: false },
+  { id: 'user-006', name: 'Ananya Reddy', email: 'ananya.reddy@gmail.com', phone: '+91 91234 56789', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ananya', joinedDate: '2024-01-18', savedProperties: ['prop-004', 'prop-014'], viewedProperties: ['prop-004', 'prop-007', 'prop-013', 'prop-014'], budget: 'â‚¹60-150 Lakhs', location: 'Kompally', lookingFor: 'Plot', isVerified: true },
+  { id: 'user-007', name: 'Karthik Iyer', email: 'karthik.iyer@tcs.com', phone: '+91 82345 67890', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=karthik', joinedDate: '2024-01-20', savedProperties: ['prop-001', 'prop-011'], viewedProperties: ['prop-001', 'prop-011', 'prop-019'], budget: 'â‚¹80 Lakhs-1.5 Crore', location: 'Sholinganallur', lookingFor: 'Apartment', isVerified: true },
+  { id: 'user-008', name: 'Divya Menon', email: 'divya.menon@hcl.in', phone: '+91 93456 78901', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=divya', joinedDate: '2024-01-22', savedProperties: ['prop-007'], viewedProperties: ['prop-007', 'prop-013', 'prop-016'], budget: 'â‚¹80 Lakhs-1.5 Crore', location: 'Anna Nagar', lookingFor: 'Row House', isVerified: true },
+  { id: 'user-009', name: 'Sanjay Gupta', email: 'sanjay.gupta@razorpay.com', phone: '+91 94567 89012', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sanjay', joinedDate: '2024-01-25', savedProperties: ['prop-005', 'prop-020'], viewedProperties: ['prop-005', 'prop-009', 'prop-017', 'prop-020'], budget: 'â‚¹5+ Crore', location: 'Boat Club', lookingFor: 'Villa', isVerified: true },
+  { id: 'user-010', name: 'Meera Pillai', email: 'meera.pillai@swiggy.com', phone: '+91 95678 90123', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=meera', joinedDate: '2024-01-28', savedProperties: ['prop-003', 'prop-008'], viewedProperties: ['prop-003', 'prop-008', 'prop-010'], budget: 'â‚¹40-70 Lakhs', location: 'Tambaram', lookingFor: 'Apartment', isVerified: false },
+  { id: 'user-011', name: 'Aditya Kumar', email: 'aditya.kumar@amazon.in', phone: '+91 96789 01234', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=aditya', joinedDate: '2024-02-01', savedProperties: ['prop-015'], viewedProperties: ['prop-015', 'prop-017', 'prop-005'], budget: 'â‚¹2-4 Crore', location: 'Siruseri', lookingFor: 'Apartment', isVerified: true },
+  { id: 'user-012', name: 'Kavitha Rao', email: 'kavitha.rao@microsoft.com', phone: '+91 97890 12345', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=kavitha', joinedDate: '2024-02-03', savedProperties: ['prop-002', 'prop-013'], viewedProperties: ['prop-002', 'prop-013', 'prop-020'], budget: 'â‚¹2-3 Crore', location: 'Shamshabad', lookingFor: 'Villa', isVerified: true },
+  { id: 'user-013', name: 'Nikhil Singh', email: 'nikhil.singh@zepto.com', phone: '+91 98901 23456', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nikhil', joinedDate: '2024-02-05', savedProperties: ['prop-018'], viewedProperties: ['prop-006', 'prop-012', 'prop-018'], budget: 'â‚¹2-4 Crore', location: 'Raidurgam', lookingFor: 'Commercial', isVerified: true },
+  { id: 'user-014', name: 'Lakshmi Venkat', email: 'lakshmi.venkat@hdfc.com', phone: '+91 99012 34567', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=lakshmi', joinedDate: '2024-02-08', savedProperties: ['prop-004'], viewedProperties: ['prop-004', 'prop-014'], budget: 'â‚¹50-100 Lakhs', location: 'Maheshwaram', lookingFor: 'Plot', isVerified: true },
+  { id: 'user-015', name: 'Rohit Bajaj', email: 'rohit.bajaj@paytm.com', phone: '+91 90123 45678', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=rohit', joinedDate: '2024-02-10', savedProperties: ['prop-011', 'prop-019'], viewedProperties: ['prop-011', 'prop-019', 'prop-001'], budget: 'â‚¹1-1.5 Crore', location: 'Nanakramguda', lookingFor: 'Apartment', isVerified: false },
+  { id: 'user-016', name: 'Preethi Iyer', email: 'preethi.iyer@ola.com', phone: '+91 91234 56780', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=preethi', joinedDate: '2024-02-12', savedProperties: ['prop-007', 'prop-016'], viewedProperties: ['prop-007', 'prop-016', 'prop-013'], budget: 'â‚¹80 Lakhs-1.5 Crore', location: 'Uppal', lookingFor: 'Row House', isVerified: true },
+  { id: 'user-017', name: 'Ashwin Prakash', email: 'ashwin.prakash@groww.in', phone: '+91 92345 67891', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ashwin', joinedDate: '2024-02-14', savedProperties: ['prop-009'], viewedProperties: ['prop-009', 'prop-020', 'prop-005'], budget: 'â‚¹5+ Crore', location: 'Boat Club', lookingFor: 'Villa', isVerified: true },
+  { id: 'user-018', name: 'Sunita Desai', email: 'sunita.desai@icici.com', phone: '+91 93456 78902', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sunita', joinedDate: '2024-02-16', savedProperties: ['prop-001', 'prop-003'], viewedProperties: ['prop-001', 'prop-003', 'prop-011'], budget: 'â‚¹60-100 Lakhs', location: 'Thoraipakkam', lookingFor: 'Apartment', isVerified: true },
+  { id: 'user-019', name: 'Manohar Reddy', email: 'manohar.reddy@sbi.co.in', phone: '+91 94567 89013', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=manohar', joinedDate: '2024-02-18', savedProperties: ['prop-014'], viewedProperties: ['prop-004', 'prop-014'], budget: 'â‚¹1-2 Crore', location: 'Kompally', lookingFor: 'Plot', isVerified: false },
+  { id: 'user-020', name: 'Deepa Krishnan', email: 'deepa.krishnan@accenture.com', phone: '+91 95678 90124', role: 'user', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=deepa', joinedDate: '2024-02-20', savedProperties: ['prop-015', 'prop-017'], viewedProperties: ['prop-015', 'prop-017', 'prop-009'], budget: 'â‚¹1.5-3 Crore', location: 'Pallavaram', lookingFor: 'Apartment', isVerified: true },
   // Admin account
   { id: 'admin-001', name: 'GS Admin', email: 'admin@gsassociations.com', phone: '+91 40 6666 7777', role: 'admin', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=gsadmin', joinedDate: '2023-01-01', savedProperties: [], viewedProperties: [], isVerified: true },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // LEADS DATA (50 leads)
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const leads: Lead[] = [
-  { id: 'lead-001', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-001', propertyTitle: 'Skyline Residences — 3BHK Premium Apartment', propertyLocation: 'Gachibowli, Hyderabad', timestamp: '2024-01-15T10:23:00Z', status: 'Qualified', notes: 'Very interested. Visiting with family next weekend.', source: 'Property View' },
-  { id: 'lead-002', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-005', propertyTitle: 'The Pinnacle — Penthouse', propertyLocation: 'Financial District, Hyderabad', timestamp: '2024-01-16T14:10:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-003', userId: 'user-002', userName: 'Sneha Kapoor', userEmail: 'sneha.kapoor@outlook.com', userPhone: '+91 98112 67890', propertyId: 'prop-002', propertyTitle: 'Emerald Heights — 4BHK Luxury Villa', propertyLocation: 'Jubilee Hills, Hyderabad', timestamp: '2024-01-15T11:45:00Z', status: 'Contacted', notes: 'Interested. Asked for price negotiation.', source: 'Property View' },
-  { id: 'lead-004', userId: 'user-002', userName: 'Sneha Kapoor', userEmail: 'sneha.kapoor@outlook.com', userPhone: '+91 98112 67890', propertyId: 'prop-009', propertyTitle: 'Crystal Villas — 5BHK Ultra Luxury Villa', propertyLocation: 'Banjara Hills, Hyderabad', timestamp: '2024-01-17T09:30:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-005', userId: 'user-003', userName: 'Rahul Joshi', userEmail: 'rahul.joshi@techcorp.in', userPhone: '+91 77001 54321', propertyId: 'prop-003', propertyTitle: 'Prestige Gateway — 2BHK Modern Apartment', propertyLocation: 'Kondapur, Hyderabad', timestamp: '2024-01-18T16:00:00Z', status: 'Qualified', notes: 'Home loan pre-approved. Ready to finalize.', source: 'Property View' },
-  { id: 'lead-006', userId: 'user-004', userName: 'Pooja Sharma', userEmail: 'pooja.sharma@infosys.com', userPhone: '+91 88456 11223', propertyId: 'prop-015', propertyTitle: 'The Reserve — 3BHK Lake View Apartment', propertyLocation: 'Narsingi, Hyderabad', timestamp: '2024-01-19T12:15:00Z', status: 'Contacted', notes: 'Wants floor plan sent to email.', source: 'Property View' },
-  { id: 'lead-007', userId: 'user-005', userName: 'Vikram Nair', userEmail: 'vikram.nair@wipro.com', userPhone: '+91 90001 33445', propertyId: 'prop-006', propertyTitle: 'Business Hub — Premium Office Space', propertyLocation: 'HITEC City, Hyderabad', timestamp: '2024-01-20T10:00:00Z', status: 'Qualified', notes: 'Company board approved. Finalizing paperwork.', source: 'Property View' },
-  { id: 'lead-008', userId: 'user-006', userName: 'Ananya Reddy', userEmail: 'ananya.reddy@gmail.com', userPhone: '+91 91234 56789', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot — 250 Sq Yd Premium Plot', propertyLocation: 'Kompally, Hyderabad', timestamp: '2024-01-20T14:30:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-009', userId: 'user-007', userName: 'Karthik Iyer', userEmail: 'karthik.iyer@tcs.com', userPhone: '+91 82345 67890', propertyId: 'prop-001', propertyTitle: 'Skyline Residences — 3BHK Premium Apartment', propertyLocation: 'Gachibowli, Hyderabad', timestamp: '2024-01-21T09:00:00Z', status: 'Contacted', notes: 'Called and explained project details.', source: 'Property View' },
-  { id: 'lead-010', userId: 'user-008', userName: 'Divya Menon', userEmail: 'divya.menon@hcl.in', userPhone: '+91 93456 78901', propertyId: 'prop-007', propertyTitle: 'Serene Palms — 3BHK Row House', propertyLocation: 'Manikonda, Hyderabad', timestamp: '2024-01-22T11:30:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-011', userId: 'user-009', userName: 'Sanjay Gupta', userEmail: 'sanjay.gupta@razorpay.com', userPhone: '+91 94567 89012', propertyId: 'prop-005', propertyTitle: 'The Pinnacle — Penthouse', propertyLocation: 'Financial District, Hyderabad', timestamp: '2024-01-23T15:45:00Z', status: 'Qualified', notes: 'Very high net worth individual. Priority follow-up.', source: 'Property View' },
-  { id: 'lead-012', userId: 'user-009', userName: 'Sanjay Gupta', userEmail: 'sanjay.gupta@razorpay.com', userPhone: '+91 94567 89012', propertyId: 'prop-020', propertyTitle: 'Golden Acres — Farm Land with Bungalow', propertyLocation: 'Chevella, Hyderabad', timestamp: '2024-01-24T10:20:00Z', status: 'Contacted', notes: 'Scheduling site visit.', source: 'Property View' },
-  { id: 'lead-013', userId: 'user-010', userName: 'Meera Pillai', userEmail: 'meera.pillai@swiggy.com', userPhone: '+91 95678 90123', propertyId: 'prop-008', propertyTitle: 'Lotus Gardens — 2BHK Affordable Apartment', propertyLocation: 'Miyapur, Hyderabad', timestamp: '2024-01-25T09:15:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-014', userId: 'user-011', userName: 'Aditya Kumar', userEmail: 'aditya.kumar@amazon.in', userPhone: '+91 96789 01234', propertyId: 'prop-015', propertyTitle: 'The Reserve — 3BHK Lake View Apartment', propertyLocation: 'Narsingi, Hyderabad', timestamp: '2024-01-26T13:00:00Z', status: 'Qualified', notes: 'Budget confirmed. Site visit done. Booking expected.', source: 'Property View' },
-  { id: 'lead-015', userId: 'user-012', userName: 'Kavitha Rao', userEmail: 'kavitha.rao@microsoft.com', userPhone: '+91 97890 12345', propertyId: 'prop-002', propertyTitle: 'Emerald Heights — 4BHK Luxury Villa', propertyLocation: 'Jubilee Hills, Hyderabad', timestamp: '2024-01-27T10:45:00Z', status: 'Contacted', notes: 'Needs interiors quote.', source: 'Property View' },
-  { id: 'lead-016', userId: 'user-013', userName: 'Nikhil Singh', userEmail: 'nikhil.singh@zepto.com', userPhone: '+91 98901 23456', propertyId: 'prop-018', propertyTitle: 'TechSpaces — Premium Office', propertyLocation: 'Raidurgam, Hyderabad', timestamp: '2024-01-28T11:30:00Z', status: 'Qualified', notes: 'Startup expanding. Needs 5000 sqft immediately.', source: 'Property View' },
-  { id: 'lead-017', userId: 'user-014', userName: 'Lakshmi Venkat', userEmail: 'lakshmi.venkat@hdfc.com', userPhone: '+91 99012 34567', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot — 250 Sq Yd', propertyLocation: 'Kompally, Hyderabad', timestamp: '2024-01-29T14:00:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-018', userId: 'user-015', userName: 'Rohit Bajaj', userEmail: 'rohit.bajaj@paytm.com', userPhone: '+91 90123 45678', propertyId: 'prop-011', propertyTitle: 'Tech Park Heights — 3BHK Smart Home', propertyLocation: 'Nanakramguda, Hyderabad', timestamp: '2024-01-30T16:30:00Z', status: 'Contacted', notes: 'Asked for EMI breakup.', source: 'Property View' },
-  { id: 'lead-019', userId: 'user-016', userName: 'Preethi Iyer', userEmail: 'preethi.iyer@ola.com', userPhone: '+91 91234 56780', propertyId: 'prop-007', propertyTitle: 'Serene Palms — 3BHK Row House', propertyLocation: 'Manikonda, Hyderabad', timestamp: '2024-02-01T09:45:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-020', userId: 'user-017', userName: 'Ashwin Prakash', userEmail: 'ashwin.prakash@groww.in', userPhone: '+91 92345 67891', propertyId: 'prop-009', propertyTitle: 'Crystal Villas — 5BHK Ultra Luxury Villa', propertyLocation: 'Banjara Hills, Hyderabad', timestamp: '2024-02-02T12:30:00Z', status: 'Qualified', notes: 'High interest. Wants brochure and legal docs.', source: 'Property View' },
-  { id: 'lead-021', userId: 'user-018', userName: 'Sunita Desai', userEmail: 'sunita.desai@icici.com', userPhone: '+91 93456 78902', propertyId: 'prop-001', propertyTitle: 'Skyline Residences — 3BHK Premium Apartment', propertyLocation: 'Gachibowli, Hyderabad', timestamp: '2024-02-03T10:00:00Z', status: 'Contacted', notes: 'Wants bank loan guidance.', source: 'Loan Inquiry' },
-  { id: 'lead-022', userId: 'user-019', userName: 'Manohar Reddy', userEmail: 'manohar.reddy@sbi.co.in', userPhone: '+91 94567 89013', propertyId: 'prop-014', propertyTitle: 'GS Icon — 500 Sq Yd Investment Plot', propertyLocation: 'Maheshwaram, Hyderabad', timestamp: '2024-02-04T14:15:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-023', userId: 'user-020', userName: 'Deepa Krishnan', userEmail: 'deepa.krishnan@accenture.com', userPhone: '+91 95678 90124', propertyId: 'prop-015', propertyTitle: 'The Reserve — 3BHK Lake View Apartment', propertyLocation: 'Narsingi, Hyderabad', timestamp: '2024-02-05T11:00:00Z', status: 'Qualified', notes: 'Shortlisted with prop-017. Deciding soon.', source: 'Property View' },
-  { id: 'lead-024', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-002', propertyTitle: 'Emerald Heights — 4BHK Luxury Villa', propertyLocation: 'Jubilee Hills, Hyderabad', timestamp: '2024-02-06T09:30:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-025', userId: 'user-003', userName: 'Rahul Joshi', userEmail: 'rahul.joshi@techcorp.in', userPhone: '+91 77001 54321', propertyId: 'prop-008', propertyTitle: 'Lotus Gardens — 2BHK Affordable Apartment', propertyLocation: 'Miyapur, Hyderabad', timestamp: '2024-02-07T15:45:00Z', status: 'Closed', notes: 'Booked. Payment done.', source: 'Property View' },
-  { id: 'lead-026', userId: 'user-004', userName: 'Pooja Sharma', userEmail: 'pooja.sharma@infosys.com', userPhone: '+91 88456 11223', propertyId: 'prop-017', propertyTitle: 'GS Grand — 4BHK Duplex Apartment', propertyLocation: 'Kokapet, Hyderabad', timestamp: '2024-02-08T10:00:00Z', status: 'Contacted', notes: 'Comparing with another project.', source: 'Property View' },
-  { id: 'lead-027', userId: 'user-005', userName: 'Vikram Nair', userEmail: 'vikram.nair@wipro.com', userPhone: '+91 90001 33445', propertyId: 'prop-012', propertyTitle: 'Commercial Arcade — Retail + Office Complex', propertyLocation: 'Kukatpally, Hyderabad', timestamp: '2024-02-09T13:30:00Z', status: 'Qualified', notes: 'Company investment decision pending board meeting.', source: 'Property View' },
-  { id: 'lead-028', userId: 'user-006', userName: 'Ananya Reddy', userEmail: 'ananya.reddy@gmail.com', userPhone: '+91 91234 56789', propertyId: 'prop-014', propertyTitle: 'GS Icon — 500 Sq Yd Investment Plot', propertyLocation: 'Maheshwaram, Hyderabad', timestamp: '2024-02-10T09:00:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-029', userId: 'user-007', userName: 'Karthik Iyer', userEmail: 'karthik.iyer@tcs.com', userPhone: '+91 82345 67890', propertyId: 'prop-019', propertyTitle: 'Azure Sky — 3BHK Premium Apartment', propertyLocation: 'Puppalaguda, Hyderabad', timestamp: '2024-02-11T14:45:00Z', status: 'Contacted', notes: 'Interested in early-bird discount.', source: 'Property View' },
-  { id: 'lead-030', userId: 'user-008', userName: 'Divya Menon', userEmail: 'divya.menon@hcl.in', userPhone: '+91 93456 78901', propertyId: 'prop-013', propertyTitle: 'Sunrise Villas — 4BHK Gated Community Villa', propertyLocation: 'Shamshabad, Hyderabad', timestamp: '2024-02-12T11:00:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-031', userId: 'user-010', userName: 'Meera Pillai', userEmail: 'meera.pillai@swiggy.com', userPhone: '+91 95678 90123', propertyId: 'prop-003', propertyTitle: 'Prestige Gateway — 2BHK Modern Apartment', propertyLocation: 'Kondapur, Hyderabad', timestamp: '2024-02-13T10:30:00Z', status: 'Contacted', notes: 'Budget tight. Exploring home loan options.', source: 'Loan Inquiry' },
-  { id: 'lead-032', userId: 'user-011', userName: 'Aditya Kumar', userEmail: 'aditya.kumar@amazon.in', userPhone: '+91 96789 01234', propertyId: 'prop-017', propertyTitle: 'GS Grand — 4BHK Duplex Apartment', propertyLocation: 'Kokapet, Hyderabad', timestamp: '2024-02-14T14:15:00Z', status: 'Qualified', notes: 'Ready to book after site visit.', source: 'Property View' },
-  { id: 'lead-033', userId: 'user-012', userName: 'Kavitha Rao', userEmail: 'kavitha.rao@microsoft.com', userPhone: '+91 97890 12345', propertyId: 'prop-013', propertyTitle: 'Sunrise Villas — 4BHK Gated Community Villa', propertyLocation: 'Shamshabad, Hyderabad', timestamp: '2024-02-15T09:30:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-034', userId: 'user-013', userName: 'Nikhil Singh', userEmail: 'nikhil.singh@zepto.com', userPhone: '+91 98901 23456', propertyId: 'prop-006', propertyTitle: 'Business Hub — Premium Office Space', propertyLocation: 'HITEC City, Hyderabad', timestamp: '2024-02-16T11:45:00Z', status: 'Contacted', notes: 'Comparing two locations. Decision by month end.', source: 'Property View' },
-  { id: 'lead-035', userId: 'user-014', userName: 'Lakshmi Venkat', userEmail: 'lakshmi.venkat@hdfc.com', userPhone: '+91 99012 34567', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot — 250 Sq Yd Premium Plot', propertyLocation: 'Kompally, Hyderabad', timestamp: '2024-02-17T15:00:00Z', status: 'Qualified', notes: 'Already shortlisted. Awaiting spouse approval.', source: 'Property View' },
-  { id: 'lead-036', userId: 'user-015', userName: 'Rohit Bajaj', userEmail: 'rohit.bajaj@paytm.com', userPhone: '+91 90123 45678', propertyId: 'prop-019', propertyTitle: 'Azure Sky — 3BHK Premium Apartment', propertyLocation: 'Puppalaguda, Hyderabad', timestamp: '2024-02-18T09:00:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-037', userId: 'user-016', userName: 'Preethi Iyer', userEmail: 'preethi.iyer@ola.com', userPhone: '+91 91234 56780', propertyId: 'prop-016', propertyTitle: 'Heritage Homes — 2BHK Row House', propertyLocation: 'Uppal, Hyderabad', timestamp: '2024-02-19T12:30:00Z', status: 'Contacted', notes: 'Inquired about resale value.', source: 'Contact Form' },
-  { id: 'lead-038', userId: 'user-017', userName: 'Ashwin Prakash', userEmail: 'ashwin.prakash@groww.in', userPhone: '+91 92345 67891', propertyId: 'prop-020', propertyTitle: 'Golden Acres — Farm Land with Bungalow', propertyLocation: 'Chevella, Hyderabad', timestamp: '2024-02-20T10:15:00Z', status: 'Qualified', notes: 'Investment for long-term. Very interested.', source: 'Property View' },
-  { id: 'lead-039', userId: 'user-018', userName: 'Sunita Desai', userEmail: 'sunita.desai@icici.com', userPhone: '+91 93456 78902', propertyId: 'prop-003', propertyTitle: 'Prestige Gateway — 2BHK Modern Apartment', propertyLocation: 'Kondapur, Hyderabad', timestamp: '2024-02-21T14:00:00Z', status: 'Closed', notes: 'Payment received. Booking done.', source: 'Property View' },
-  { id: 'lead-040', userId: 'user-019', userName: 'Manohar Reddy', userEmail: 'manohar.reddy@sbi.co.in', userPhone: '+91 94567 89013', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot — 250 Sq Yd Premium Plot', propertyLocation: 'Kompally, Hyderabad', timestamp: '2024-02-22T11:30:00Z', status: 'Contacted', notes: 'Asked for site map and approval copies.', source: 'Property View' },
-  { id: 'lead-041', userId: 'user-020', userName: 'Deepa Krishnan', userEmail: 'deepa.krishnan@accenture.com', userPhone: '+91 95678 90124', propertyId: 'prop-017', propertyTitle: 'GS Grand — 4BHK Duplex Apartment', propertyLocation: 'Kokapet, Hyderabad', timestamp: '2024-02-23T09:30:00Z', status: 'Qualified', notes: 'Decided on this over prop-015. Booking this week.', source: 'Property View' },
-  { id: 'lead-042', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-009', propertyTitle: 'Crystal Villas — 5BHK Ultra Luxury Villa', propertyLocation: 'Banjara Hills, Hyderabad', timestamp: '2024-02-24T15:00:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-043', userId: 'user-002', userName: 'Sneha Kapoor', userEmail: 'sneha.kapoor@outlook.com', userPhone: '+91 98112 67890', propertyId: 'prop-017', propertyTitle: 'GS Grand — 4BHK Duplex Apartment', propertyLocation: 'Kokapet, Hyderabad', timestamp: '2024-02-25T10:45:00Z', status: 'Contacted', notes: 'Reconsidering budget.', source: 'Property View' },
-  { id: 'lead-044', userId: 'user-003', userName: 'Rahul Joshi', userEmail: 'rahul.joshi@techcorp.in', userPhone: '+91 77001 54321', propertyId: 'prop-010', propertyTitle: 'Metro Towers — 1BHK Investment Property', propertyLocation: 'LB Nagar, Hyderabad', timestamp: '2024-02-26T09:00:00Z', status: 'Closed', notes: 'Investment purchase. Completed.', source: 'Property View' },
-  { id: 'lead-045', userId: 'user-004', userName: 'Pooja Sharma', userEmail: 'pooja.sharma@infosys.com', userPhone: '+91 88456 11223', propertyId: 'prop-019', propertyTitle: 'Azure Sky — 3BHK Premium Apartment', propertyLocation: 'Puppalaguda, Hyderabad', timestamp: '2024-02-27T13:30:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-046', userId: 'user-005', userName: 'Vikram Nair', userEmail: 'vikram.nair@wipro.com', userPhone: '+91 90001 33445', propertyId: 'prop-018', propertyTitle: 'TechSpaces — Premium Office', propertyLocation: 'Raidurgam, Hyderabad', timestamp: '2024-02-28T11:00:00Z', status: 'Qualified', notes: 'Second office expansion. Strong interest.', source: 'Property View' },
-  { id: 'lead-047', userId: 'user-006', userName: 'Ananya Reddy', userEmail: 'ananya.reddy@gmail.com', userPhone: '+91 91234 56789', propertyId: 'prop-007', propertyTitle: 'Serene Palms — 3BHK Row House', propertyLocation: 'Manikonda, Hyderabad', timestamp: '2024-02-29T10:00:00Z', status: 'Contacted', notes: 'Wants construction quality details.', source: 'Schedule Visit' },
-  { id: 'lead-048', userId: 'user-007', userName: 'Karthik Iyer', userEmail: 'karthik.iyer@tcs.com', userPhone: '+91 82345 67890', propertyId: 'prop-011', propertyTitle: 'Tech Park Heights — 3BHK Smart Home', propertyLocation: 'Nanakramguda, Hyderabad', timestamp: '2024-03-01T14:30:00Z', status: 'New', notes: '', source: 'Property View' },
-  { id: 'lead-049', userId: 'user-008', userName: 'Divya Menon', userEmail: 'divya.menon@hcl.in', userPhone: '+91 93456 78901', propertyId: 'prop-016', propertyTitle: 'Heritage Homes — 2BHK Row House', propertyLocation: 'Uppal, Hyderabad', timestamp: '2024-03-02T09:15:00Z', status: 'Contacted', notes: 'Looking for ready-to-move.', source: 'Contact Form' },
-  { id: 'lead-050', userId: 'user-009', userName: 'Sanjay Gupta', userEmail: 'sanjay.gupta@razorpay.com', userPhone: '+91 94567 89012', propertyId: 'prop-009', propertyTitle: 'Crystal Villas — 5BHK Ultra Luxury Villa', propertyLocation: 'Banjara Hills, Hyderabad', timestamp: '2024-03-03T15:00:00Z', status: 'Qualified', notes: 'Very serious buyer. Schedule private tour.', source: 'Schedule Visit' },
+  { id: 'lead-001', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-001', propertyTitle: 'Skyline Residences â€” 3BHK Premium Apartment', propertyLocation: 'OMR (Old Mahabalipuram Road), Chennai', timestamp: '2024-01-15T10:23:00Z', status: 'Qualified', notes: 'Very interested. Visiting with family next weekend.', source: 'Property View' },
+  { id: 'lead-002', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-005', propertyTitle: 'The Pinnacle â€” Penthouse', propertyLocation: 'Perungudi, Chennai', timestamp: '2024-01-16T14:10:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-003', userId: 'user-002', userName: 'Sneha Kapoor', userEmail: 'sneha.kapoor@outlook.com', userPhone: '+91 98112 67890', propertyId: 'prop-002', propertyTitle: 'Emerald Heights â€” 4BHK Luxury Villa', propertyLocation: 'Adyar, Chennai', timestamp: '2024-01-15T11:45:00Z', status: 'Contacted', notes: 'Interested. Asked for price negotiation.', source: 'Property View' },
+  { id: 'lead-004', userId: 'user-002', userName: 'Sneha Kapoor', userEmail: 'sneha.kapoor@outlook.com', userPhone: '+91 98112 67890', propertyId: 'prop-009', propertyTitle: 'Crystal Villas â€” 5BHK Ultra Luxury Villa', propertyLocation: 'Nungambakkam, Chennai', timestamp: '2024-01-17T09:30:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-005', userId: 'user-003', userName: 'Rahul Joshi', userEmail: 'rahul.joshi@techcorp.in', userPhone: '+91 77001 54321', propertyId: 'prop-003', propertyTitle: 'Prestige Gateway â€” 2BHK Modern Apartment', propertyLocation: 'Velachery, Chennai', timestamp: '2024-01-18T16:00:00Z', status: 'Qualified', notes: 'Home loan pre-approved. Ready to finalize.', source: 'Property View' },
+  { id: 'lead-006', userId: 'user-004', userName: 'Pooja Sharma', userEmail: 'pooja.sharma@infosys.com', userPhone: '+91 88456 11223', propertyId: 'prop-015', propertyTitle: 'The Reserve â€” 3BHK Lake View Apartment', propertyLocation: 'Perambur, Chennai', timestamp: '2024-01-19T12:15:00Z', status: 'Contacted', notes: 'Wants floor plan sent to email.', source: 'Property View' },
+  { id: 'lead-007', userId: 'user-005', userName: 'Vikram Nair', userEmail: 'vikram.nair@wipro.com', userPhone: '+91 90001 33445', propertyId: 'prop-006', propertyTitle: 'Business Hub â€” Premium Office Space', propertyLocation: 'Tidel Park, Chennai', timestamp: '2024-01-20T10:00:00Z', status: 'Qualified', notes: 'Company board approved. Finalizing paperwork.', source: 'Property View' },
+  { id: 'lead-008', userId: 'user-006', userName: 'Ananya Reddy', userEmail: 'ananya.reddy@gmail.com', userPhone: '+91 91234 56789', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot â€” 250 Sq Yd Premium Plot', propertyLocation: 'Ambattur, Chennai', timestamp: '2024-01-20T14:30:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-009', userId: 'user-007', userName: 'Karthik Iyer', userEmail: 'karthik.iyer@tcs.com', userPhone: '+91 82345 67890', propertyId: 'prop-001', propertyTitle: 'Skyline Residences â€” 3BHK Premium Apartment', propertyLocation: 'OMR (Old Mahabalipuram Road), Chennai', timestamp: '2024-01-21T09:00:00Z', status: 'Contacted', notes: 'Called and explained project details.', source: 'Property View' },
+  { id: 'lead-010', userId: 'user-008', userName: 'Divya Menon', userEmail: 'divya.menon@hcl.in', userPhone: '+91 93456 78901', propertyId: 'prop-007', propertyTitle: 'Serene Palms â€” 3BHK Row House', propertyLocation: 'Pallavaram, Chennai', timestamp: '2024-01-22T11:30:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-011', userId: 'user-009', userName: 'Sanjay Gupta', userEmail: 'sanjay.gupta@razorpay.com', userPhone: '+91 94567 89012', propertyId: 'prop-005', propertyTitle: 'The Pinnacle â€” Penthouse', propertyLocation: 'Perungudi, Chennai', timestamp: '2024-01-23T15:45:00Z', status: 'Qualified', notes: 'Very high net worth individual. Priority follow-up.', source: 'Property View' },
+  { id: 'lead-012', userId: 'user-009', userName: 'Sanjay Gupta', userEmail: 'sanjay.gupta@razorpay.com', userPhone: '+91 94567 89012', propertyId: 'prop-020', propertyTitle: 'Golden Acres â€” Farm Land with Bungalow', propertyLocation: 'Sriperumbudur, Chennai', timestamp: '2024-01-24T10:20:00Z', status: 'Contacted', notes: 'Scheduling site visit.', source: 'Property View' },
+  { id: 'lead-013', userId: 'user-010', userName: 'Meera Pillai', userEmail: 'meera.pillai@swiggy.com', userPhone: '+91 95678 90123', propertyId: 'prop-008', propertyTitle: 'Lotus Gardens â€” 2BHK Affordable Apartment', propertyLocation: 'Avadi, Chennai', timestamp: '2024-01-25T09:15:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-014', userId: 'user-011', userName: 'Aditya Kumar', userEmail: 'aditya.kumar@amazon.in', userPhone: '+91 96789 01234', propertyId: 'prop-015', propertyTitle: 'The Reserve â€” 3BHK Lake View Apartment', propertyLocation: 'Perambur, Chennai', timestamp: '2024-01-26T13:00:00Z', status: 'Qualified', notes: 'Budget confirmed. Site visit done. Booking expected.', source: 'Property View' },
+  { id: 'lead-015', userId: 'user-012', userName: 'Kavitha Rao', userEmail: 'kavitha.rao@microsoft.com', userPhone: '+91 97890 12345', propertyId: 'prop-002', propertyTitle: 'Emerald Heights â€” 4BHK Luxury Villa', propertyLocation: 'Adyar, Chennai', timestamp: '2024-01-27T10:45:00Z', status: 'Contacted', notes: 'Needs interiors quote.', source: 'Property View' },
+  { id: 'lead-016', userId: 'user-013', userName: 'Nikhil Singh', userEmail: 'nikhil.singh@zepto.com', userPhone: '+91 98901 23456', propertyId: 'prop-018', propertyTitle: 'TechSpaces â€” Premium Office', propertyLocation: 'Guindy, Chennai', timestamp: '2024-01-28T11:30:00Z', status: 'Qualified', notes: 'Startup expanding. Needs 5000 sqft immediately.', source: 'Property View' },
+  { id: 'lead-017', userId: 'user-014', userName: 'Lakshmi Venkat', userEmail: 'lakshmi.venkat@hdfc.com', userPhone: '+91 99012 34567', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot â€” 250 Sq Yd', propertyLocation: 'Ambattur, Chennai', timestamp: '2024-01-29T14:00:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-018', userId: 'user-015', userName: 'Rohit Bajaj', userEmail: 'rohit.bajaj@paytm.com', userPhone: '+91 90123 45678', propertyId: 'prop-011', propertyTitle: 'Tech Park Heights â€” 3BHK Smart Home', propertyLocation: 'Sholinganallur, Chennai', timestamp: '2024-01-30T16:30:00Z', status: 'Contacted', notes: 'Asked for EMI breakup.', source: 'Property View' },
+  { id: 'lead-019', userId: 'user-016', userName: 'Preethi Iyer', userEmail: 'preethi.iyer@ola.com', userPhone: '+91 91234 56780', propertyId: 'prop-007', propertyTitle: 'Serene Palms â€” 3BHK Row House', propertyLocation: 'Pallavaram, Chennai', timestamp: '2024-02-01T09:45:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-020', userId: 'user-017', userName: 'Ashwin Prakash', userEmail: 'ashwin.prakash@groww.in', userPhone: '+91 92345 67891', propertyId: 'prop-009', propertyTitle: 'Crystal Villas â€” 5BHK Ultra Luxury Villa', propertyLocation: 'Nungambakkam, Chennai', timestamp: '2024-02-02T12:30:00Z', status: 'Qualified', notes: 'High interest. Wants brochure and legal docs.', source: 'Property View' },
+  { id: 'lead-021', userId: 'user-018', userName: 'Sunita Desai', userEmail: 'sunita.desai@icici.com', userPhone: '+91 93456 78902', propertyId: 'prop-001', propertyTitle: 'Skyline Residences â€” 3BHK Premium Apartment', propertyLocation: 'OMR (Old Mahabalipuram Road), Chennai', timestamp: '2024-02-03T10:00:00Z', status: 'Contacted', notes: 'Wants bank loan guidance.', source: 'Loan Inquiry' },
+  { id: 'lead-022', userId: 'user-019', userName: 'Manohar Reddy', userEmail: 'manohar.reddy@sbi.co.in', userPhone: '+91 94567 89013', propertyId: 'prop-014', propertyTitle: 'GS Icon â€” 500 Sq Yd Investment Plot', propertyLocation: 'Mahindra City, Chennai', timestamp: '2024-02-04T14:15:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-023', userId: 'user-020', userName: 'Deepa Krishnan', userEmail: 'deepa.krishnan@accenture.com', userPhone: '+91 95678 90124', propertyId: 'prop-015', propertyTitle: 'The Reserve â€” 3BHK Lake View Apartment', propertyLocation: 'Perambur, Chennai', timestamp: '2024-02-05T11:00:00Z', status: 'Qualified', notes: 'Shortlisted with prop-017. Deciding soon.', source: 'Property View' },
+  { id: 'lead-024', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-002', propertyTitle: 'Emerald Heights â€” 4BHK Luxury Villa', propertyLocation: 'Adyar, Chennai', timestamp: '2024-02-06T09:30:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-025', userId: 'user-003', userName: 'Rahul Joshi', userEmail: 'rahul.joshi@techcorp.in', userPhone: '+91 77001 54321', propertyId: 'prop-008', propertyTitle: 'Lotus Gardens â€” 2BHK Affordable Apartment', propertyLocation: 'Avadi, Chennai', timestamp: '2024-02-07T15:45:00Z', status: 'Closed', notes: 'Booked. Payment done.', source: 'Property View' },
+  { id: 'lead-026', userId: 'user-004', userName: 'Pooja Sharma', userEmail: 'pooja.sharma@infosys.com', userPhone: '+91 88456 11223', propertyId: 'prop-017', propertyTitle: 'GS Grand â€” 4BHK Duplex Apartment', propertyLocation: 'Porur, Chennai', timestamp: '2024-02-08T10:00:00Z', status: 'Contacted', notes: 'Comparing with another project.', source: 'Property View' },
+  { id: 'lead-027', userId: 'user-005', userName: 'Vikram Nair', userEmail: 'vikram.nair@wipro.com', userPhone: '+91 90001 33445', propertyId: 'prop-012', propertyTitle: 'Commercial Arcade â€” Retail + Office Complex', propertyLocation: 'Anna Nagar, Chennai', timestamp: '2024-02-09T13:30:00Z', status: 'Qualified', notes: 'Company investment decision pending board meeting.', source: 'Property View' },
+  { id: 'lead-028', userId: 'user-006', userName: 'Ananya Reddy', userEmail: 'ananya.reddy@gmail.com', userPhone: '+91 91234 56789', propertyId: 'prop-014', propertyTitle: 'GS Icon â€” 500 Sq Yd Investment Plot', propertyLocation: 'Mahindra City, Chennai', timestamp: '2024-02-10T09:00:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-029', userId: 'user-007', userName: 'Karthik Iyer', userEmail: 'karthik.iyer@tcs.com', userPhone: '+91 82345 67890', propertyId: 'prop-019', propertyTitle: 'Azure Sky â€” 3BHK Premium Apartment', propertyLocation: 'Pallikaranai, Chennai', timestamp: '2024-02-11T14:45:00Z', status: 'Contacted', notes: 'Interested in early-bird discount.', source: 'Property View' },
+  { id: 'lead-030', userId: 'user-008', userName: 'Divya Menon', userEmail: 'divya.menon@hcl.in', userPhone: '+91 93456 78901', propertyId: 'prop-013', propertyTitle: 'Sunrise Villas â€” 4BHK Gated Community Villa', propertyLocation: 'Tambaram, Chennai', timestamp: '2024-02-12T11:00:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-031', userId: 'user-010', userName: 'Meera Pillai', userEmail: 'meera.pillai@swiggy.com', userPhone: '+91 95678 90123', propertyId: 'prop-003', propertyTitle: 'Prestige Gateway â€” 2BHK Modern Apartment', propertyLocation: 'Velachery, Chennai', timestamp: '2024-02-13T10:30:00Z', status: 'Contacted', notes: 'Budget tight. Exploring home loan options.', source: 'Loan Inquiry' },
+  { id: 'lead-032', userId: 'user-011', userName: 'Aditya Kumar', userEmail: 'aditya.kumar@amazon.in', userPhone: '+91 96789 01234', propertyId: 'prop-017', propertyTitle: 'GS Grand â€” 4BHK Duplex Apartment', propertyLocation: 'Porur, Chennai', timestamp: '2024-02-14T14:15:00Z', status: 'Qualified', notes: 'Ready to book after site visit.', source: 'Property View' },
+  { id: 'lead-033', userId: 'user-012', userName: 'Kavitha Rao', userEmail: 'kavitha.rao@microsoft.com', userPhone: '+91 97890 12345', propertyId: 'prop-013', propertyTitle: 'Sunrise Villas â€” 4BHK Gated Community Villa', propertyLocation: 'Tambaram, Chennai', timestamp: '2024-02-15T09:30:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-034', userId: 'user-013', userName: 'Nikhil Singh', userEmail: 'nikhil.singh@zepto.com', userPhone: '+91 98901 23456', propertyId: 'prop-006', propertyTitle: 'Business Hub â€” Premium Office Space', propertyLocation: 'Tidel Park, Chennai', timestamp: '2024-02-16T11:45:00Z', status: 'Contacted', notes: 'Comparing two locations. Decision by month end.', source: 'Property View' },
+  { id: 'lead-035', userId: 'user-014', userName: 'Lakshmi Venkat', userEmail: 'lakshmi.venkat@hdfc.com', userPhone: '+91 99012 34567', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot â€” 250 Sq Yd Premium Plot', propertyLocation: 'Ambattur, Chennai', timestamp: '2024-02-17T15:00:00Z', status: 'Qualified', notes: 'Already shortlisted. Awaiting spouse approval.', source: 'Property View' },
+  { id: 'lead-036', userId: 'user-015', userName: 'Rohit Bajaj', userEmail: 'rohit.bajaj@paytm.com', userPhone: '+91 90123 45678', propertyId: 'prop-019', propertyTitle: 'Azure Sky â€” 3BHK Premium Apartment', propertyLocation: 'Pallikaranai, Chennai', timestamp: '2024-02-18T09:00:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-037', userId: 'user-016', userName: 'Preethi Iyer', userEmail: 'preethi.iyer@ola.com', userPhone: '+91 91234 56780', propertyId: 'prop-016', propertyTitle: 'Heritage Homes â€” 2BHK Row House', propertyLocation: 'Chromepet, Chennai', timestamp: '2024-02-19T12:30:00Z', status: 'Contacted', notes: 'Inquired about resale value.', source: 'Contact Form' },
+  { id: 'lead-038', userId: 'user-017', userName: 'Ashwin Prakash', userEmail: 'ashwin.prakash@groww.in', userPhone: '+91 92345 67891', propertyId: 'prop-020', propertyTitle: 'Golden Acres â€” Farm Land with Bungalow', propertyLocation: 'Sriperumbudur, Chennai', timestamp: '2024-02-20T10:15:00Z', status: 'Qualified', notes: 'Investment for long-term. Very interested.', source: 'Property View' },
+  { id: 'lead-039', userId: 'user-018', userName: 'Sunita Desai', userEmail: 'sunita.desai@icici.com', userPhone: '+91 93456 78902', propertyId: 'prop-003', propertyTitle: 'Prestige Gateway â€” 2BHK Modern Apartment', propertyLocation: 'Velachery, Chennai', timestamp: '2024-02-21T14:00:00Z', status: 'Closed', notes: 'Payment received. Booking done.', source: 'Property View' },
+  { id: 'lead-040', userId: 'user-019', userName: 'Manohar Reddy', userEmail: 'manohar.reddy@sbi.co.in', userPhone: '+91 94567 89013', propertyId: 'prop-004', propertyTitle: 'GreenFields Plot â€” 250 Sq Yd Premium Plot', propertyLocation: 'Ambattur, Chennai', timestamp: '2024-02-22T11:30:00Z', status: 'Contacted', notes: 'Asked for site map and approval copies.', source: 'Property View' },
+  { id: 'lead-041', userId: 'user-020', userName: 'Deepa Krishnan', userEmail: 'deepa.krishnan@accenture.com', userPhone: '+91 95678 90124', propertyId: 'prop-017', propertyTitle: 'GS Grand â€” 4BHK Duplex Apartment', propertyLocation: 'Porur, Chennai', timestamp: '2024-02-23T09:30:00Z', status: 'Qualified', notes: 'Decided on this over prop-015. Booking this week.', source: 'Property View' },
+  { id: 'lead-042', userId: 'user-001', userName: 'Arjun Mehta', userEmail: 'arjun.mehta@gmail.com', userPhone: '+91 99001 12345', propertyId: 'prop-009', propertyTitle: 'Crystal Villas â€” 5BHK Ultra Luxury Villa', propertyLocation: 'Nungambakkam, Chennai', timestamp: '2024-02-24T15:00:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-043', userId: 'user-002', userName: 'Sneha Kapoor', userEmail: 'sneha.kapoor@outlook.com', userPhone: '+91 98112 67890', propertyId: 'prop-017', propertyTitle: 'GS Grand â€” 4BHK Duplex Apartment', propertyLocation: 'Porur, Chennai', timestamp: '2024-02-25T10:45:00Z', status: 'Contacted', notes: 'Reconsidering budget.', source: 'Property View' },
+  { id: 'lead-044', userId: 'user-003', userName: 'Rahul Joshi', userEmail: 'rahul.joshi@techcorp.in', userPhone: '+91 77001 54321', propertyId: 'prop-010', propertyTitle: 'Metro Towers â€” 1BHK Investment Property', propertyLocation: 'Medavakkam, Chennai', timestamp: '2024-02-26T09:00:00Z', status: 'Closed', notes: 'Investment purchase. Completed.', source: 'Property View' },
+  { id: 'lead-045', userId: 'user-004', userName: 'Pooja Sharma', userEmail: 'pooja.sharma@infosys.com', userPhone: '+91 88456 11223', propertyId: 'prop-019', propertyTitle: 'Azure Sky â€” 3BHK Premium Apartment', propertyLocation: 'Pallikaranai, Chennai', timestamp: '2024-02-27T13:30:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-046', userId: 'user-005', userName: 'Vikram Nair', userEmail: 'vikram.nair@wipro.com', userPhone: '+91 90001 33445', propertyId: 'prop-018', propertyTitle: 'TechSpaces â€” Premium Office', propertyLocation: 'Guindy, Chennai', timestamp: '2024-02-28T11:00:00Z', status: 'Qualified', notes: 'Second office expansion. Strong interest.', source: 'Property View' },
+  { id: 'lead-047', userId: 'user-006', userName: 'Ananya Reddy', userEmail: 'ananya.reddy@gmail.com', userPhone: '+91 91234 56789', propertyId: 'prop-007', propertyTitle: 'Serene Palms â€” 3BHK Row House', propertyLocation: 'Pallavaram, Chennai', timestamp: '2024-02-29T10:00:00Z', status: 'Contacted', notes: 'Wants construction quality details.', source: 'Schedule Visit' },
+  { id: 'lead-048', userId: 'user-007', userName: 'Karthik Iyer', userEmail: 'karthik.iyer@tcs.com', userPhone: '+91 82345 67890', propertyId: 'prop-011', propertyTitle: 'Tech Park Heights â€” 3BHK Smart Home', propertyLocation: 'Sholinganallur, Chennai', timestamp: '2024-03-01T14:30:00Z', status: 'New', notes: '', source: 'Property View' },
+  { id: 'lead-049', userId: 'user-008', userName: 'Divya Menon', userEmail: 'divya.menon@hcl.in', userPhone: '+91 93456 78901', propertyId: 'prop-016', propertyTitle: 'Heritage Homes â€” 2BHK Row House', propertyLocation: 'Chromepet, Chennai', timestamp: '2024-03-02T09:15:00Z', status: 'Contacted', notes: 'Looking for ready-to-move.', source: 'Contact Form' },
+  { id: 'lead-050', userId: 'user-009', userName: 'Sanjay Gupta', userEmail: 'sanjay.gupta@razorpay.com', userPhone: '+91 94567 89012', propertyId: 'prop-009', propertyTitle: 'Crystal Villas â€” 5BHK Ultra Luxury Villa', propertyLocation: 'Nungambakkam, Chennai', timestamp: '2024-03-03T15:00:00Z', status: 'Qualified', notes: 'Very serious buyer. Schedule private tour.', source: 'Schedule Visit' },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // BLOG POSTS (10 articles)
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const blogPosts: BlogPost[] = [
   {
     id: 'blog-001',
-    slug: 'hyderabad-real-estate-boom-2024',
-    title: 'Hyderabad Real Estate Boom: Why 2024 is the Year to Buy',
-    excerpt: 'Hyderabad\'s property market is defying national trends with consistent double-digit appreciation. Here\'s everything you need to know before making your move.',
-    content: `Hyderabad has firmly established itself as India's premier real estate investment destination in 2024. With the IT sector continuing its robust growth, demand for premium residential and commercial spaces has reached an all-time high.
+    slug: 'chennai-real-estate-boom-2024',
+    title: 'Chennai Real Estate Boom: Why 2024 is the Year to Buy',
+    excerpt: "Chennai's property market is defying national trends with consistent double-digit appreciation. Here's everything you need to know before making your move.",
+    content: `Chennai has firmly established itself as India's premier real estate investment destination in 2024. With the IT sector continuing its robust growth, demand for premium residential and commercial spaces has reached an all-time high.
 
 **The Numbers Don't Lie**
 
-According to recent data, property registrations in Hyderabad saw a 28% year-on-year increase in Q1 2024. The Financial District, Gachibowli, and the emerging Kokapet corridor have witnessed price appreciation of 15-22% over the past 18 months.
+According to recent data, property registrations in Chennai saw a 28% year-on-year increase in Q1 2024. The OMR, Guindy, and the emerging Porur corridor have witnessed price appreciation of 15-22% over the past 18 months.
 
 **Key Demand Drivers**
 
-1. **IT Sector Expansion**: Major MNCs including Microsoft, Google, and Amazon have significantly expanded their Hyderabad footprints, bringing tens of thousands of high-earning employees into the city.
+1. **IT Sector Expansion**: Major MNCs including Microsoft, Google, and Amazon have significantly expanded their Chennai footprints, bringing tens of thousands of high-earning employees into the city.
 
 2. **Infrastructure Push**: The Outer Ring Road, Metro Rail Phase 2, and the Regional Ring Road project are opening up new corridors for development, making previously inaccessible areas prime real estate.
 
-3. **Business-Friendly Governance**: Telangana's proactive industrial policies and the single-window clearance system have attracted massive FDI, boosting economic sentiment.
+3. **Business-Friendly Governance**: Tamil Nadu's proactive industrial policies and the single-window clearance system have attracted massive FDI, boosting economic sentiment.
 
 **Where to Buy in 2024**
 
-- **Gachibowli & Financial District**: Still the gold standard for premium residential investment. Expect 12-18% appreciation annually.
-- **Kokapet**: The emerging luxury destination. Land prices have tripled in 5 years.
+- **Sholinganallur & OMR IT Corridor**: Still the gold standard for premium residential investment. Expect 12-18% appreciation annually.
+- **Siruseri**: The emerging luxury destination. Land prices have tripled in 5 years.
 - **Shamshabad**: Airport proximity and ORR connectivity make this a sleeper hit for plotted development.
 - **Kompally**: Affordable options with high growth potential as the city expands northward.
 
 **The GS Associations Perspective**
 
-At GS Associations, we've been guiding buyers and investors in Hyderabad's market for over a decade. Our advice: don't wait for the "perfect" moment. The city's fundamentals are strong, inventory is tightening, and the window for below-market entries is closing rapidly.
+At GS Associations, we've been guiding buyers and investors in Chennai's market for over a decade. Our advice: don't wait for the "perfect" moment. The city's fundamentals are strong, inventory is tightening, and the window for below-market entries is closing rapidly.
 
 **Conclusion**
 
-Whether you're a first-time buyer seeking a home or a seasoned investor looking to expand your portfolio, Hyderabad's real estate market in 2024 presents a compelling opportunity. The combination of economic growth, infrastructure development, and lifestyle upgrades makes this city a standout performer in India's real estate landscape.`,
+Whether you're a first-time buyer seeking a home or a seasoned investor looking to expand your portfolio, Chennai's real estate market in 2024 presents a compelling opportunity. The combination of economic growth, infrastructure development, and lifestyle upgrades makes this city a standout performer in India's real estate landscape.`,
     category: 'Market Trends',
     author: 'Priya Nair',
     authorAvatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=priya',
     publishedDate: '2024-01-15',
     readTime: 6,
     coverImage: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=1200&q=80',
-    tags: ['Hyderabad', 'Investment', 'Market Analysis', '2024'],
+    tags: ['Chennai', 'Investment', 'Market Analysis', '2024'],
     featured: true,
     views: 4521,
   },
@@ -919,7 +919,7 @@ Whether you're a first-time buyer seeking a home or a seasoned investor looking 
     id: 'blog-002',
     slug: 'home-loan-guide-first-time-buyers',
     title: 'The Ultimate Home Loan Guide for First-Time Buyers in India',
-    excerpt: 'Confused about home loans? We break down everything — from eligibility criteria to PMAY subsidies — in plain language.',
+    excerpt: 'Confused about home loans? We break down everything â€” from eligibility criteria to PMAY subsidies â€” in plain language.',
     content: `Buying your first home is one of life\'s most significant milestones. For most Indians, it also means navigating the complex world of home loans for the first time. This comprehensive guide demystifies the process.
 
 **Understanding Home Loan Basics**
@@ -929,13 +929,13 @@ A home loan is a secured loan where the property itself serves as collateral. Ba
 **Key Terms You Must Know**
 
 - **EMI (Equated Monthly Instalment)**: Your monthly payment consisting of principal and interest.
-- **LTV (Loan-to-Value Ratio)**: The percentage of the property value the lender will finance. For properties above ₹75 lakhs, this is typically 75%.
+- **LTV (Loan-to-Value Ratio)**: The percentage of the property value the lender will finance. For properties above â‚¹75 lakhs, this is typically 75%.
 - **CIBIL Score**: Your credit score. Aim for 750+ for the best interest rates.
 - **Processing Fee**: Typically 0.5-1% of the loan amount, charged upfront.
 
-**PMAY — Pradhan Mantri Awas Yojana**
+**PMAY â€” Pradhan Mantri Awas Yojana**
 
-First-time homebuyers in India may qualify for interest subsidies under PMAY. Under CLSS (Credit Linked Subsidy Scheme), eligible buyers can receive an interest subsidy of 3-6.5% on their home loan, translating to savings of ₹2-2.67 lakhs.
+First-time homebuyers in India may qualify for interest subsidies under PMAY. Under CLSS (Credit Linked Subsidy Scheme), eligible buyers can receive an interest subsidy of 3-6.5% on their home loan, translating to savings of â‚¹2-2.67 lakhs.
 
 **Step-by-Step Application Process**
 
@@ -958,9 +958,9 @@ First-time homebuyers in India may qualify for interest subsidies under PMAY. Un
 
 **Pro Tips from GS Associations**
 
-1. **Don't apply to multiple lenders simultaneously** — each application creates a hard inquiry that temporarily lowers your CIBIL score.
-2. **Consider a longer tenure** if cash flow is a concern — you can always prepay without penalty on floating rate loans.
-3. **Factor in all costs** — registration, stamp duty, GST on under-construction properties, maintenance deposits.
+1. **Don't apply to multiple lenders simultaneously** â€” each application creates a hard inquiry that temporarily lowers your CIBIL score.
+2. **Consider a longer tenure** if cash flow is a concern â€” you can always prepay without penalty on floating rate loans.
+3. **Factor in all costs** â€” registration, stamp duty, GST on under-construction properties, maintenance deposits.
 
 Reach out to our loan experts at GS Associations for personalized guidance at zero cost.`,
     category: 'Home Loans',
@@ -975,48 +975,48 @@ Reach out to our loan experts at GS Associations for personalized guidance at ze
   },
   {
     id: 'blog-003',
-    slug: 'gachibowli-investment-guide',
-    title: 'Gachibowli Investment Guide: Is Now the Right Time?',
-    excerpt: 'Gachibowli has transformed from a quiet suburb to Hyderabad\'s most valuable real estate destination. Here\'s an honest assessment of current opportunities.',
-    content: `Gachibowli's transformation over the past two decades is one of India's most remarkable real estate stories. From a sleepy village on Hyderabad's outskirts to the epicenter of India's technology revolution — the journey has been extraordinary.
+    slug: 'omr-investment-guide',
+    title: 'Sholinganallur Investment Guide: Is Now the Right Time?',
+    excerpt: 'OMR has transformed from a quiet suburb to Chennai\'s most valuable real estate destination. Here\'s an honest assessment of current opportunities.',
+    content: `Sholinganallur's transformation over the past two decades is one of India's most remarkable real estate stories. From a sleepy village on Chennai's outskirts to the epicenter of India's technology revolution â€” the journey has been extraordinary.
 
 **A Brief History**
 
-The development of Gachibowli began in earnest with the establishment of HITEC City in the late 1990s. The subsequent IT boom brought thousands of knowledge workers, creating demand for premium housing that the market has struggled to meet ever since.
+The development of Sholinganallur began in earnest with the establishment of Taramani in the late 1990s. The subsequent IT boom brought thousands of knowledge workers, creating demand for premium housing that the market has struggled to meet ever since.
 
 **Current Market Snapshot**
 
-- **Average residential price**: ₹7,000-12,000 per sqft (depending on project quality)
+- **Average residential price**: â‚¹7,000-12,000 per sqft (depending on project quality)
 - **Year-on-year appreciation**: 14-18%
 - **Average rental yield**: 3.5-4.5%
 - **Vacancy rate**: Below 5%
 
-**Why Gachibowli Still Has Legs**
+**Why Sholinganallur Still Has Legs**
 
-Despite being a "mature" market, Gachibowli continues to attract investment for several reasons:
+Despite being a "mature" market, Sholinganallur continues to attract investment for several reasons:
 
 1. **Employment Concentration**: The DLF Cyber City, Raheja Mindspace, and Q City tech parks house hundreds of thousands of employees within a 3km radius.
-2. **Limited Land Bank**: Unlike peripheral areas, Gachibowli has very limited undeveloped land, keeping supply constrained.
-3. **Lifestyle Infrastructure**: World-class malls, hospitals, schools, and restaurants make it genuinely livable — not just a dormitory suburb.
+2. **Limited Land Bank**: Unlike peripheral areas, Sholinganallur has very limited undeveloped land, keeping supply constrained.
+3. **Lifestyle Infrastructure**: World-class malls, hospitals, schools, and restaurants make it genuinely livable â€” not just a dormitory suburb.
 
 **Risks to Consider**
 
-- **Price at Entry**: Gachibowli is no longer "affordable" — you're paying a premium for a premium location.
+- **Price at Entry**: Sholinganallur is no longer "affordable" â€” you're paying a premium for a premium location.
 - **IT Sector Concentration**: A downturn in the tech sector could soften demand.
 - **Traffic**: Infrastructure development hasn't fully kept pace with the density of development.
 
 **Our Recommendation**
 
-For end-users, Gachibowli remains an excellent choice — the lifestyle quality and resale/rental prospects are unmatched. For investors, the math works if you're looking at a 5+ year horizon and rental income as a component of returns.
+For end-users, Sholinganallur remains an excellent choice â€” the lifestyle quality and resale/rental prospects are unmatched. For investors, the math works if you're looking at a 5+ year horizon and rental income as a component of returns.
 
-Browse our current Gachibowli listings and speak to our advisors for a personalized investment analysis.`,
+Browse our current Sholinganallur listings and speak to our advisors for a personalized investment analysis.`,
     category: 'Investment Guide',
     author: 'Suresh Reddy',
     authorAvatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=suresh',
     publishedDate: '2024-02-01',
     readTime: 7,
     coverImage: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80',
-    tags: ['Gachibowli', 'Investment', 'Hyderabad', 'Locality Guide'],
+    tags: ['OMR', 'Investment', 'Chennai', 'Locality Guide'],
     featured: false,
     views: 3214,
   },
@@ -1025,11 +1025,11 @@ Browse our current Gachibowli listings and speak to our advisors for a personali
     slug: 'vastu-shastra-modern-homes',
     title: 'Vastu Shastra in Modern Homes: Science or Superstition?',
     excerpt: 'Millions of Indian homebuyers insist on Vastu compliance. We explore the principles, their origins, and how modern architects are incorporating them.',
-    content: `In India's real estate market, no factor generates more discussion — or more confusion — than Vastu Shastra. This ancient Indian architectural science influences decisions from plot orientation to the placement of the pooja room. But how relevant is it to modern apartment living?
+    content: `In India's real estate market, no factor generates more discussion â€” or more confusion â€” than Vastu Shastra. This ancient Indian architectural science influences decisions from plot orientation to the placement of the pooja room. But how relevant is it to modern apartment living?
 
 **What is Vastu Shastra?**
 
-Vastu Shastra is a traditional Hindu system of architecture and design that dates back thousands of years. At its core, it's a set of principles for designing spaces that harmonize with natural forces — sunlight, wind, water, and earth energies.
+Vastu Shastra is a traditional Hindu system of architecture and design that dates back thousands of years. At its core, it's a set of principles for designing spaces that harmonize with natural forces â€” sunlight, wind, water, and earth energies.
 
 **The Five Elements**
 
@@ -1056,7 +1056,7 @@ Modern architects often incorporate Vastu principles not as superstition, but as
 
 **Does it Affect Property Value?**
 
-In Hyderabad's market, Vastu compliance — especially plot direction and main door orientation — does affect buyer preference and therefore property value. North and East-facing properties command a 5-8% premium over similarly specified South and West-facing units.
+In Chennai's market, Vastu compliance â€” especially plot direction and main door orientation â€” does affect buyer preference and therefore property value. North and East-facing properties command a 5-8% premium over similarly specified South and West-facing units.
 
 **Our Practical Advice**
 
@@ -1073,9 +1073,9 @@ Don't reject a property solely for minor Vastu defects. Major structural concern
   },
   {
     id: 'blog-005',
-    slug: 'rera-hyderabad-explained',
-    title: 'RERA Hyderabad: Your Complete Guide to Buyer Protection',
-    excerpt: 'RERA has fundamentally changed the real estate landscape. Here\'s everything buyers in Telangana need to know to protect their investment.',
+    slug: 'rera-chennai-explained',
+    title: 'RERA Chennai: Your Complete Guide to Buyer Protection',
+    excerpt: 'RERA has fundamentally changed the real estate landscape. Here\'s everything buyers in Tamil Nadu need to know to protect their investment.',
     content: `The Real Estate Regulation and Development Act (RERA) 2016 is arguably the most significant reform in India's real estate sector since Independence. For buyers, it offers unprecedented protection against the many malpractices that plagued the pre-RERA era.
 
 **What RERA Means for Buyers**
@@ -1119,7 +1119,7 @@ Your investment is safe with us.`,
     publishedDate: '2024-02-15',
     readTime: 7,
     coverImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80',
-    tags: ['RERA', 'Legal', 'Buyer Protection', 'Hyderabad'],
+    tags: ['RERA', 'Legal', 'Buyer Protection', 'Chennai'],
     featured: false,
     views: 4789,
   },
@@ -1132,15 +1132,15 @@ Your investment is safe with us.`,
 
 **The Two Philosophies**
 
-**Lifestyle Property** is one you buy primarily to live in. The focus is on quality of life — proximity to work, schools, green spaces, and community. Return on investment is a consideration, but not the primary driver.
+**Lifestyle Property** is one you buy primarily to live in. The focus is on quality of life â€” proximity to work, schools, green spaces, and community. Return on investment is a consideration, but not the primary driver.
 
-**Investment Property** is acquired primarily for capital appreciation and/or rental yield. Location choice is driven by data — rental demand, vacancy rates, appreciation history, and tenant profile.
+**Investment Property** is acquired primarily for capital appreciation and/or rental yield. Location choice is driven by data â€” rental demand, vacancy rates, appreciation history, and tenant profile.
 
 **When Objectives Conflict**
 
 The best lifestyle neighborhoods aren't always the best investment neighborhoods. Here's why:
 
-- Mature, premium localities (like Jubilee Hills or Banjara Hills) may have lower yield because property prices have already appreciated significantly.
+- Mature, premium localities (like Poes Garden or Boat Club) may have lower yield because property prices have already appreciated significantly.
 - High-growth investment corridors (like Maheshwaram or Shamshabad) may not offer the lifestyle quality you desire for daily living.
 
 **A Practical Framework**
@@ -1154,7 +1154,7 @@ Ask yourself these questions:
 
 **For Lifestyle Buyers**
 
-Focus on Gachibowli, Narsingi, Kondapur, Manikonda, and Kokapet. These areas offer excellent quality of life with solid, if not spectacular, investment returns.
+Focus on Sholinganallur, Pallavaram, Thoraipakkam, Anna Nagar, and Siruseri. These areas offer excellent quality of life with solid, if not spectacular, investment returns.
 
 **For Pure Investors**
 
@@ -1164,7 +1164,7 @@ Look at Kompally, Maheshwaram, Shamshabad, and Pharma City corridor. Higher grow
 
 Many of our successful clients take a hybrid approach: buy a modest lifestyle property in a premium area, and a separate smaller investment property in a high-growth corridor. This diversifies risk while ensuring quality of life.
 
-Contact GS Associations for a personalized consultation — we'll help you build a real estate strategy aligned with your financial goals.`,
+Contact GS Associations for a personalized consultation â€” we'll help you build a real estate strategy aligned with your financial goals.`,
     category: 'Investment Guide',
     author: 'Ravi Shankar',
     authorAvatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ravi',
@@ -1185,7 +1185,7 @@ Contact GS Associations for a personalized consultation — we'll help you build
 **The Top 10 Amenities Worth the Premium**
 
 **1. 24/7 Multi-Tier Security**
-Not just a guard at the gate, but CCTV, biometric entry, visitor management systems, and patrolling. In Hyderabad's premium localities, this is non-negotiable.
+Not just a guard at the gate, but CCTV, biometric entry, visitor management systems, and patrolling. In Chennai's premium localities, this is non-negotiable.
 
 **2. Backup Power for All Common Areas and Homes**
 Inconsistent electricity is a reality in India. A complex with 100% power backup eliminates one of the biggest quality-of-life irritants.
@@ -1200,10 +1200,10 @@ For families, this is a strong differentiator. Certified safe play equipment wit
 With EV adoption accelerating, buildings without EV charging will face a significant resale disadvantage within 5 years. Future-proof your investment.
 
 **6. Clubhouse with Multiple Activity Rooms**
-A real clubhouse — not just a room — with spaces for yoga, table tennis, a reading library, and party halls genuinely improves community living.
+A real clubhouse â€” not just a room â€” with spaces for yoga, table tennis, a reading library, and party halls genuinely improves community living.
 
 **7. Rooftop Amenities**
-Pools, gardens, or sky lounges on the roof add disproportionate value — both experiential and market value.
+Pools, gardens, or sky lounges on the roof add disproportionate value â€” both experiential and market value.
 
 **8. Smart Home Integration**
 Alexa/Google Home integration, smart locks, video door phones, and energy monitoring genuinely improve daily life and differentiate the property.
@@ -1236,12 +1236,12 @@ Visit the completed projects of the same developer. Talk to residents. Ask about
   },
   {
     id: 'blog-008',
-    slug: 'property-tax-stamp-duty-hyderabad',
-    title: 'Property Tax and Stamp Duty in Hyderabad: 2024 Complete Guide',
-    excerpt: 'Understanding the taxes and charges involved in property purchase in Telangana can save you lakhs. Here\'s a complete breakdown.',
-    content: `Every property transaction in Hyderabad involves multiple government levies. Understanding these charges upfront prevents nasty surprises and helps you budget accurately.
+    slug: 'property-tax-stamp-duty-chennai',
+    title: 'Property Tax and Stamp Duty in Chennai: 2024 Complete Guide',
+    excerpt: 'Understanding the taxes and charges involved in property purchase in Tamil Nadu can save you lakhs. Here\'s a complete breakdown.',
+    content: `Every property transaction in Chennai involves multiple government levies. Understanding these charges upfront prevents nasty surprises and helps you budget accurately.
 
-**Stamp Duty in Telangana**
+**Stamp Duty in Tamil Nadu**
 
 Stamp duty is a tax on the transaction document and is calculated as a percentage of the property's market value or sale price, whichever is higher.
 
@@ -1252,35 +1252,35 @@ Stamp duty is a tax on the transaction document and is calculated as a percentag
 **Registration Charges**
 
 In addition to stamp duty, you pay registration charges:
-- **Registration Fee**: 0.5% of property value (max ₹20,000 for residential)
+- **Registration Fee**: 0.5% of property value (max â‚¹20,000 for residential)
 - This cap makes registration charges relatively fixed for most transactions
 
 **GST on Under-Construction Properties**
 
 If you're buying an under-construction apartment, GST applies:
 - **Without ITC**: 5% GST on the agreement value
-- **Affordable Housing** (< ₹45 lakhs, < 60 sqm): 1% GST
+- **Affordable Housing** (< â‚¹45 lakhs, < 60 sqm): 1% GST
 
 No GST applies on ready-to-move properties with OC (Occupancy Certificate).
 
 **Property Tax (Annual)**
 
-Property tax in Hyderabad is levied by GHMC (Greater Hyderabad Municipal Corporation) and varies by:
+Property tax in Chennai is levied by GCC (Greater Chennai Corporation) and varies by:
 - Property location (zone)
 - Built-up area
 - Property type (residential/commercial)
 - Age of construction
 
-Typically, property tax for a standard 2BHK apartment ranges from ₹3,000 to ₹12,000 per year.
+Typically, property tax for a standard 2BHK apartment ranges from â‚¹3,000 to â‚¹12,000 per year.
 
 **A Worked Example**
 
-For a ₹1 crore apartment (under construction):
-- Stamp Duty (4%): ₹4,00,000
-- Transfer Duty (0.5%): ₹50,000
-- Registration Fee: ₹20,000 (capped)
-- GST (5%): ₹5,00,000
-- **Total Additional Costs**: ~₹9,70,000 (approx 9.7% of purchase price)
+For a â‚¹1 crore apartment (under construction):
+- Stamp Duty (4%): â‚¹4,00,000
+- Transfer Duty (0.5%): â‚¹50,000
+- Registration Fee: â‚¹20,000 (capped)
+- GST (5%): â‚¹5,00,000
+- **Total Additional Costs**: ~â‚¹9,70,000 (approx 9.7% of purchase price)
 
 **Budget Accordingly**
 
@@ -1293,68 +1293,68 @@ Our team at GS Associations provides detailed cost breakdowns before you commit 
     publishedDate: '2024-03-08',
     readTime: 8,
     coverImage: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&q=80',
-    tags: ['Property Tax', 'Stamp Duty', 'Legal', 'Hyderabad'],
+    tags: ['Property Tax', 'Stamp Duty', 'Legal', 'Chennai'],
     featured: false,
     views: 8941,
   },
   {
     id: 'blog-009',
-    slug: 'future-of-kokapet-hyderabad',
-    title: 'Kokapet: Hyderabad\'s Next Luxury Destination',
-    excerpt: 'From farmland to Hyderabad\'s most sought-after luxury corridor in less than a decade — the Kokapet story is one for the books.',
-    content: `Five years ago, Kokapet was largely unknown outside real estate investment circles. Today, it commands premium prices that rival established neighborhoods like Jubilee Hills and Banjara Hills. What happened?
+    slug: 'future-of-porur-chennai',
+    title: 'Porur: Chennai\'s Next Luxury Destination',
+    excerpt: "From farmland to Chennai's most sought-after luxury corridor in less than a decade — the Porur story is one for the books.",
+    content: `Five years ago, Siruseri was largely unknown outside real estate investment circles. Today, it commands premium prices that rival established neighborhoods like Poes Garden and Boat Club. What happened?
 
 **The Transformation**
 
-Kokapet's rise has been driven by a confluence of factors that rarely align so perfectly in any real estate market:
+Siruseri's rise has been driven by a confluence of factors that rarely align so perfectly in any real estate market:
 
-1. **ORR Connectivity**: The Outer Ring Road's direct access to Kokapet dramatically reduced commute times to Gachibowli and HITEC City.
-2. **Large Land Parcels**: Unlike older localities, Kokapet had large contiguous land parcels, enabling large-format, amenity-rich gated communities.
-3. **Developer Interest**: When Prestige, Aparna, and Phoenix chose Kokapet for their marquee Hyderabad projects, it signaled serious intent and attracted premium buyers.
-4. **Limited Premium Supply**: The Financial District and Gachibowli were running out of space. Kokapet was the natural overflow for premium demand.
+1. **ORR Connectivity**: The Outer Ring Road's direct access to Siruseri dramatically reduced commute times to Sholinganallur and Taramani.
+2. **Large Land Parcels**: Unlike older localities, Siruseri had large contiguous land parcels, enabling large-format, amenity-rich gated communities.
+3. **Developer Interest**: When Prestige, Aparna, and Phoenix chose Siruseri for their marquee Chennai projects, it signaled serious intent and attracted premium buyers.
+4. **Limited Premium Supply**: The OMR IT Corridor and Sholinganallur were running out of space. Siruseri was the natural overflow for premium demand.
 
-**What's Coming to Kokapet**
+**What's Coming to Siruseri**
 
-- **Kokapet Business Park**: A 200-acre commercial development that will bring 50,000+ jobs within walking distance of residential zones.
+- **Siruseri Business Park**: A 200-acre commercial development that will bring 50,000+ jobs within walking distance of residential zones.
 - **Star Hotels**: Multiple 5-star properties are in various stages of development.
-- **Metro Extension**: Plans for a metro line connecting Kokapet to the main network.
+- **Metro Extension**: Plans for a metro line connecting Siruseri to the main network.
 - **Social Infrastructure**: International schools, multi-specialty hospitals, and retail.
 
 **Current Price Levels**
 
-- Land: ₹1.5-2.5 crore per acre (depending on road frontage and approval status)
-- Apartments: ₹8,000-14,000 per sqft
-- Villas: ₹12,000-18,000 per sqft (plot + construction)
+- Land: â‚¹1.5-2.5 crore per acre (depending on road frontage and approval status)
+- Apartments: â‚¹8,000-14,000 per sqft
+- Villas: â‚¹12,000-18,000 per sqft (plot + construction)
 
 **Investment Thesis**
 
-Kokapet is in the "growth phase" of the real estate cycle — past the speculative early stage, but not yet as expensive as mature markets. The 5-year appreciation potential is estimated at 60-80%, outpacing most other Hyderabad micro-markets.
+Siruseri is in the "growth phase" of the real estate cycle â€” past the speculative early stage, but not yet as expensive as mature markets. The 5-year appreciation potential is estimated at 60-80%, outpacing most other Chennai micro-markets.
 
 **The Risk**
 
 Over-supply is the key risk. Multiple large projects launching simultaneously could dampen prices short-term. Investors should look for projects with strong developer credentials and early delivery timelines.
 
-GS Associations has curated a selection of the best Kokapet projects. Contact us for an investment walkthrough.`,
+GS Associations has curated a selection of the best Siruseri projects. Contact us for an investment walkthrough.`,
     category: 'Investment Guide',
     author: 'Ravi Shankar',
     authorAvatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ravi',
     publishedDate: '2024-03-15',
     readTime: 7,
     coverImage: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80',
-    tags: ['Kokapet', 'Investment', 'Luxury', 'Hyderabad'],
+    tags: ['Porur', 'Investment', 'Luxury', 'Chennai'],
     featured: true,
     views: 6782,
   },
   {
     id: 'blog-010',
     slug: 'interior-design-tips-new-apartment',
-    title: '7 Interior Design Tips to Transform Your New Apartment Under ₹15 Lakhs',
+    title: '7 Interior Design Tips to Transform Your New Apartment Under â‚¹15 Lakhs',
     excerpt: 'You don\'t need a seven-figure budget to create a stunning home. These practical tips from professional designers can transform any space.',
-    content: `Moving into a new apartment is exciting — and overwhelming. With a ₹15 lakh budget thoughtfully allocated, you can create a space that looks like it cost twice as much.
+    content: `Moving into a new apartment is exciting â€” and overwhelming. With a â‚¹15 lakh budget thoughtfully allocated, you can create a space that looks like it cost twice as much.
 
 **Tip 1: Invest in Flooring, Not Furniture**
 
-The single biggest visual impact in any space is the flooring. Budget Italian marble effect tiles cost as little as ₹80/sqft, but they elevate the entire room. Don't skimp here.
+The single biggest visual impact in any space is the flooring. Budget Italian marble effect tiles cost as little as â‚¹80/sqft, but they elevate the entire room. Don't skimp here.
 
 **Tip 2: Choose a Warm, Neutral Palette**
 
@@ -1362,7 +1362,7 @@ Stick to 3-4 colors maximum. Warm whites, soft greys, warm taupes, and one accen
 
 **Tip 3: Kitchen Modulars Are Worth It**
 
-A well-designed modular kitchen is the heart of the home. Budget ₹3.5-4 lakhs for a well-specified modular kitchen. It transforms your entire lifestyle and is the single best investment in any home.
+A well-designed modular kitchen is the heart of the home. Budget â‚¹3.5-4 lakhs for a well-specified modular kitchen. It transforms your entire lifestyle and is the single best investment in any home.
 
 **Tip 4: Lighting is Everything**
 
@@ -1371,31 +1371,31 @@ Most Indian homes are criminally underlit. Layer your lighting with:
 - Task lighting (under-cabinet, pendant over dining)
 - Accent lighting (picture lights, step lighting)
 
-A ₹1 lakh investment in proper lighting creates more impact than ₹5 lakhs of furniture.
+A â‚¹1 lakh investment in proper lighting creates more impact than â‚¹5 lakhs of furniture.
 
 **Tip 5: Wardrobes and Storage First**
 
-Clutter destroys aesthetics. Budget ₹1-1.5 lakhs per bedroom for well-planned wardrobes. Lofts, under-bed storage, and built-in shelves eliminate the clutter that makes spaces feel small.
+Clutter destroys aesthetics. Budget â‚¹1-1.5 lakhs per bedroom for well-planned wardrobes. Lofts, under-bed storage, and built-in shelves eliminate the clutter that makes spaces feel small.
 
 **Tip 6: One Statement Piece Per Room**
 
-In each room, have one standout piece — a stunning sofa, a dramatic artwork, a chandelier. Everything else can be modest. This focal point creates visual interest without requiring a large budget.
+In each room, have one standout piece â€” a stunning sofa, a dramatic artwork, a chandelier. Everything else can be modest. This focal point creates visual interest without requiring a large budget.
 
 **Tip 7: Plants and Natural Elements**
 
 Nothing brings a space alive like greenery. A mix of indoor plants (money plants, pothos, fiddle leaf figs) adds freshness, improves air quality, and adds visual interest for minimal cost.
 
-**Suggested Budget Allocation (₹15 Lakhs)**
+**Suggested Budget Allocation (â‚¹15 Lakhs)**
 
-- Modular Kitchen: ₹4,00,000
-- Wardrobes (3 bedrooms): ₹3,50,000
-- Flooring (if upgrade from builder): ₹2,00,000
-- Lighting: ₹1,00,000
-- Living Room Furniture: ₹2,00,000
-- Bathroom Accessories: ₹75,000
-- Curtains/Soft Furnishings: ₹75,000
-- Decor and Plants: ₹50,000
-- Contingency: ₹50,000
+- Modular Kitchen: â‚¹4,00,000
+- Wardrobes (3 bedrooms): â‚¹3,50,000
+- Flooring (if upgrade from builder): â‚¹2,00,000
+- Lighting: â‚¹1,00,000
+- Living Room Furniture: â‚¹2,00,000
+- Bathroom Accessories: â‚¹75,000
+- Curtains/Soft Furnishings: â‚¹75,000
+- Decor and Plants: â‚¹50,000
+- Contingency: â‚¹50,000
 
 GS Associations partners with certified interior designers who offer preferential rates to our clients. Reach out for a free consultation.`,
     category: 'Interior Design',
@@ -1410,251 +1410,112 @@ GS Associations partners with certified interior designers who offer preferentia
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // LOAN PROGRAMS (10 programs)
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const loanPrograms: LoanProgram[] = [
   {
     id: 'loan-001',
-    name: 'Home Purchase Loan',
+    name: 'Home Loans',
     type: 'Residential',
-    interestRate: '8.35% - 9.15% p.a.',
-    maxAmount: '₹5 Crore',
-    tenure: 'Up to 30 years',
-    processingFee: '0.5% of loan amount',
-    eligibility: 'Salaried & Self-Employed Indians, Age 21-65',
-    features: ['No prepayment penalty on floating rate', 'Balance transfer facility', 'Top-up loan available', 'Digital loan journey', 'Doorstep service'],
-    bankName: 'SBI Home Loans',
+    interestRate: 'Competitive Rates',
+    maxAmount: 'Starting from ₹8.5 Lakhs',
+    tenure: 'Flexible EMI Options',
+    processingFee: 'Minimal Documentation',
+    eligibility: 'First-time home buyers & home upgrades',
+    features: [
+      'Loan starting from ₹8.5 Lakhs', 
+      'Smooth and hassle-free process', 
+      'Quick approvals', 
+      'Minimal paperwork', 
+      'Expert guidance at every step', 
+      'Repayment plans suited to income'
+    ],
+    bankName: 'Multiple Banks',
     logo: 'https://upload.wikimedia.org/wikipedia/en/5/58/State_Bank_of_India_Logo.svg',
     popular: true,
+    overview: 'From dream house to doorstep we finance your future. Suitable for first-time home buyers or dream home upgrades.',
   },
   {
     id: 'loan-002',
-    name: 'HDFC Premium Home Loan',
-    type: 'Residential',
-    interestRate: '8.40% - 9.25% p.a.',
-    maxAmount: '₹10 Crore',
-    tenure: 'Up to 30 years',
-    processingFee: '₹7,500 + GST (non-refundable)',
-    eligibility: 'Salaried, Self-Employed Professionals & Non-Professionals',
-    features: ['Express Home Loan approval in 24 hrs', 'Partly disbursed loans available', 'Step-up EMI option', 'Free legal and technical verification', 'Relationship manager assigned'],
-    bankName: 'HDFC Bank',
+    name: 'Unsecured Business Loans',
+    type: 'Business',
+    interestRate: '15% - 25% p.a.',
+    maxAmount: 'Based on credit score',
+    tenure: 'Up to 4 years',
+    processingFee: 'Minimal Documentation',
+    eligibility: 'Based on credit score and financial profile',
+    features: [
+      'Instant Loan at your Fingertips', 
+      'Loan from All Banks', 
+      'Business expansion', 
+      'Marketing expenses', 
+      'Vendor payments', 
+      'Emergency working capital'
+    ],
+    bankName: 'All Banks',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg',
     popular: true,
+    overview: 'No Waiting. No Stress. Business loans without collateral designed for business growth and flexibility. Available through leading Banks and NBFCs.',
   },
   {
     id: 'loan-003',
-    name: 'Plot Purchase Loan',
-    type: 'Plot',
-    interestRate: '8.75% - 9.65% p.a.',
-    maxAmount: '₹3 Crore',
-    tenure: 'Up to 15 years',
-    processingFee: '0.5% of loan amount',
-    eligibility: 'For DTCP/HMDA approved plots only. Age 21-60',
-    features: ['Finance up to 75% of plot value', 'Overdraft facility available', 'Convert to home loan once construction begins', 'Simple documentation'],
-    bankName: 'ICICI Bank',
+    name: 'Secured Overdraft (OD) Facility',
+    type: 'Secured Overdraft',
+    interestRate: 'Charged only on utilized amount',
+    maxAmount: 'Based on property value',
+    tenure: 'Flexible access',
+    processingFee: 'Minimal Documentation',
+    eligibility: 'Property or valuable assets required',
+    features: [
+      'Credit backed by property or valuable assets', 
+      'Interest charged only on utilized amount', 
+      'Flexible access to funds', 
+      'Suitable for seasonal businesses', 
+      'Suitable for unexpected expenses', 
+      'Short-term cash flow requirements'
+    ],
+    bankName: 'Leading Banks',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg',
-    popular: false,
+    popular: true,
+    overview: 'Smart Credit. On Demand. Only When You Need It. Maintain cash flow and control business finances with flexible access to funds without paying interest on the full sanctioned limit.',
   },
   {
     id: 'loan-004',
-    name: 'Pradhan Mantri Awas Yojana (PMAY)',
-    type: 'Government Scheme',
-    interestRate: 'Effective rate from 6.1% p.a. (after subsidy)',
-    maxAmount: '₹45 Lakhs (subsidy on ₹6-12 lakhs)',
-    tenure: 'Up to 20 years',
-    processingFee: 'Nil (under PMAY scheme)',
-    eligibility: 'First-time homebuyers, EWS/LIG/MIG categories as defined',
-    features: ['Interest subsidy up to ₹2.67 lakhs', 'No processing fee', 'All leading banks participating', 'Online application through NHB', 'Subsidy credited directly to loan account'],
-    bankName: 'Multiple Banks (NHB Scheme)',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg',
-    popular: true,
-  },
-  {
-    id: 'loan-005',
-    name: 'Commercial Property Loan',
-    type: 'Commercial',
-    interestRate: '9.25% - 11.50% p.a.',
-    maxAmount: '₹25 Crore',
-    tenure: 'Up to 15 years',
-    processingFee: '1% of loan amount',
-    eligibility: 'Businesses, Corporates, Self-Employed Professionals. Minimum 3 years business vintage',
-    features: ['Finance up to 70% of property value', 'Moratorium period available', 'Lease rental discounting', 'Balance transfer at better rates', 'Overdraft against property'],
-    bankName: 'Axis Bank',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Axis_Bank_logo.svg',
-    popular: false,
-  },
-  {
-    id: 'loan-006',
-    name: 'NRI Home Loan',
-    type: 'NRI',
-    interestRate: '8.50% - 9.40% p.a.',
-    maxAmount: '₹5 Crore',
-    tenure: 'Up to 20 years',
-    processingFee: '0.5% of loan amount + overseas processing charges',
-    eligibility: 'NRIs with valid employment abroad, PIO/OCI cardholders',
-    features: ['Repayment via NRE/NRO account', 'POA holder can manage documentation in India', 'Online application from anywhere', 'Dedicated NRI relationship manager', 'Repatriation of rental income permitted'],
-    bankName: 'Kotak Mahindra Bank',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Kotak_Mahindra_Bank_logo.svg',
-    popular: false,
-  },
-  {
-    id: 'loan-007',
-    name: 'Home Improvement Loan',
-    type: 'Improvement',
-    interestRate: '9.00% - 10.25% p.a.',
-    maxAmount: '₹50 Lakhs',
-    tenure: 'Up to 15 years',
-    processingFee: '0.5% of loan amount',
-    eligibility: 'Existing homeowners. Minimum 2 years ownership required',
-    features: ['No collateral for amounts up to ₹10 lakhs', 'Quick disbursal in 72 hours', 'Use for renovation, extension, modular kitchen, interiors', 'Top-up on existing home loan', 'Tax benefits under Section 24(b)'],
-    bankName: 'Bank of Baroda',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/26/Bank_of_Baroda.svg',
-    popular: false,
-  },
-  {
-    id: 'loan-008',
-    name: 'Balance Transfer + Top Up',
-    type: 'Balance Transfer',
-    interestRate: 'From 8.30% p.a. (subject to credit assessment)',
-    maxAmount: 'Up to outstanding loan amount + ₹50 lakhs top-up',
-    tenure: 'Remaining loan tenure',
-    processingFee: '0.25% of outstanding loan amount',
-    eligibility: 'Existing home loan customers of any bank with 12+ months repayment history and clean track record',
-    features: ['Lowest available interest rates', 'Cashback up to ₹50,000 on transfer', 'Top-up loan simultaneously', 'Minimal documentation', 'No foreclosure penalty from existing lender required'],
-    bankName: 'HDFC Bank',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg',
-    popular: true,
-  },
-  {
-    id: 'loan-009',
-    name: 'Affordable Home Loan (CLSS)',
-    type: 'Affordable',
-    interestRate: 'Effective from 6.50% p.a. (with subsidy)',
-    maxAmount: '₹35 Lakhs',
-    tenure: 'Up to 20 years',
-    processingFee: 'Nil under scheme',
-    eligibility: 'Annual household income up to ₹18 lakhs. No existing pucca house in family',
-    features: ['Upfront subsidy of ₹2.30-2.67 lakhs', 'All property types eligible', 'Multiple bank partners', 'Simple online application', 'Reduced EMI from day one'],
-    bankName: 'Canara Bank (via NHB)',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Canara_bank.svg',
-    popular: false,
-  },
-  {
-    id: 'loan-010',
-    name: 'Senior Citizen Home Loan',
-    type: 'Residential',
-    interestRate: '8.50% - 9.00% p.a.',
-    maxAmount: '₹2 Crore',
-    tenure: 'Up to 20 years (or age 80, whichever is earlier)',
-    processingFee: '0.25% of loan amount (capped at ₹5,000)',
-    eligibility: 'Age 60-75 at application. Pension/fixed income mandatory. Co-applicant may be required',
-    features: ['Pension and rental income considered for eligibility', 'Reverse mortgage option available', 'Step-down EMI aligned with retirement income', 'Reduced processing fee', 'Doorstep documentation'],
-    bankName: 'Punjab National Bank',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/6/64/PNB_logo.svg',
-    popular: false,
-  },
-  {
-    id: 'loan-011',
-    name: 'Business Loan',
-    type: 'Business',
-    interestRate: '10.50% - 16.00% p.a.',
-    maxAmount: '₹50 Lakhs',
-    tenure: 'Up to 5 years',
-    processingFee: '1.5% of loan amount',
-    eligibility: 'Self-employed individuals, proprietors, partnerships, and private limited companies with minimum 2 years of business vintage',
-    features: ['Collateral-free loans up to ₹50 lakhs', 'Quick disbursal within 48 hours', 'Flexible repayment options', 'No end-use restrictions', 'Minimal documentation'],
-    bankName: 'HDFC Bank',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg',
-    popular: false,
-    overview: 'The HDFC Business Loan is designed to meet the diverse financing needs of growing businesses. Whether you need funds for expansion, inventory purchase, equipment upgrades, or working capital needs, this unsecured loan provides quick access to capital without pledging any assets.',
-    benefits: ['No collateral or security required', 'Flexible loan tenure from 12 to 60 months', 'Competitive interest rates for established businesses', 'Overdraft facility available for regular borrowers', 'Pre-approved offers for existing HDFC customers'],
-    documents: ['Business Registration Certificate / GST Registration', 'Last 2 years ITR with computation of income', 'Last 6 months bank statements', 'KYC documents of all partners / directors', 'Business vintage proof (minimum 2 years)', 'Latest audited financial statements'],
-    process: [
-      { title: 'Application', desc: 'Submit your business loan application with required business and financial documents.' },
-      { title: 'Credit Assessment', desc: 'Our team evaluates your business financials, credit score, and repayment capacity.' },
-      { title: 'Approval & Offer', desc: 'Upon successful assessment, receive your loan offer with terms and conditions.' },
-      { title: 'Disbursal', desc: 'Accept the offer and receive funds directly in your business account within 48 hours.' },
-    ],
-  },
-  {
-    id: 'loan-012',
-    name: 'Loan Against Property (LAP)',
-    type: 'Loan Against Property',
-    interestRate: '8.75% - 11.50% p.a.',
-    maxAmount: '₹10 Crore',
-    tenure: 'Up to 18 years',
-    processingFee: '0.5% - 1% of loan amount',
-    eligibility: 'Property owners (residential or commercial) with clear title. Salaried or self-employed, age 25-65 years',
-    features: ['Finance up to 65% of property market value', 'Lower interest rates compared to unsecured loans', 'Continue to occupy the mortgaged property', 'Tax benefits on interest paid for business purposes', 'Flexible end-use: business expansion, education, medical, or personal needs'],
-    bankName: 'SBI',
-    logo: 'https://upload.wikimedia.org/wikipedia/en/5/58/State_Bank_of_India_Logo.svg',
-    popular: true,
-    overview: 'Loan Against Property (LAP) from SBI allows you to unlock the value of your residential or commercial property to meet large financial needs. With competitive rates starting from 8.75% and tenure up to 18 years, this secured loan is ideal for funding business expansion, higher education, medical emergencies, or debt consolidation.',
-    benefits: ['High loan amount up to ₹10 Crore', 'Lower interest rate as it is a secured loan', 'Long repayment tenure reduces EMI burden', 'Property remains in your possession and use', 'Multipurpose loan with no restriction on end-use'],
-    documents: ['Original property documents with chain of title', 'Property tax receipts and encumbrance certificate', 'Approved building plan and completion certificate', 'Identity and address proof', 'Income proof — salary slips or ITR for last 3 years', 'Last 12 months bank statements'],
-    process: [
-      { title: 'Property Evaluation', desc: 'Submit your application along with property documents for valuation and legal verification.' },
-      { title: 'Income Assessment', desc: 'Your income documents and credit history are assessed to determine loan eligibility.' },
-      { title: 'Sanction & Offer', desc: 'Receive a sanction letter with approved loan amount, rate, and tenure.' },
-      { title: 'Registration & Disbursal', desc: 'Complete mortgage registration and receive the loan amount in your account.' },
-    ],
-  },
-  {
-    id: 'loan-013',
-    name: 'Secured Overdraft Facility',
-    type: 'Secured Overdraft',
-    interestRate: '9.00% - 10.75% p.a.',
-    maxAmount: '₹5 Crore',
-    tenure: 'Renewable annually',
-    processingFee: '0.5% of sanctioned limit',
-    eligibility: 'Property owners (residential or commercial) with clear title. Salaried with minimum ₹50,000/month income or self-employed with 3+ years business vintage',
-    features: ['Pay interest only on the amount utilized', 'Withdraw and repay any number of times', 'Sanctioned limit available 24/7', 'Linked to savings/current account for easy access', 'No prepayment or part-payment penalty'],
-    bankName: 'ICICI Bank',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg',
-    popular: false,
-    overview: 'The Secured Overdraft Facility from ICICI Bank provides a flexible credit line against your property. Unlike traditional loans, you pay interest only on the amount you actually use. This revolving credit facility is ideal for business owners, professionals, and individuals who need periodic access to funds without taking a fixed-term loan each time.',
-    benefits: ['Interest charged only on utilized amount, not sanctioned limit', 'No fixed EMI — repay as per your convenience', 'Revolving credit line that resets on repayment', 'Can be used alongside existing home loan on the same property', 'Digital access to overdraft via net banking and mobile app'],
-    documents: ['Original property documents and title deed', 'Encumbrance certificate (last 15 years)', 'Income proof — latest salary slips, Form 16, or ITR', 'Bank statements for last 6 months', 'KYC documents', 'Business proof (for self-employed applicants)'],
-    process: [
-      { title: 'Application & Property Submission', desc: 'Apply online or at branch with your property and income documents.' },
-      { title: 'Valuation & Legal Check', desc: 'ICICI Bank conducts property valuation and legal due diligence.' },
-      { title: 'Limit Sanctioning', desc: 'Overdraft limit is sanctioned based on property value and income assessment.' },
-      { title: 'Account Activation', desc: 'OD account is linked to your savings/current account for instant fund access.' },
-    ],
-  },
-  {
-    id: 'loan-014',
-    name: 'Working Capital Loan',
+    name: 'Bridge Loan Financing',
     type: 'Working Capital',
-    interestRate: '11.00% - 15.00% p.a.',
-    maxAmount: '₹2 Crore',
-    tenure: 'Up to 3 years (renewable)',
-    processingFee: '1% of loan amount',
-    eligibility: 'MSMEs, SMEs, proprietorships, partnerships, and private limited companies with minimum 1 year of operation and annual turnover above ₹25 lakhs',
-    features: ['Cash credit and overdraft options available', 'Quick sanction within 5 working days', 'No collateral required up to ₹25 lakhs (under CGTMSE)', 'Flexible drawdown and repayment', 'GST-linked working capital assessment'],
-    bankName: 'Axis Bank',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Axis_Bank_logo.svg',
-    popular: false,
-    overview: 'The Working Capital Loan from Axis Bank is designed to bridge short-term funding gaps for businesses. Whether you need to manage inventory, pay suppliers, cover payroll, or handle seasonal demand fluctuations, this loan provides the liquidity your business needs to operate smoothly without interruptions.',
-    benefits: ['Funds available for day-to-day business operations', 'Multiple facilities: CC, OD, and term loan options', 'Government-backed CGTMSE guarantee for collateral-free loans', 'Competitive rates for businesses with strong credit profile', 'Renewable facility — no need to re-apply every year'],
-    documents: ['GST registration and returns (last 1 year)', 'Business financials — P&L, Balance Sheet (last 2 years)', 'Bank statements for last 6-12 months', 'KYC of proprietor / partners / directors', 'Business plan or fund utilization statement', 'Stock / debtor / creditor statement (if applicable)'],
-    process: [
-      { title: 'Eligibility Check', desc: 'Submit your business details and financials for a preliminary eligibility assessment.' },
-      { title: 'Documentation', desc: 'Provide the required financial and business documents for detailed evaluation.' },
-      { title: 'Credit Appraisal', desc: 'Axis Bank reviews your turnover, cash flow, and creditworthiness.' },
-      { title: 'Sanction & Disbursal', desc: 'Working capital limit is sanctioned and funds are made available in your business account.' },
+    interestRate: 'Competitive Rates',
+    maxAmount: 'Based on needs',
+    tenure: 'Short-term',
+    processingFee: 'Minimal Documentation',
+    eligibility: 'Property and business needs',
+    features: [
+      'Because Opportunities Can\'t Wait', 
+      'Short-term secured funding', 
+      'Fast approvals', 
+      'Multiple channel partners'
     ],
+    bankName: 'Leading Banks',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Axis_Bank_logo.svg',
+    popular: true,
+    overview: 'Because Opportunities Can\'t Wait. Short-term secured funding for property and business needs.',
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // DEMO CREDENTIALS
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const DEMO_CREDENTIALS = {
   admin: { email: 'admin@gsassociations.com', password: 'admin123' },
   user: { email: 'arjun.mehta@gmail.com', password: 'user123' },
 };
+
+
+
+
+
+
+
 
