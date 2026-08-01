@@ -10,7 +10,7 @@ import {
   CheckCircle2, Eye, Lock, X, LayoutGrid, Ruler, Building2
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { getProperty, getProperties } from '@/lib/db/properties';
+import { getProperty, getProperties, incrementPropertyView } from '@/lib/db/properties';
 import { saveProperty, unsaveProperty, getSavedPropertyIds, recordPropertyView } from '@/lib/db/saved';
 import { createLead } from '@/lib/db/leads';
 import { useAuthStore } from '@/stores/authStore';
@@ -42,8 +42,9 @@ export default function PropertyDetailPage() {
   useEffect(() => {
     setLoading(true);
     getProperty(id).then(async (p) => {
-      setProperty(p);
       if (p) {
+        setProperty({ ...p, views: (p.views || 0) + 1 });
+        incrementPropertyView(p.id).catch(() => {});
         const all = await getProperties();
         setSimilar(all.filter(x => x.id !== id && x.type === p.type).slice(0, 3));
         if (isAuthenticated && currentUser) {
@@ -51,6 +52,8 @@ export default function PropertyDetailPage() {
           setIsSaved(saved.includes(id));
           await recordPropertyView(currentUser.id, id);
         }
+      } else {
+        setProperty(null);
       }
       setLoading(false);
     }).catch(() => setLoading(false));
@@ -288,8 +291,8 @@ export default function PropertyDetailPage() {
                     <Lock className="w-6 h-6 text-navy-800 mx-auto mb-3" />
                     <h3 className="font-bold text-surface-900 mb-2">Members Only Content</h3>
                     <p className="text-sm text-surface-600 mb-5">Sign in to view full property details and description.</p>
-                    <button onClick={openRegisterModal} className="btn-primary w-full mb-3">Register Free</button>
-                    <button onClick={openLoginModal} className="text-sm text-navy-800 font-semibold hover:underline">Already have an account? Sign In</button>
+                    <button onClick={() => openRegisterModal()} className="btn-primary w-full mb-3">Register Free</button>
+                    <button onClick={() => openLoginModal()} className="text-sm text-navy-800 font-semibold hover:underline">Already have an account? Sign In</button>
                   </div>
                 </div>
               </div>
@@ -408,10 +411,10 @@ export default function PropertyDetailPage() {
                 ) : (
                   <div className="text-center py-6">
                     <p className="text-surface-600 mb-6 font-medium">Sign in to contact the agent and unlock property details.</p>
-                    <button onClick={openRegisterModal} className="btn-primary w-full mb-3">
+                    <button onClick={() => openRegisterModal()} className="btn-primary w-full mb-3">
                       Register Free
                     </button>
-                    <button onClick={openLoginModal} className="text-sm font-semibold text-navy-700 hover:text-navy-900">
+                    <button onClick={() => openLoginModal()} className="text-sm font-semibold text-navy-700 hover:text-navy-900">
                       Already have an account? Sign in
                     </button>
                   </div>

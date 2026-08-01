@@ -14,7 +14,7 @@ interface AuthState {
   setAuth: (user: any | null) => void;
   isLoginModalOpen: boolean;
   loginPromptReason: string | null;
-  openLoginModal: (reason?: string) => void;
+  openLoginModal: (reason?: string | any) => void;
   closeLoginModal: () => void;
   isRegisterModalOpen: boolean;
   openRegisterModal: () => void;
@@ -31,7 +31,7 @@ export const useAuthStore = create<AuthState>()(
       loginPromptReason: null,
       isRegisterModalOpen: false,
 
-      openLoginModal: (reason?: string) => set({ isLoginModalOpen: true, loginPromptReason: reason || null }),
+      openLoginModal: (reason?: any) => set({ isLoginModalOpen: true, loginPromptReason: typeof reason === 'string' ? reason : null }),
       closeLoginModal: () => set({ isLoginModalOpen: false, loginPromptReason: null }),
       openRegisterModal: () => set({ isRegisterModalOpen: true }),
       closeRegisterModal: () => set({ isRegisterModalOpen: false }),

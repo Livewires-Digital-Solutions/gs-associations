@@ -171,5 +171,20 @@ export async function deleteProperty(id: string): Promise<void> {
 
 export async function incrementPropertyView(id: string): Promise<void> {
   const supabase = createClient();
-  await supabase.rpc('increment_property_view', { property_id: id });
+  try {
+    const { error } = await supabase.rpc('increment_property_view', { property_id: id });
+    if (error) {
+      const { data } = await supabase.from('properties').select('views').eq('id', id).single();
+      if (data) {
+        await supabase.from('properties').update({ views: (data.views ?? 0) + 1 }).eq('id', id);
+      }
+    }
+  } catch (err) {
+    try {
+      const { data } = await supabase.from('properties').select('views').eq('id', id).single();
+      if (data) {
+        await supabase.from('properties').update({ views: (data.views ?? 0) + 1 }).eq('id', id);
+      }
+    } catch (_) {}
+  }
 }
