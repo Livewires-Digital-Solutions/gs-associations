@@ -58,12 +58,45 @@ export default function AdminLeads() {
       try {
         await dbUpdateLeadNotes(selectedLead.id, noteText);
         setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, notes: noteText } : l));
-        toast.success('Note saved');
+        setSelectedLead({ ...selectedLead, notes: noteText });
+        toast.success('Notes saved');
       } catch (e: any) {
-        toast.error(e.message || 'Failed to save note');
+        toast.error(e.message || 'Failed to save notes');
       }
     }
   };
+
+  const downloadCSV = () => {
+    if (filtered.length === 0) {
+      toast.error('No leads to export');
+      return;
+    }
+    
+    const headers = ['Date', 'Name', 'Phone', 'Email', 'Source', 'Property', 'Status', 'Notes'];
+    const rows = filtered.map(lead => [
+      lead.date,
+      `"${lead.userName}"`,
+      lead.userPhone,
+      lead.userEmail,
+      lead.source,
+      `"${lead.propertyTitle}"`,
+      lead.status,
+      `"${(lead.notes || '').replace(/"/g, '""')}"`
+    ]);
+
+    const csvContent = [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `leads_export_${format(new Date(), 'yyyy-MM-dd')}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success('CSV downloaded successfully');
+  };
+
 
   const openLead = (lead: typeof leads[0]) => {
     setSelectedLead(lead);
@@ -87,7 +120,7 @@ export default function AdminLeads() {
             <p className="text-surface-500 text-sm">{leads.length} total leads captured</p>
           </div>
           <button
-            onClick={() => toast.success('Export started — CSV will download shortly')}
+            onClick={downloadCSV}
             className="btn-secondary text-sm gap-2"
           >
             <Download className="w-4 h-4" />
