@@ -67,34 +67,42 @@ export default function AdminLeads() {
   };
 
   const downloadCSV = () => {
-    if (filtered.length === 0) {
-      toast.error('No leads to export');
-      return;
-    }
-    
-    const headers = ['Date', 'Name', 'Phone', 'Email', 'Source', 'Property', 'Status', 'Notes'];
-    const rows = filtered.map(lead => [
-      lead.date,
-      `"${lead.userName}"`,
-      lead.userPhone,
-      lead.userEmail,
-      lead.source,
-      `"${lead.propertyTitle}"`,
-      lead.status,
-      `"${(lead.notes || '').replace(/"/g, '""')}"`
-    ]);
+    try {
+      if (filtered.length === 0) {
+        toast.error('No leads to export');
+        return;
+      }
+      
+      const headers = ['Date', 'Name', 'Phone', 'Email', 'Source', 'Property', 'Status', 'Notes'];
+      const rows = filtered.map(lead => [
+        lead.date || '',
+        `"${(lead.userName || '').replace(/"/g, '""')}"`,
+        lead.userPhone || '',
+        lead.userEmail || '',
+        lead.source || '',
+        `"${(lead.propertyTitle || '').replace(/"/g, '""')}"`,
+        lead.status || '',
+        `"${(lead.notes || '').replace(/"/g, '""')}"`
+      ]);
 
-    const csvContent = [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
-    
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `leads_export_${format(new Date(), 'yyyy-MM-dd')}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    toast.success('CSV downloaded successfully');
+      const csvString = [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+      
+      // Fallback data URI method for maximum browser compatibility
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `leads_export_${format(new Date(), 'yyyy-MM-dd')}.csv`);
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      toast.success('CSV downloaded successfully');
+    } catch (error) {
+      console.error('CSV Export Error:', error);
+      toast.error('Error generating CSV. Check console.');
+    }
   };
 
 
