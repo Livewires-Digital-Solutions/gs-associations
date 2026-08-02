@@ -10,6 +10,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   register: (name: string, email: string, phone: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
+  deleteAccount: () => Promise<{ success: boolean; error?: string }>;
   updateProfile: (data: Partial<User>) => void;
   setAuth: (user: any | null) => void;
   isLoginModalOpen: boolean;
@@ -95,6 +96,25 @@ export const useAuthStore = create<AuthState>()(
         const supabase = createClient();
         await supabase.auth.signOut();
         set({ currentUser: null, isAuthenticated: false, isLoginModalOpen: false });
+      },
+
+      deleteAccount: async () => {
+        const supabase = createClient();
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session?.access_token) {
+          return { success: false, error: 'Not authenticated' };
+        }
+        const res = await fetch('/api/delete-account', {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${session.access_token}` },
+        });
+        const json = await res.json();
+        if (!res.ok) {
+          return { success: false, error: json.error || 'Failed to delete account' };
+        }
+        await supabase.auth.signOut();
+        set({ currentUser: null, isAuthenticated: false, isLoginModalOpen: false });
+        return { success: true };
       },
 
       updateProfile: (data) => {

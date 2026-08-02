@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, Edit2, Trash2, Star, Eye, Heart, X, Check } from 'lucide-react';
 import { toast } from 'sonner';
 import type { Property } from '@/data/mockData';
+import ImageUpload from '@/components/ui/ImageUpload';
 import {
   getProperties,
   createProperty,
@@ -40,8 +41,10 @@ function PropertyForm({
     description: property?.description || '',
     agentName: property?.agentName || '',
     agentPhone: property?.agentPhone || '',
+    agentEmail: property?.agentEmail || '',
     featured: property?.featured || false,
   });
+  const [uploadedImages, setUploadedImages] = useState<string[]>(property?.images || []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +55,8 @@ function PropertyForm({
       bedrooms: parseInt(form.bedrooms),
       bathrooms: parseInt(form.bathrooms),
       parking: parseInt(form.parking),
-      images: property?.images || ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80'],
+      images: uploadedImages.length > 0 ? uploadedImages : (property?.images || ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80']),
+      agentEmail: form.agentEmail,
       features: property?.features || [],
       lat: property?.lat || 17.44,
       lng: property?.lng || 78.34,
@@ -142,6 +146,61 @@ function PropertyForm({
             <label className="label mb-1.5 block">Description</label>
             <textarea value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} className="input h-24 resize-none" />
           </div>
+          <div>
+            <label className="label mb-2 block">Property Images (First image is Cover)</label>
+            <ImageUpload
+              value=""
+              onChange={(url) => setUploadedImages(prev => url ? [...prev, url] : prev)}
+              onMultipleChange={(urls) => setUploadedImages(prev => [...prev, ...urls])}
+              multiple
+              bucket="uploads"
+              folder="property-images"
+            />
+            {uploadedImages.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+                {uploadedImages.map((img, i) => (
+                  <div key={i} className={`relative group rounded-xl overflow-hidden border-2 ${i === 0 ? 'border-navy-500' : 'border-transparent'}`}>
+                    <img src={img} alt="" className="w-full h-24 object-cover" />
+                    
+                    {/* Dark overlay on hover */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                      {i !== 0 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newArr = [...uploadedImages];
+                            const temp = newArr[0];
+                            newArr[0] = newArr[i];
+                            newArr[i] = temp;
+                            setUploadedImages(newArr);
+                          }}
+                          className="bg-white/20 hover:bg-white text-white hover:text-navy-900 text-[10px] font-bold px-2 py-1 rounded backdrop-blur-md transition-colors"
+                        >
+                          SET COVER
+                        </button>
+                      )}
+                    </div>
+                    
+                    {/* Remove Button */}
+                    <button
+                      type="button"
+                      onClick={() => setUploadedImages(prev => prev.filter((_, j) => j !== i))}
+                      className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-red-600/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 transition-all z-10"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+
+                    {/* Cover Badge */}
+                    {i === 0 && (
+                      <div className="absolute top-1.5 left-1.5 bg-navy-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">
+                        COVER
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label mb-1.5 block">Agent Name</label>
@@ -151,6 +210,10 @@ function PropertyForm({
               <label className="label mb-1.5 block">Agent Phone</label>
               <input type="text" value={form.agentPhone} onChange={e => setForm(p => ({ ...p, agentPhone: e.target.value }))} className="input" />
             </div>
+          </div>
+          <div>
+            <label className="label mb-1.5 block">Agent Email</label>
+            <input type="email" value={form.agentEmail} onChange={e => setForm(p => ({ ...p, agentEmail: e.target.value }))} className="input" placeholder="agent@gsassociations.com" />
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.featured} onChange={e => setForm(p => ({ ...p, featured: e.target.checked }))} className="rounded" />

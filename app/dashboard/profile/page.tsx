@@ -2,15 +2,17 @@
 
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Save, Camera, Shield, Bell } from 'lucide-react';
+import { Save, Camera, Shield, Bell, Trash2, AlertTriangle } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 
 const budgetOptions = ['Under ₹50 Lakhs', '₹50L – ₹1 Crore', '₹1Cr – ₹2 Crore', '₹2Cr – ₹5 Crore', '₹5 Crore+'];
 const propertyTypes = ['Apartment', 'Villa', 'Plot', 'Commercial', 'Row House', 'Penthouse'];
 
 export default function ProfileSettings() {
-  const { currentUser, updateProfile } = useAuthStore();
+  const router = useRouter();
+  const { currentUser, updateProfile, deleteAccount } = useAuthStore();
   const [form, setForm] = useState({
     name: currentUser?.name || '',
     email: currentUser?.email || '',
@@ -21,6 +23,8 @@ export default function ProfileSettings() {
   });
   const [notifications, setNotifications] = useState({ newListings: true, priceDrops: true, marketUpdates: false });
   const [saved, setSaved] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +32,19 @@ export default function ProfileSettings() {
     setSaved(true);
     toast.success('Profile updated successfully');
     setTimeout(() => setSaved(false), 3000);
+  };
+
+  const handleDeleteAccount = async () => {
+    setDeleteLoading(true);
+    const result = await deleteAccount();
+    setDeleteLoading(false);
+    if (result.success) {
+      toast.success('Your account has been deleted.');
+      router.push('/');
+    } else {
+      toast.error(result.error || 'Failed to delete account. Please try again.');
+      setShowDeleteConfirm(false);
+    }
   };
 
   return (
@@ -150,11 +167,58 @@ export default function ProfileSettings() {
             <Save className="w-4 h-4" />
             {saved ? 'Saved!' : 'Save Changes'}
           </button>
-          <button type="button" className="btn-danger text-sm">
+          <button
+            type="button"
+            onClick={() => setShowDeleteConfirm(true)}
+            className="btn-danger text-sm gap-2 flex items-center"
+          >
+            <Trash2 className="w-4 h-4" />
             Delete Account
           </button>
         </div>
       </form>
+
+      {/* Delete Account Confirmation Dialog */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 border border-surface-200">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-4">
+                <AlertTriangle className="w-8 h-8 text-red-600" />
+              </div>
+              <h2 className="text-xl font-bold text-surface-900 mb-2">Delete Account?</h2>
+              <p className="text-surface-500 text-sm mb-1">
+                This action is <span className="font-semibold text-red-600">permanent and irreversible</span>.
+              </p>
+              <p className="text-surface-400 text-sm mb-8">
+                All your saved properties, profile data, and history will be permanently removed.
+              </p>
+              <div className="flex gap-3 w-full">
+                <button
+                  type="button"
+                  onClick={() => setShowDeleteConfirm(false)}
+                  disabled={deleteLoading}
+                  className="flex-1 px-4 py-3 rounded-xl border-2 border-surface-200 text-surface-700 font-semibold hover:border-surface-300 transition-all text-sm"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDeleteAccount}
+                  disabled={deleteLoading}
+                  className="flex-1 px-4 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold transition-all text-sm disabled:opacity-60 flex items-center justify-center gap-2"
+                >
+                  {deleteLoading ? (
+                    <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Deleting...</>
+                  ) : (
+                    <><Trash2 className="w-4 h-4" /> Yes, Delete My Account</>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

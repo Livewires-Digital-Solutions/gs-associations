@@ -153,22 +153,58 @@ export default function PropertyDetailPage() {
       
       {/* 1. Page Content with Anti-DevTools Security & Full Blur if unauthenticated */}
       <div className={!isAuthenticated ? "filter blur-xl pointer-events-none select-none max-h-screen overflow-hidden opacity-30 transition-all duration-300" : "transition-all duration-300"}>
-        {/* Cinematic Full-Bleed Hero */}
-        <section className="relative w-full h-[60vh] bg-surface-900">
-          <img 
-            src={property.images[0]} 
-            alt={isAuthenticated ? property.title : "Luxury Property Chennai"} 
-            className="w-full h-full object-cover opacity-90"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        {/* Cinematic Full-Bleed Hero Carousel */}
+        <section className="relative w-full h-[60vh] bg-surface-900 group">
+          <AnimatePresence mode="wait">
+            <motion.img 
+              key={activeImage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              src={property.images[activeImage]} 
+              alt={isAuthenticated ? property.title : "Luxury Property Chennai"} 
+              className="w-full h-full object-cover opacity-90 absolute inset-0"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+          
+          {/* Carousel Arrows */}
+          {property.images.length > 1 && isAuthenticated && (
+            <>
+              <button 
+                onClick={(e) => { e.stopPropagation(); setActiveImage(prev => prev === 0 ? property.images.length - 1 : prev - 1); }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/30 hover:bg-black/50 text-white backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all border border-white/20 z-10"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button 
+                onClick={(e) => { e.stopPropagation(); setActiveImage(prev => prev === property.images.length - 1 ? 0 : prev + 1); }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/30 hover:bg-black/50 text-white backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all border border-white/20 z-10"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+              
+              {/* Carousel Indicators */}
+              <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {property.images.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImage(i)}
+                    className={`h-1.5 rounded-full transition-all ${i === activeImage ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
           
           {/* Floating View Gallery Button */}
           <button 
             onClick={() => isAuthenticated && setLightboxOpen(true)}
-            className="absolute bottom-6 right-6 md:bottom-8 md:right-8 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 font-medium transition-all"
+            className="absolute bottom-6 right-6 md:bottom-8 md:right-8 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 font-medium transition-all z-10"
           >
             <LayoutGrid className="w-5 h-5" />
-            Show all photos
+            Show all {property.images.length} photos
           </button>
         </section>
 

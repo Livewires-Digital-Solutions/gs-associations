@@ -282,11 +282,12 @@ export default function LoansPage() {
               onClick={() => setIsEmiModalOpen(false)}
               className="fixed inset-0 bg-navy-950/40 backdrop-blur-sm z-50"
             />
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <motion.div
-              initial={{ opacity: 0, y: 100, scale: 0.9 }} 
+              initial={{ opacity: 0, y: 40, scale: 0.95 }} 
               animate={{ opacity: 1, y: 0, scale: 1 }} 
-              exit={{ opacity: 0, y: 100, scale: 0.9 }}
-              className="fixed bottom-0 left-0 right-0 md:bottom-auto md:left-1/2 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-50 bg-white md:rounded-2xl rounded-t-2xl shadow-2xl w-full max-w-lg overflow-hidden"
+              exit={{ opacity: 0, y: 40, scale: 0.95 }}
+              className="pointer-events-auto bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
@@ -347,6 +348,7 @@ export default function LoansPage() {
                 </div>
               </div>
             </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
@@ -360,11 +362,12 @@ export default function LoansPage() {
               onClick={() => setIsExpertModalOpen(false)}
               className="fixed inset-0 bg-navy-950/40 backdrop-blur-sm z-50"
             />
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <motion.div
-              initial={{ opacity: 0, y: 100, scale: 0.9 }} 
+              initial={{ opacity: 0, y: 40, scale: 0.95 }} 
               animate={{ opacity: 1, y: 0, scale: 1 }} 
-              exit={{ opacity: 0, y: 100, scale: 0.9 }}
-              className="fixed bottom-0 left-0 right-0 md:bottom-auto md:left-1/2 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-50 bg-white md:rounded-2xl rounded-t-2xl shadow-2xl w-full max-w-md overflow-hidden"
+              exit={{ opacity: 0, y: 40, scale: 0.95 }}
+              className="pointer-events-auto bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-2">
@@ -407,6 +410,7 @@ export default function LoansPage() {
                 )}
               </div>
             </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>

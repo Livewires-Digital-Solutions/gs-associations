@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { getBlogPosts, createBlogPost, updateBlogPost, deleteBlogPost } from '@/lib/db/blogs';
 import { toast } from 'sonner';
 import type { BlogPost } from '@/data/mockData';
+import ImageUpload from '@/components/ui/ImageUpload';
 
 function BlogForm({ blog, onSave, onClose }: { blog?: BlogPost; onSave: (data: Partial<BlogPost>) => void; onClose: () => void }) {
   const [form, setForm] = useState({
@@ -75,10 +76,13 @@ function BlogForm({ blog, onSave, onClose }: { blog?: BlogPost; onSave: (data: P
             <label className="label mb-1.5 block">Content *</label>
             <textarea value={form.content} onChange={e => setForm(p => ({ ...p, content: e.target.value }))} className="input h-36 resize-none" required />
           </div>
-          <div>
-            <label className="label mb-1.5 block">Cover Image URL</label>
-            <input type="url" value={form.coverImage} onChange={e => setForm(p => ({ ...p, coverImage: e.target.value }))} placeholder="https://..." className="input" />
-          </div>
+          <ImageUpload
+            label="Cover Image"
+            value={form.coverImage}
+            onChange={(url) => setForm(p => ({ ...p, coverImage: url }))}
+            bucket="uploads"
+            folder="blog-covers"
+          />
           <div>
             <label className="label mb-1.5 block">Tags (comma-separated)</label>
             <input type="text" value={form.tags} onChange={e => setForm(p => ({ ...p, tags: e.target.value }))} placeholder="Investment, Chennai, 2024" className="input" />

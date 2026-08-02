@@ -3,12 +3,15 @@ import nodemailer from 'nodemailer';
 
 export async function POST(req: NextRequest) {
   try {
-    const { userName, userPhone, userEmail, message, propertyTitle, propertyLocation, agentName, agentEmail } = await req.json();
+    const { userName, userPhone, userEmail, message, propertyTitle, propertyLocation, agentName, agentEmail, type } = await req.json();
 
-    // Validate required fields
-    if (!agentEmail || !userName || !userPhone) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    // Validate only truly required fields
+    if (!userName || !userPhone) {
+      return NextResponse.json({ error: 'Name and phone number are required' }, { status: 400 });
     }
+
+    // Fall back to admin email if property has no agent email set
+    const recipientEmail = agentEmail || process.env.SMTP_USER;
 
     // Create transporter
     const transporter = nodemailer.createTransport({
@@ -24,7 +27,7 @@ export async function POST(req: NextRequest) {
     // Email to agent
     await transporter.sendMail({
       from: `"GS Associations Enquiry" <${process.env.SMTP_USER}>`,
-      to: agentEmail,
+      to: recipientEmail,
       replyTo: userEmail || undefined,
       subject: `New Property Enquiry — ${propertyTitle}`,
       html: `
