@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { createLead } from '@/lib/db/leads';
+import PhoneInput from '@/components/ui/PhoneInput';
 
 const contactInfo = [
   { icon: <MapPin className="w-5 h-5" />, label: 'Office Address', value: 'No. 42, Anna Salai,\nGuindy, Chennai — 600032' },
@@ -25,11 +26,25 @@ const inquiryTypes = [
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', type: '', message: '' });
+  const [phoneValid, setPhoneValid] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.name.trim().length < 2) {
+      toast.error('Please enter your full name (letters only)');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    if (!phoneValid) {
+      toast.error('Please enter a valid phone number for the selected country');
+      return;
+    }
     setLoading(true);
     try {
       await createLead({
@@ -196,7 +211,7 @@ export default function ContactPage() {
                         <input
                           type="text"
                           value={formData.name}
-                          onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
+                          onChange={e => setFormData(p => ({ ...p, name: e.target.value.replace(/[^a-zA-Z\s'.\-]/g, '') }))}
                           placeholder="Arjun Mehta"
                           className="w-full bg-surface-50 border border-surface-200 text-surface-900 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all outline-none"
                           required
@@ -204,12 +219,12 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <label className="text-xs font-bold uppercase tracking-wider text-surface-500 mb-2 block">Phone Number *</label>
-                        <input
-                          type="tel"
+                        <PhoneInput
                           value={formData.phone}
-                          onChange={e => setFormData(p => ({ ...p, phone: e.target.value }))}
-                          placeholder="+91 99001 12345"
-                          className="w-full bg-surface-50 border border-surface-200 text-surface-900 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 transition-all outline-none"
+                          onChange={(val, valid) => {
+                            setFormData(p => ({ ...p, phone: val }));
+                            setPhoneValid(valid);
+                          }}
                           required
                         />
                       </div>

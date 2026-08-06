@@ -17,6 +17,7 @@ import { useAuthStore } from '@/stores/authStore';
 import { extractPropertyId } from '@/lib/utils';
 import PropertyCard from '@/components/property/PropertyCard';
 import type { Property } from '@/data/mockData';
+import PhoneInput from '@/components/ui/PhoneInput';
 
 export default function PropertyDetailPage() {
   const params = useParams<{ id: string }>();
@@ -37,6 +38,7 @@ export default function PropertyDetailPage() {
   const [contactLoading, setContactLoading] = useState(false);
   const [formName, setFormName] = useState('');
   const [formPhone, setFormPhone] = useState('');
+  const [formPhoneValid, setFormPhoneValid] = useState(false);
   const [formMessage, setFormMessage] = useState("I am interested in this property and would like to arrange a viewing.");
 
   useEffect(() => {
@@ -106,6 +108,14 @@ export default function PropertyDetailPage() {
 
   const handleContact = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formName.trim().length < 2) {
+      toast.error('Please enter your name');
+      return;
+    }
+    if (!formPhoneValid) {
+      toast.error('Please enter a valid phone number for the selected country');
+      return;
+    }
     setContactLoading(true);
     try {
       await createLead({
@@ -420,12 +430,12 @@ export default function PropertyDetailPage() {
                           className="input"
                           required
                         />
-                        <input
-                          type="tel"
+                        <PhoneInput
                           value={formPhone}
-                          onChange={e => setFormPhone(e.target.value.replace(/[^0-9+\s-]/g, ''))}
-                          placeholder="Phone Number"
-                          className="input"
+                          onChange={(val, valid) => {
+                            setFormPhone(val);
+                            setFormPhoneValid(valid);
+                          }}
                           required
                         />
                         <textarea

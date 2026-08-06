@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Calculator, CheckCircle2, Phone, Star, X } from 'lucide-react';
+import PhoneInput from '@/components/ui/PhoneInput';
 
 function JackpotDigit({ value, delay, start }: { value: string, delay: number, start: boolean }) {
   if (isNaN(Number(value))) return <span className="px-[1px]">{value}</span>;
@@ -86,6 +87,7 @@ export default function LoansPage() {
 
   // Expert Form State
   const [formSent, setFormSent] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(false);
   const [formData, setFormData] = useState({
     name: currentUser?.name || '',
     phone: currentUser?.phone || '',
@@ -96,7 +98,20 @@ export default function LoansPage() {
 
   const handleInquiry = (e: React.FormEvent) => {
     e.preventDefault();
-    
+    if (formData.name.trim().length < 2) {
+      toast.error('Please enter your full name');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    if (!phoneValid) {
+      toast.error('Please enter a valid phone number for the selected country');
+      return;
+    }
+
     createLead({
       userId: currentUser?.id || '',
       userName: formData.name,
@@ -120,6 +135,7 @@ export default function LoansPage() {
       }, 3000);
     }, 500);
   };
+
 
   return (
     <div className="bg-surface-50 min-h-screen pb-32">
@@ -393,8 +409,15 @@ export default function LoansPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleInquiry} className="space-y-4">
-                    <input type="text" placeholder="Your Full Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="input" required />
-                    <input type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="input" required />
+                    <input type="text" placeholder="Your Full Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value.replace(/[^a-zA-Z\s'.\-]/g, '')})} className="input" required />
+                    <PhoneInput
+                      value={formData.phone}
+                      onChange={(val, valid) => {
+                        setFormData({...formData, phone: val});
+                        setPhoneValid(valid);
+                      }}
+                      required
+                    />
                     <input type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="input" required />
                     <input type="number" placeholder="Loan Amount Required (₹)" value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} className="input" />
                     <select className="input" value={formData.loanType} onChange={e => setFormData({...formData, loanType: e.target.value})}>

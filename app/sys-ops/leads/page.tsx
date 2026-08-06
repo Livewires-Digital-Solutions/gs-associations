@@ -75,7 +75,7 @@ export default function AdminLeads() {
       
       const headers = ['Date', 'Name', 'Phone', 'Email', 'Source', 'Property', 'Status', 'Notes'];
       const rows = filtered.map(lead => [
-        lead.date || '',
+        lead.timestamp || '',
         `"${(lead.userName || '').replace(/"/g, '""')}"`,
         lead.userPhone || '',
         lead.userEmail || '',

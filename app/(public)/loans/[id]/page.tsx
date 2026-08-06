@@ -13,6 +13,7 @@ import { createLead } from '@/lib/db/leads';
 import { useAuthStore } from '@/stores/authStore';
 import { toast } from 'sonner';
 import type { LoanProgram } from '@/data/mockData';
+import PhoneInput from '@/components/ui/PhoneInput';
 
 export default function LoanDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -26,6 +27,7 @@ export default function LoanDetailPage() {
   }, [id]);
   
   const [formSent, setFormSent] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(false);
   const [formData, setFormData] = useState({
     name: currentUser?.name || '',
     phone: currentUser?.phone || '',
@@ -84,6 +86,19 @@ export default function LoanDetailPage() {
 
   const handleInquiry = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.name.trim().length < 2) {
+      toast.error('Please enter your full name');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    if (!phoneValid) {
+      toast.error('Please enter a valid phone number for the selected country');
+      return;
+    }
     try {
       await createLead({
         userId: currentUser?.id || '',
@@ -297,11 +312,18 @@ export default function LoanDetailPage() {
                     <form onSubmit={handleInquiry} className="space-y-4">
                       <div>
                         <label className="label text-xs mb-1.5 block">Full Name *</label>
-                        <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="input text-sm bg-surface-50" required />
+                        <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value.replace(/[^a-zA-Z\s'.\-]/g, '')})} className="input text-sm bg-surface-50" required />
                       </div>
                       <div>
                         <label className="label text-xs mb-1.5 block">Phone Number *</label>
-                        <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="input text-sm bg-surface-50" required />
+                        <PhoneInput
+                          value={formData.phone}
+                          onChange={(val, valid) => {
+                            setFormData({...formData, phone: val});
+                            setPhoneValid(valid);
+                          }}
+                          required
+                        />
                       </div>
                       <div>
                         <label className="label text-xs mb-1.5 block">Email Address *</label>

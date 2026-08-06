@@ -3,11 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Eye, EyeOff, User, Phone, Mail, Lock, ArrowRight, X } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, ArrowRight, X } from 'lucide-react';
 import Image from 'next/image';
 import { toast } from 'sonner';
 import { useAuthStore } from '@/stores/authStore';
 import logo from '@/assets/logo.png';
+import PhoneInput from '@/components/ui/PhoneInput';
 
 const lookingForOptions = ['Apartment', 'Villa', 'Plot', 'Commercial', 'Row House', 'Not sure yet'];
 const budgetOptions = ['Under ₹50 Lakhs', '₹50L – ₹1 Crore', '₹1Cr – ₹2 Crore', '₹2Cr – ₹5 Crore', '₹5 Crore+'];
@@ -15,6 +16,7 @@ const budgetOptions = ['Under ₹50 Lakhs', '₹50L – ₹1 Crore', '₹1Cr –
 export default function RegisterModal() {
   const { isRegisterModalOpen, closeRegisterModal, openLoginModal, register, isLoading } = useAuthStore();
   const [form, setForm] = useState({ name: '', email: '', phone: '', password: '', lookingFor: '', budget: '' });
+  const [phoneValid, setPhoneValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
@@ -50,9 +52,8 @@ export default function RegisterModal() {
       return;
     }
 
-    const digitCount = form.phone.replace(/\D/g, '').length;
-    if (digitCount < 10) {
-      toast.error('Phone number must contain at least 10 digits');
+    if (!phoneValid) {
+      toast.error('Please enter a valid phone number for the selected country');
       return;
     }
 
@@ -138,17 +139,14 @@ export default function RegisterModal() {
 
               <div>
                 <label className="label mb-1.5 block">Phone Number *</label>
-                <div className="relative">
-                  <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-400" />
-                  <input
-                    type="tel"
-                    value={form.phone}
-                    onChange={e => setForm(p => ({ ...p, phone: e.target.value.replace(/[^0-9+\s-]/g, '') }))}
-                    placeholder="+91 99001 12345"
-                    className="input pl-10"
-                    required
-                  />
-                </div>
+                <PhoneInput
+                  value={form.phone}
+                  onChange={(val, valid) => {
+                    setForm(p => ({ ...p, phone: val }));
+                    setPhoneValid(valid);
+                  }}
+                  required
+                />
                 <p className="text-xs text-surface-400 mt-1">Required for property inquiries</p>
               </div>
 

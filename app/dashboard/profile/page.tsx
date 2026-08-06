@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Save, Camera, Shield, Bell, Trash2, AlertTriangle } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
+import PhoneInput from '@/components/ui/PhoneInput';
 
 const budgetOptions = ['Under ₹50 Lakhs', '₹50L – ₹1 Crore', '₹1Cr – ₹2 Crore', '₹2Cr – ₹5 Crore', '₹5 Crore+'];
 const propertyTypes = ['Apartment', 'Villa', 'Plot', 'Commercial', 'Row House', 'Penthouse'];
@@ -23,11 +24,25 @@ export default function ProfileSettings() {
   });
   const [notifications, setNotifications] = useState({ newListings: true, priceDrops: true, marketUpdates: false });
   const [saved, setSaved] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(true); // true by default since it's pre-filled from user profile
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
+    if (form.name.trim().length < 2) {
+      toast.error('Please enter a valid full name');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    if (!phoneValid) {
+      toast.error('Please enter a valid phone number for the selected country');
+      return;
+    }
     updateProfile(form);
     setSaved(true);
     toast.success('Profile updated successfully');
@@ -83,11 +98,17 @@ export default function ProfileSettings() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label mb-1.5 block">Full Name</label>
-              <input type="text" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="input" />
+              <input type="text" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value.replace(/[^a-zA-Z\s'.\-]/g, '') }))} className="input" />
             </div>
             <div>
               <label className="label mb-1.5 block">Phone Number</label>
-              <input type="tel" value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} className="input" />
+              <PhoneInput
+                value={form.phone}
+                onChange={(val, valid) => {
+                  setForm(p => ({ ...p, phone: val }));
+                  setPhoneValid(valid);
+                }}
+              />
             </div>
             <div className="md:col-span-2">
               <label className="label mb-1.5 block">Email Address</label>
